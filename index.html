@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katrine Alice Daniel | Portfolio</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #050505;
+            --text: #e1e1e1;
+            --accent: #E0CCBB; /* Soft Porcelain/Beige */
+            --gold: #D4AF37;   /* For the award winning feel */
+            --secondary: #888;
+            --card: #111;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-outline {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        /* --- CINEMATIC LOADER --- */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 50px;
+            font-family: 'Clash Display', sans-serif;
+            color: var(--accent);
+        }
+
+        .loader-counter {
+            font-size: 15vw;
+            line-height: 0.8;
+            font-weight: 700;
+        }
+
+        .loader-text {
+            text-align: right;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            overflow: hidden;
+            height: 1.5rem;
+        }
+
+        .loader-word {
+            display: block;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .hero-video-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40vw;
+            height: 60vh;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .hero-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .hero-title-container {
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 12vw;
+            font-weight: 700;
+            line-height: 0.85;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+            white-space: nowrap;
+        }
+        
+        .hero-subtitle {
+            margin-top: 30px;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 14px;
+            color: var(--accent);
+            opacity: 0;
+        }
+
+        .magnetic-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: transform 0.3s;
+        }
+
+        .magnetic-text { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- CONTENT STYLING --- */
+        .section-padding { padding: 120px 5vw; }
+        
+        .bio-text {
+            font-family: 'Clash Display';
+            font-size: clamp(24px, 3vw, 40px);
+            line-height: 1.3;
+            max-width: 1200px;
+        }
+        
+        .highlight { color: var(--accent); }
+
+        /* Horizontal Scroll */
+        .horizontal-section {
+            height: 100vh;
+            background: #0a0a0a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        
+        .gallery-wrapper {
+            display: flex;
+            gap: 10vw;
+            padding: 0 10vw;
+            width: fit-content;
+        }
+
+        .gallery-item {
+            width: 40vw;
+            height: 60vh;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img { filter: grayscale(0%); transform: scale(1.05); }
+
+        .gallery-info { position: absolute; bottom: -50px; left: 0; }
+        .gallery-title { font-family: 'Clash Display'; font-size: 30px; }
+        .gallery-cat { font-family: 'Syne'; color: var(--secondary); margin-top: 5px; }
+
+        /* Experience Accordion */
+        .experience-container { border-top: 1px solid var(--border); }
+
+        .exp-row {
+            border-bottom: 1px solid var(--border);
+            padding: 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            transition: background 0.3s;
+            cursor: pointer;
+            align-items: flex-start;
+        }
+        
+        .exp-row:hover { background: #0f0f0f; }
+        
+        .exp-year { font-family: 'Syne'; color: var(--accent); font-size: 14px; padding-left: 20px; }
+        .exp-role { font-family: 'Clash Display'; font-size: 28px; margin-bottom: 5px; color: white; }
+        .exp-company { font-size: 16px; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .exp-details { height: 0; overflow: hidden; transition: height 0.5s ease; font-size: 16px; color: #ccc; line-height: 1.6; }
+        .exp-details ul { list-style: none; }
+        .exp-details li { position: relative; padding-left: 15px; margin-bottom: 10px; }
+        .exp-details li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
+        .exp-row.active .exp-details { height: auto; }
+        .exp-icon { text-align: right; padding-right: 20px; font-size: 24px; transition: transform 0.3s; }
+        .exp-row.active .exp-icon { transform: rotate(45deg); color: var(--accent); }
+        .tag-badge { display: inline-block; font-size: 10px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 20px; text-transform: uppercase; margin-bottom: 10px; color: var(--accent); }
+
+        /* --- NEW: EDUCATION TIMELINE --- */
+        .edu-section {
+            padding: 150px 5vw;
+            position: relative;
+        }
+
+        .edu-title {
+            font-family: 'Clash Display';
+            font-size: 60px;
+            text-transform: uppercase;
+            margin-bottom: 80px;
+            color: var(--text);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* The vertical line that draws */
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .timeline-line-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            background: var(--accent);
+            height: 0%; /* Animated via JS */
+        }
+
+        .edu-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 80px;
+            opacity: 0.3; /* Start dim */
+            transition: opacity 0.5s;
+        }
+
+        .edu-item.active { opacity: 1; }
+
+        .edu-dot {
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+            z-index: 2;
+        }
+
+        .edu-date { font-family: 'Syne'; color: var(--accent); margin-bottom: 10px; display: block; }
+        .edu-degree { font-family: 'Clash Display'; font-size: 32px; margin-bottom: 10px; }
+        .edu-school { font-size: 18px; color: var(--secondary); margin-bottom: 10px; }
+
+        /* --- NEW: THE VAULT (Certifications & Awards) --- */
+        .vault-section {
+            background: #080808;
+            padding: 150px 5vw;
+        }
+
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .vault-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .vault-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .vault-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .vault-card:hover::before { transform: translateX(100%); }
+
+        .vault-type {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .vault-title { font-family: 'Clash Display'; font-size: 24px; margin-bottom: 10px; line-height: 1.2; }
+        .vault-issuer { font-family: 'Syne'; color: var(--accent); }
+
+        /* --- NEW: KINETIC SKILLS WALL --- */
+        .skills-section {
+            padding: 100px 5vw;
+            overflow: hidden;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px 50px;
+        }
+
+        .skill-word {
+            font-family: 'Clash Display';
+            font-size: clamp(40px, 8vw, 100px);
+            line-height: 0.9;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 1px #333;
+            transition: all 0.4s;
+            cursor: default;
+        }
+
+        .skill-word:hover {
+            color: var(--gold);
+            -webkit-text-stroke: 0px;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 50;
+            mix-blend-mode: difference;
+        }
+        
+        .nav-logo { font-weight: 700; letter-spacing: 2px; }
+
+        /* Footer */
+        footer {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #080808;
+            text-align: center;
+        }
+        
+        .huge-mail {
+            font-family: 'Clash Display';
+            font-size: 6vw;
+            color: #fff;
+            text-decoration: none;
+            line-height: 1;
+        }
+        
+        .huge-mail:hover { font-style: italic; color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .exp-row { grid-template-columns: 1fr; gap: 10px; }
+            .exp-year { padding-left: 0; margin-bottom: 10px; }
+            .hero-title { font-size: 15vw; }
+            .hero-video-wrapper { width: 80vw; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="loader">
+        <div class="loader-text">
+            <span class="loader-word">Loading</span>
+            <span class="loader-word">Legacy</span>
+            <span class="loader-word">Skills</span>
+            <span class="loader-word">Ready</span>
+        </div>
+        <div class="loader-counter">0%</div>
+    </div>
+
+    <nav>
+        <div class="nav-logo">KATRINE.</div>
+        <div>
+            <a href="#work" style="color:white; text-decoration:none; margin-right:20px;">WORK</a>
+            <a href="#experience" style="color:white; text-decoration:none;">INFO</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-video-wrapper">
+            <video autoplay muted loop playsinline>
+                <source src="Image_to_Wave_Motion_Video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-title-container">
+            <h1 class="hero-title">
+                <div class="line">KATRINE</div>
+                <div class="line">ALICE DANIEL</div>
+            </h1>
+            <p class="hero-subtitle">UI/UX Designer & Creative Developer</p>
+        </div>
+        <div class="magnetic-btn" onclick="document.querySelector('#intro').scrollIntoView({behavior: 'smooth'})">
+            <span class="magnetic-text">Scroll</span>
+        </div>
+    </section>
+
+    <section id="intro" class="section-padding">
+        <p style="color:var(--accent); margin-bottom:20px; text-transform:uppercase;">Introduction</p>
+        <div class="bio-text">
+            I'm a UI/UX designer bridging the gap between <span class="highlight">design</span> and <span class="highlight">functionality</span>. Leading interface designs for University dashboards, startups like Apnaa Vehicle, and hospitality tech at Praxis Services.
+        </div>
+    </section>
+
+    <section id="work" class="horizontal-section">
+        <div class="gallery-wrapper">
+            <div class="gallery-item">
+                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">01</div>
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="gallery-img" alt="One Fine Rate">
+                <div class="gallery-info">
+                    <div class="gallery-title">One Fine Rate</div>
+                    <div class="gallery-cat">Praxis Services / Hospitality Tech</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">02</div>
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80" class="gallery-img" alt="Apnaa Vehicle">
+                <div class="gallery-info">
+                    <div class="gallery-title">Apnaa Vehicle</div>
+                    <div class="gallery-cat">Startup / Marketplace / 3rd Prize Winner</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">03</div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" class="gallery-img" alt="Placement Dashboard">
+                <div class="gallery-info">
+                    <div class="gallery-title">Uni Placement Dashboard</div>
+                    <div class="gallery-cat">SGGS University / System Design</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">04</div>
+                <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80" class="gallery-img" alt="SGT Farms">
+                <div class="gallery-info">
+                    <div class="gallery-title">SGT Farms</div>
+                    <div class="gallery-cat">E-commerce / Web App</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section-padding">
+        <h2 style="font-family:'Clash Display'; font-size:50px; margin-bottom:20px; text-transform:uppercase;">Career Journey</h2>
+        <p style="color:var(--secondary); margin-bottom:60px;">Click on a role to expand details.</p>
+        <div class="experience-container">
+            <div class="exp-row" onclick="this.classList.toggle('active')">
+                <div class="exp-year">Jun 2025 - Present</div>
+                <div class="exp-main">
+                    <span class="tag-badge">Full Time</span>
+                    <div class="exp-role">UI/UX Designer</div>
+                    <div class="exp-company">Praxis Services Pvt. Ltd.</div>
+                    <div class="exp-details">
+                        <ul>
+                            <li>Designing "One Fine Rate", the company’s hotel reservation platform.</li>
+                            <li>Creating smooth, user-friendly booking experiences for travelers to search and reserve rooms with ease.</li>
+                            <li>Contributing to design discussions, UI best practices, and evolving trends in hospitality tech.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp-icon">+</div>
+            </div>
+            <div class="exp-row" onclick="this.classList.toggle('active')">
+                <div class="exp-year">Mar 2025 - Present</div>
+                <div class="exp-main">
+                    <span class="tag-badge">Training</span>
+                    <div class="exp-role">UI/UX Trainer</div>
+                    <div class="exp-company">Zaalima Development</div>
+                    <div class="exp-details">
+                        <ul>
+                            <li>Guiding interns through practical App & Web projects and UI/UX problem-solving.</li>
+                            <li>Mentoring on GitHub usage, freelance strategies (building/selling websites), and industry trends.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp-icon">+</div>
+            </div>
+            <div class="exp-row" onclick="this.classList.toggle('active')">
+                <div class="exp-year">Nov 2024 - Present</div>
+                <div class="exp-main">
+                    <span class="tag-badge">Startup Core Team</span>
+                    <div class="exp-role">UI/UX Designer</div>
+                    <div class="exp-company">Apnaa Vehicle (Startup)</div>
+                    <div class="exp-details">
+                        <ul>
+                            <li>Awarded 3rd Prize for Startup Innovation at SGT University.</li>
+                            <li>Designed user-friendly interfaces for an online vehicle marketplace (21 distributors onboarded).</li>
+                            <li>Created 3D vehicle models for visual presentation and pitch decks.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp-icon">+</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="edu-section">
+        <h2 class="edu-title">Education<br>& Milestones</h2>
+        <div class="timeline">
+            <div class="timeline-line"><div class="timeline-line-fill"></div></div>
+            
+            <div class="edu-item">
+                <div class="edu-dot"></div>
+                <span class="edu-date">Jan 2023 - Jan 2027</span>
+                <h3 class="edu-degree">B.Tech Computer Science</h3>
+                <div class="edu-school">Shree Guru Gobind Singh University, Gurgaon</div>
+                <p style="color:#888">Specializing in iOS and Mobile Application Development.</p>
+            </div>
+
+            <div class="edu-item">
+                <div class="edu-dot"></div>
+                <span class="edu-date">Jan 2022 - Jan 2023</span>
+                <h3 class="edu-degree">B.Tech First Year</h3>
+                <div class="edu-school">Presidency University</div>
+                <p style="color:#888">Specialized in Cyber Security.</p>
+            </div>
+
+            <div class="edu-item">
+                <div class="edu-dot"></div>
+                <span class="edu-date">2016 - 2022</span>
+                <h3 class="edu-degree">Secondary Education</h3>
+                <div class="edu-school">GD Goenka Public School</div>
+                <p style="color:#888">12th Science Math’s (PCM) & 10th Grade.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="vault-section">
+        <h2 class="edu-title" style="margin-bottom:60px;">The Vault</h2>
+        <div class="vault-grid">
+            
+            <div class="vault-card">
+                <span class="vault-type text-accent">Major Achievement</span>
+                <h3 class="vault-title">Startup Innovation Award (3rd Prize)</h3>
+                <div class="vault-issuer">ICC (Innovations Contest Cell)</div>
+                <p style="color:#666; font-size:14px; margin-top:10px;">For contributions to Apnaa Vehicle startup initiative.</p>
+            </div>
+
+            <div class="vault-card">
+                <span class="vault-type">Certification</span>
+                <h3 class="vault-title">JavaScript (Intermediate)</h3>
+                <div class="vault-issuer">HackerRank</div>
+                <p style="color:#666; font-size:14px; margin-top:10px;">April 2023</p>
+            </div>
+
+            <div class="vault-card">
+                <span class="vault-type">Certification</span>
+                <h3 class="vault-title">Problem Solving (Intermediate)</h3>
+                <div class="vault-issuer">HackerRank</div>
+                <p style="color:#666; font-size:14px; margin-top:10px;">April 2023</p>
+            </div>
+
+            <div class="vault-card">
+                <span class="vault-type">Internship</span>
+                <h3 class="vault-title">SGT Farms Intern</h3>
+                <div class="vault-issuer">SGT University</div>
+                <p style="color:#666; font-size:14px; margin-top:10px;">May 2025 - June 2025</p>
+            </div>
+
+            <div class="vault-card">
+                <span class="vault-type">Internship</span>
+                <h3 class="vault-title">TPO Website Development</h3>
+                <div class="vault-issuer">Training & Placement Cell</div>
+                <p style="color:#666; font-size:14px; margin-top:10px;">March 2025 - August 2025</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <div style="text-align:center; margin-bottom:50px; color:var(--secondary); font-family:'Syne';">TECHNICAL & CREATIVE ARSENAL</div>
+        <div class="skills-container">
+            <span class="skill-word">iOS Design</span>
+            <span class="skill-word">UI/UX</span>
+            <span class="skill-word">VFX</span>
+            <span class="skill-word">Graphic</span>
+            <span class="skill-word">HTML/CSS</span>
+            <span class="skill-word">JavaScript</span>
+            <span class="skill-word">Tailwind</span>
+            <span class="skill-word">Java</span>
+            <span class="skill-word">Python</span>
+            <span class="skill-word">Bootstrap</span>
+            <span class="skill-word">Adobe XD</span>
+            <span class="skill-word">Sketch</span>
+            <span class="skill-word">Figma</span>
+            <span class="skill-word">Illustrator</span>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color:var(--secondary); margin-bottom:20px;">READY TO COLLABORATE?</p>
+        <a href="mailto:alicekatrine23@gmail.com" class="huge-mail">alicekatrine23@gmail.com</a>
+        <div style="margin-top:50px; font-family:'Syne'">+91 8130554314 | Gurugram, India</div>
+    </footer>
+
+    <script>
+        // --- 1. SETUP LENIS (Smooth Scroll) ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- 2. LOADING SEQUENCE ---
+        const counter = { val: 0 };
+        const counterEl = document.querySelector('.loader-counter');
+        const loader = document.querySelector('.loader');
+        const tl = gsap.timeline();
+
+        tl.to(counter, {
+            val: 100,
+            duration: 2,
+            ease: "power2.inOut",
+            onUpdate: () => { counterEl.textContent = Math.floor(counter.val) + "%"; }
+        });
+
+        const words = gsap.utils.toArray('.loader-word');
+        tl.to('.loader-text', {
+            duration: 2,
+            onStart: () => {
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i >= words.length) i = 0;
+                    gsap.to(words, {y: -30, opacity: 0, duration: 0.2});
+                    gsap.fromTo(words[i], {y: 30, opacity: 0}, {y: 0, opacity: 1, duration: 0.2});
+                    i++;
+                }, 400);
+                setTimeout(() => clearInterval(interval), 1800);
+            }
+        }, "<");
+
+        tl.to(loader, { yPercent: -100, duration: 1, ease: "power4.inOut" });
+
+        // --- 3. HERO ANIMATIONS ---
+        tl.to('.hero-video-wrapper', { opacity: 1, width: '40vw', duration: 1, ease: "power3.out" }, "-=0.5");
+        tl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.5, stagger: 0.1, ease: "power4.out" }, "-=0.8");
+        tl.to('.hero-subtitle', { opacity: 1, duration: 1 }, "-=1");
+
+        // --- 4. SCROLL ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        const heroScroll = gsap.timeline({
+            scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
+        });
+        heroScroll.to('.hero-video-wrapper', { width: '100vw', height: '100vh', borderRadius: 0 });
+        heroScroll.to('.hero-title', { scale: 1.5, opacity: 0 }, "<");
+
+        if (window.innerWidth > 1024) {
+            const gallery = document.querySelector('.gallery-wrapper');
+            gsap.to(gallery, {
+                x: () => -(gallery.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: { trigger: ".horizontal-section", pin: true, scrub: 1, end: () => "+=" + gallery.scrollWidth }
+            });
+        }
+
+        // --- 5. EDUCATION TIMELINE ANIMATION ---
+        gsap.to(".timeline-line-fill", {
+            height: "100%",
+            scrollTrigger: {
+                trigger: ".timeline",
+                start: "top center",
+                end: "bottom center",
+                scrub: 1
+            }
+        });
+
+        gsap.utils.toArray(".edu-item").forEach(item => {
+            gsap.to(item, {
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // --- 6. MOUSE INTERACTIONS ---
+        const magneticBtn = document.querySelector('.magnetic-btn');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(".cursor-dot", { x: e.clientX, y: e.clientY, duration: 0 });
+            gsap.to(".cursor-outline", { x: e.clientX, y: e.clientY, duration: 0.1 });
+            
+            const pos = magneticBtn.getBoundingClientRect();
+            const x = e.clientX - pos.left - pos.width / 2;
+            const y = e.clientY - pos.top - pos.height / 2;
+            const dist = Math.sqrt(x*x + y*y);
+            
+            if (dist < 100) {
+                gsap.to(magneticBtn, { x: x * 0.5, y: y * 0.5, duration: 0.3 });
+                gsap.to(".cursor-outline", { scale: 1.5 });
+            } else {
+                gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.3 });
+                gsap.to(".cursor-outline", { scale: 1 });
+            }
+        });
+    </script>
+</body>
+</html>
