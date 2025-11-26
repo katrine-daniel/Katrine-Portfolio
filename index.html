@@ -16,19 +16,13 @@
         :root {
             --bg: #050505;
             --text: #e1e1e1;
-            --accent: #E0CCBB; /* Soft Porcelain/Beige */
-            --gold: #D4AF37;   /* For the award winning feel */
+            --accent: #E0CCBB;
             --secondary: #888;
-            --card: #111;
             --border: rgba(255,255,255,0.1);
+            --gold: #D4AF37;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
         body {
             background-color: var(--bg);
@@ -38,406 +32,149 @@
         }
 
         /* --- CUSTOM CURSOR --- */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
+        .cursor-outline { width: 50px; height: 50px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.2s; mix-blend-mode: difference; }
 
-        .cursor-outline {
-            width: 50px;
-            height: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s, background-color 0.2s;
-            mix-blend-mode: difference;
-        }
+        /* --- LOADER --- */
+        .intro-loader { position: fixed; inset: 0; background-color: #000; z-index: 20000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .bounce-ball { width: 50px; height: 50px; background-color: #fff; border-radius: 50%; }
+        .loading-text { margin-top: 20px; font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- CINEMATIC LOADER --- */
-        .loader {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 10000;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 50px;
-            font-family: 'Clash Display', sans-serif;
-            color: var(--accent);
-        }
+        .zajno-wrapper { position: fixed; inset: 0; background-color: #ffffff; z-index: 15000; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .zajno-ball { position: absolute; width: 400px; height: 400px; background-color: #000000; border-radius: 50%; transform: scale(0); }
+        .zajno-text-container { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; mix-blend-mode: difference; color: #fff; }
+        .zajno-text { font-family: 'Clash Display', sans-serif; font-size: clamp(40px, 8vw, 120px); font-weight: 700; text-transform: uppercase; position: absolute; opacity: 0; letter-spacing: -2px; text-align: center; white-space: nowrap; }
 
-        .loader-counter {
-            font-size: 15vw;
-            line-height: 0.8;
-            font-weight: 700;
-        }
-
-        .loader-text {
-            text-align: right;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            overflow: hidden;
-            height: 1.5rem;
-        }
-
-        .loader-word {
-            display: block;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            background: var(--bg);
-        }
-
-        .hero-video-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40vw;
-            height: 60vh;
-            z-index: 1;
-            overflow: hidden;
-            opacity: 0;
-        }
-
-        .hero-video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-        }
-
-        .hero-title-container {
-            position: absolute;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            mix-blend-mode: difference;
-        }
-
-        .hero-title {
-            font-family: 'Clash Display', sans-serif;
-            font-size: 12vw;
-            font-weight: 700;
-            line-height: 0.85;
-            text-transform: uppercase;
-            text-align: center;
-            color: #fff;
-            white-space: nowrap;
-        }
-        
-        .hero-subtitle {
-            margin-top: 30px;
-            font-family: 'Syne', sans-serif;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-size: 14px;
-            color: var(--accent);
-            opacity: 0;
-        }
-
-        .magnetic-btn {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 100px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            transition: transform 0.3s;
-        }
-
-        .magnetic-text { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- CONTENT STYLING --- */
-        .section-padding { padding: 120px 5vw; }
-        
-        .bio-text {
-            font-family: 'Clash Display';
-            font-size: clamp(24px, 3vw, 40px);
-            line-height: 1.3;
-            max-width: 1200px;
-        }
-        
-        .highlight { color: var(--accent); }
-
-        /* Horizontal Scroll */
-        .horizontal-section {
-            height: 100vh;
-            background: #0a0a0a;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
-        
-        .gallery-wrapper {
-            display: flex;
-            gap: 10vw;
-            padding: 0 10vw;
-            width: fit-content;
-        }
-
-        .gallery-item {
-            width: 40vw;
-            height: 60vh;
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: all 0.5s ease;
-        }
-        
-        .gallery-item:hover .gallery-img { filter: grayscale(0%); transform: scale(1.05); }
-
-        .gallery-info { position: absolute; bottom: -50px; left: 0; }
-        .gallery-title { font-family: 'Clash Display'; font-size: 30px; }
-        .gallery-cat { font-family: 'Syne'; color: var(--secondary); margin-top: 5px; }
-
-        /* Experience Accordion */
-        .experience-container { border-top: 1px solid var(--border); }
-
-        .exp-row {
-            border-bottom: 1px solid var(--border);
-            padding: 40px 0;
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            transition: background 0.3s;
-            cursor: pointer;
-            align-items: flex-start;
-        }
-        
-        .exp-row:hover { background: #0f0f0f; }
-        
-        .exp-year { font-family: 'Syne'; color: var(--accent); font-size: 14px; padding-left: 20px; }
-        .exp-role { font-family: 'Clash Display'; font-size: 28px; margin-bottom: 5px; color: white; }
-        .exp-company { font-size: 16px; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-        .exp-details { height: 0; overflow: hidden; transition: height 0.5s ease; font-size: 16px; color: #ccc; line-height: 1.6; }
-        .exp-details ul { list-style: none; }
-        .exp-details li { position: relative; padding-left: 15px; margin-bottom: 10px; }
-        .exp-details li::before { content: '•'; position: absolute; left: 0; color: var(--accent); }
-        .exp-row.active .exp-details { height: auto; }
-        .exp-icon { text-align: right; padding-right: 20px; font-size: 24px; transition: transform 0.3s; }
-        .exp-row.active .exp-icon { transform: rotate(45deg); color: var(--accent); }
-        .tag-badge { display: inline-block; font-size: 10px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 20px; text-transform: uppercase; margin-bottom: 10px; color: var(--accent); }
-
-        /* --- NEW: EDUCATION TIMELINE --- */
-        .edu-section {
-            padding: 150px 5vw;
-            position: relative;
-        }
-
-        .edu-title {
-            font-family: 'Clash Display';
-            font-size: 60px;
-            text-transform: uppercase;
-            margin-bottom: 80px;
-            color: var(--text);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        /* The vertical line that draws */
-        .timeline-line {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .timeline-line-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 2px;
-            background: var(--accent);
-            height: 0%; /* Animated via JS */
-        }
-
-        .edu-item {
-            position: relative;
-            padding-left: 50px;
-            margin-bottom: 80px;
-            opacity: 0.3; /* Start dim */
-            transition: opacity 0.5s;
-        }
-
-        .edu-item.active { opacity: 1; }
-
-        .edu-dot {
-            position: absolute;
-            left: -6px;
-            top: 0;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--accent);
-            z-index: 2;
-        }
-
-        .edu-date { font-family: 'Syne'; color: var(--accent); margin-bottom: 10px; display: block; }
-        .edu-degree { font-family: 'Clash Display'; font-size: 32px; margin-bottom: 10px; }
-        .edu-school { font-size: 18px; color: var(--secondary); margin-bottom: 10px; }
-
-        /* --- NEW: THE VAULT (Certifications & Awards) --- */
-        .vault-section {
-            background: #080808;
-            padding: 150px 5vw;
-        }
-
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .vault-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border);
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .vault-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: translateX(-100%);
-            transition: 0.5s;
-        }
-
-        .vault-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .vault-card:hover::before { transform: translateX(100%); }
-
-        .vault-type {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--secondary);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .vault-title { font-family: 'Clash Display'; font-size: 24px; margin-bottom: 10px; line-height: 1.2; }
-        .vault-issuer { font-family: 'Syne'; color: var(--accent); }
-
-        /* --- NEW: KINETIC SKILLS WALL --- */
-        .skills-section {
-            padding: 100px 5vw;
-            overflow: hidden;
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px 50px;
-        }
-
-        .skill-word {
-            font-family: 'Clash Display';
-            font-size: clamp(40px, 8vw, 100px);
-            line-height: 0.9;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: transparent;
-            -webkit-text-stroke: 1px #333;
-            transition: all 0.4s;
-            cursor: default;
-        }
-
-        .skill-word:hover {
-            color: var(--gold);
-            -webkit-text-stroke: 0px;
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 50;
-            mix-blend-mode: difference;
-        }
-        
+        /* --- NAV --- */
+        nav { position: fixed; top: 0; width: 100%; padding: 30px 50px; display: flex; justify-content: space-between; z-index: 50; mix-blend-mode: difference; }
         .nav-logo { font-weight: 700; letter-spacing: 2px; }
 
-        /* Footer */
-        footer {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #080808;
-            text-align: center;
+        /* --- HERO SECTION (FIXED VIDEO) --- */
+        .hero { 
+            height: 100vh; 
+            width: 100%; 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: transparent; /* See through to the fixed video */
+            z-index: 1;
         }
-        
-        .huge-mail {
-            font-family: 'Clash Display';
-            font-size: 6vw;
-            color: #fff;
-            text-decoration: none;
-            line-height: 1;
+
+        .hero-video-wrapper { 
+            position: fixed; /* FIXED TO SCREEN */
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; /* BEHIND EVERYTHING */
+            overflow: hidden; 
         }
-        
+
+        .hero-video-wrapper video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0.5; 
+        }
+
+        /* The text scrolls naturally with the page flow */
+        .hero-title-container { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            mix-blend-mode: difference; 
+        }
+
+        .hero-title { font-family: 'Clash Display', sans-serif; font-size: 10vw; font-weight: 700; line-height: 0.9; text-transform: uppercase; text-align: center; color: #fff; }
+        .hero-subtitle { margin-top: 30px; font-family: 'Syne', sans-serif; letter-spacing: 5px; text-transform: uppercase; font-size: 16px; color: var(--accent); opacity: 0; }
+        .magnetic-btn { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 10; }
+
+        /* --- CONTENT SECTIONS (Must have backgrounds to cover video) --- */
+        section {
+            position: relative;
+            z-index: 2; /* Above the video */
+            background-color: var(--bg); /* Solid background to cover video */
+        }
+
+        /* Remove background from Hero specifically so we see video */
+        section.hero {
+            background-color: transparent;
+        }
+
+        .section-padding { padding: 120px 5vw; }
+        .bio-text { font-family: 'Clash Display'; font-size: clamp(24px, 3vw, 40px); line-height: 1.3; max-width: 1200px; }
+        .highlight { color: var(--accent); }
+        .section-header { font-family: 'Clash Display'; font-size: 60px; text-transform: uppercase; margin-bottom: 60px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+
+        /* --- PROJECTS --- */
+        .project-section-container { height: 100vh; background: #050505; overflow: hidden; display: flex; align-items: center; }
+        .gallery-track { display: flex; align-items: center; gap: 5vw; padding-left: 5vw; padding-right: 5vw; width: fit-content; }
+        .project-intro { min-width: 400px; padding-right: 50px; display: flex; flex-direction: column; justify-content: center; }
+        .gallery-item { width: 65vw; height: 70vh; position: relative; flex-shrink: 0; }
+        .project-card { width: 100%; height: 100%; position: relative; background: #111; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s ease; }
+        .project-card:hover { transform: scale(0.98); border-color: var(--accent); }
+        .project-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: 0.5s; }
+        .project-card:hover .project-img { filter: brightness(1); transform: scale(1.05); }
+        .project-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px; background: linear-gradient(to top, #000, transparent); z-index: 2; }
+        .project-num { font-family: 'Clash Display'; font-size: 8vw; position: absolute; top: 20px; right: 40px; color: rgba(255,255,255,0.1); line-height: 1; }
+        .project-title { font-family: 'Clash Display'; font-size: 48px; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
+        .project-cat { font-family: 'Syne'; color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- CAREER BENTO --- */
+        .career-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 100px; }
+        .bento-card { background: #0f0f0f; border: 1px solid var(--border); padding: 30px; border-radius: 12px; position: relative; transition: transform 0.3s, border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .bento-card:hover { transform: translateY(-5px); border-color: var(--accent); background: #151515; }
+        .span-2 { grid-column: span 2; } .span-1 { grid-column: span 1; }
+        .job-date { font-family: 'Syne'; color: var(--accent); font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .job-role { font-family: 'Clash Display'; font-size: 24px; color: #fff; margin-bottom: 5px; }
+        .job-company { font-size: 14px; color: var(--secondary); text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .job-desc { font-size: 14px; color: #aaa; line-height: 1.6; }
+        .job-tag { position: absolute; top: 30px; right: 30px; font-size: 10px; border: 1px solid #333; padding: 5px 10px; border-radius: 20px; text-transform: uppercase; }
+
+        /* --- EDUCATION --- */
+        .edu-container { display: flex; flex-direction: column; gap: 120px; padding-bottom: 100px; position: relative; overflow: hidden; }
+        .edu-card { display: flex; align-items: center; gap: 80px; opacity: 0; position: relative; }
+        .edu-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+        .edu-year-big { font-family: 'Clash Display'; font-size: 12vw; font-weight: 700; color: transparent; -webkit-text-stroke: 2px #333; line-height: 1; transition: all 0.5s; }
+        .edu-card:hover .edu-year-big { -webkit-text-stroke: 2px var(--accent); opacity: 0.5; }
+        .edu-info h3 { font-family: 'Clash Display'; font-size: 40px; color: #fff; margin-bottom: 10px; }
+        .edu-info h4 { font-family: 'Syne'; color: var(--accent); margin-bottom: 20px; font-size: 18px; letter-spacing: 1px; }
+        .edu-info p { color: #888; max-width: 500px; font-size: 18px; line-height: 1.6; }
+
+        /* --- THE VAULT (BIG) --- */
+        .vault-horizontal-section { height: 100vh; background: #0a0a0a; overflow: hidden; display: flex; align-items: center; }
+        .vault-track { display: flex; gap: 60px; padding: 0 10vw; width: fit-content; align-items: center; }
+        .vault-intro { min-width: 500px; padding-right: 80px; border-right: 1px solid #333; margin-right: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .vault-item { min-width: 600px; height: 70vh; background: #0f0f0f; border: 1px solid #222; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: all 0.4s ease; }
+        .vault-item:hover { border-color: var(--accent); background: #121212; }
+        .vault-item.highlight { border-color: var(--gold); background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent); }
+        .v-icon { font-size: 80px; margin-bottom: 40px; color: #333; transition: color 0.3s; }
+        .vault-item:hover .v-icon { color: var(--accent); }
+        .v-date { font-family: 'Syne'; font-size: 14px; color: var(--secondary); margin-bottom: 20px; display: block; letter-spacing: 2px; }
+        .v-title { font-family: 'Clash Display'; font-size: 48px; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+        .v-issuer { font-size: 18px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .v-desc { font-size: 16px; color: #999; margin-top: 30px; line-height: 1.6; border-top: 1px solid #222; padding-top: 30px; }
+
+        /* --- SKILLS --- */
+        .skills-wall { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px 0; }
+        .skill-brick { font-family: 'Clash Display'; font-size: clamp(20px, 4vw, 60px); font-weight: 600; color: #333; text-transform: uppercase; padding: 10px 20px; transition: all 0.3s; cursor: default; }
+        .skill-brick:hover { color: #fff; text-shadow: 0 0 10px var(--accent); transform: scale(1.1); }
+
+        footer { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #080808; text-align: center; }
+        .huge-mail { font-family: 'Clash Display'; font-size: 6vw; color: #fff; text-decoration: none; }
         .huge-mail:hover { font-style: italic; color: var(--accent); }
-
-        @media (max-width: 768px) {
-            .exp-row { grid-template-columns: 1fr; gap: 10px; }
-            .exp-year { padding-left: 0; margin-bottom: 10px; }
+        
+        @media(max-width: 1024px) {
+            .career-bento { grid-template-columns: 1fr; }
+            .span-2 { grid-column: span 1; }
             .hero-title { font-size: 15vw; }
-            .hero-video-wrapper { width: 80vw; }
+            .project-title, .v-title { font-size: 32px; }
+            .vault-item { min-width: 85vw; height: 60vh; padding: 30px; }
+            .gallery-item { width: 90vw; }
+            .edu-card, .edu-card:nth-child(even) { flex-direction: column; text-align: center; gap: 20px; }
         }
-
     </style>
 </head>
 <body>
@@ -445,14 +182,14 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <div class="loader">
-        <div class="loader-text">
-            <span class="loader-word">Loading</span>
-            <span class="loader-word">Legacy</span>
-            <span class="loader-word">Skills</span>
-            <span class="loader-word">Ready</span>
+    <div class="intro-loader"><div class="bounce-ball"></div><div class="loading-text">Loading</div></div>
+    <div class="zajno-wrapper">
+        <div class="zajno-ball"></div>
+        <div class="zajno-text-container">
+            <div class="zajno-text" id="z-text-1">WEB DESIGNER</div>
+            <div class="zajno-text" id="z-text-2">APP DESIGNER</div>
+            <div class="zajno-text" id="z-text-3">FRONTEND DEVELOPER</div>
         </div>
-        <div class="loader-counter">0%</div>
     </div>
 
     <nav>
@@ -466,14 +203,11 @@
     <section class="hero">
         <div class="hero-video-wrapper">
             <video autoplay muted loop playsinline>
-                <source src="Image_to_Wave_Motion_Video.mp4" type="video/mp4">
+                <source src="image/Image_to_Wave_Motion_Video.mp4" type="video/mp4">
             </video>
         </div>
         <div class="hero-title-container">
-            <h1 class="hero-title">
-                <div class="line">KATRINE</div>
-                <div class="line">ALICE DANIEL</div>
-            </h1>
+            <h1 class="hero-title"><div class="line">KATRINE</div><div class="line">ALICE DANIEL</div></h1>
             <p class="hero-subtitle">UI/UX Designer & Creative Developer</p>
         </div>
         <div class="magnetic-btn" onclick="document.querySelector('#intro').scrollIntoView({behavior: 'smooth'})">
@@ -483,300 +217,164 @@
 
     <section id="intro" class="section-padding">
         <p style="color:var(--accent); margin-bottom:20px; text-transform:uppercase;">Introduction</p>
-        <div class="bio-text">
-            I'm a UI/UX designer bridging the gap between <span class="highlight">design</span> and <span class="highlight">functionality</span>. Leading interface designs for University dashboards, startups like Apnaa Vehicle, and hospitality tech at Praxis Services.
-        </div>
+        <div class="bio-text">I'm a UI/UX designer bridging the gap between <span class="highlight">design</span> and <span class="highlight">functionality</span>.</div>
     </section>
 
-    <section id="work" class="horizontal-section">
-        <div class="gallery-wrapper">
-            <div class="gallery-item">
-                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">01</div>
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="gallery-img" alt="One Fine Rate">
-                <div class="gallery-info">
-                    <div class="gallery-title">One Fine Rate</div>
-                    <div class="gallery-cat">Praxis Services / Hospitality Tech</div>
-                </div>
+    <section id="work" class="project-section-container">
+        <div class="gallery-track">
+            <div class="project-intro">
+                <h2 class="section-header" style="margin-bottom:20px;">Selected<br>Works</h2>
+                <p style="color:#888; font-size:18px;">A showcase of my recent projects in UI/UX, Web Development, and Startup Innovation.</p>
             </div>
-            <div class="gallery-item">
-                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">02</div>
-                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80" class="gallery-img" alt="Apnaa Vehicle">
-                <div class="gallery-info">
-                    <div class="gallery-title">Apnaa Vehicle</div>
-                    <div class="gallery-cat">Startup / Marketplace / 3rd Prize Winner</div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">03</div>
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" class="gallery-img" alt="Placement Dashboard">
-                <div class="gallery-info">
-                    <div class="gallery-title">Uni Placement Dashboard</div>
-                    <div class="gallery-cat">SGGS University / System Design</div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <div class="gallery-number" style="position:absolute; top:-40px; font-size:40px; color:var(--accent); font-family:'Syne'">04</div>
-                <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80" class="gallery-img" alt="SGT Farms">
-                <div class="gallery-info">
-                    <div class="gallery-title">SGT Farms</div>
-                    <div class="gallery-cat">E-commerce / Web App</div>
-                </div>
-            </div>
+            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="project-img" alt="One Fine Rate"><div class="project-num">01</div><div class="project-overlay"><h3 class="project-title">One Fine Rate</h3><div class="project-cat">Praxis Services</div></div></div></div>
+            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80" class="project-img" alt="Apnaa Vehicle"><div class="project-num">02</div><div class="project-overlay"><h3 class="project-title">Apnaa Vehicle</h3><div class="project-cat">Startup • Award Winner</div></div></div></div>
+            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" class="project-img" alt="Uni Placement"><div class="project-num">03</div><div class="project-overlay"><h3 class="project-title">Uni Placement</h3><div class="project-cat">System Design</div></div></div></div>
+            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80" class="project-img" alt="SGT Farms"><div class="project-num">04</div><div class="project-overlay"><h3 class="project-title">SGT Farms</h3><div class="project-cat">E-commerce</div></div></div></div>
         </div>
     </section>
 
     <section id="experience" class="section-padding">
-        <h2 style="font-family:'Clash Display'; font-size:50px; margin-bottom:20px; text-transform:uppercase;">Career Journey</h2>
-        <p style="color:var(--secondary); margin-bottom:60px;">Click on a role to expand details.</p>
-        <div class="experience-container">
-            <div class="exp-row" onclick="this.classList.toggle('active')">
-                <div class="exp-year">Jun 2025 - Present</div>
-                <div class="exp-main">
-                    <span class="tag-badge">Full Time</span>
-                    <div class="exp-role">UI/UX Designer</div>
-                    <div class="exp-company">Praxis Services Pvt. Ltd.</div>
-                    <div class="exp-details">
-                        <ul>
-                            <li>Designing "One Fine Rate", the company’s hotel reservation platform.</li>
-                            <li>Creating smooth, user-friendly booking experiences for travelers to search and reserve rooms with ease.</li>
-                            <li>Contributing to design discussions, UI best practices, and evolving trends in hospitality tech.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exp-icon">+</div>
-            </div>
-            <div class="exp-row" onclick="this.classList.toggle('active')">
-                <div class="exp-year">Mar 2025 - Present</div>
-                <div class="exp-main">
-                    <span class="tag-badge">Training</span>
-                    <div class="exp-role">UI/UX Trainer</div>
-                    <div class="exp-company">Zaalima Development</div>
-                    <div class="exp-details">
-                        <ul>
-                            <li>Guiding interns through practical App & Web projects and UI/UX problem-solving.</li>
-                            <li>Mentoring on GitHub usage, freelance strategies (building/selling websites), and industry trends.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exp-icon">+</div>
-            </div>
-            <div class="exp-row" onclick="this.classList.toggle('active')">
-                <div class="exp-year">Nov 2024 - Present</div>
-                <div class="exp-main">
-                    <span class="tag-badge">Startup Core Team</span>
-                    <div class="exp-role">UI/UX Designer</div>
-                    <div class="exp-company">Apnaa Vehicle (Startup)</div>
-                    <div class="exp-details">
-                        <ul>
-                            <li>Awarded 3rd Prize for Startup Innovation at SGT University.</li>
-                            <li>Designed user-friendly interfaces for an online vehicle marketplace (21 distributors onboarded).</li>
-                            <li>Created 3D vehicle models for visual presentation and pitch decks.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="exp-icon">+</div>
-            </div>
+        <h2 class="section-header">Career Journey</h2>
+        <div class="career-bento">
+            <div class="bento-card span-2"><span class="job-tag">Full Time</span><div><div class="job-date">Jun 2025 - Present</div><h3 class="job-role">UI/UX Designer</h3><div class="job-company">Praxis Services Pvt. Ltd.</div></div><div class="job-desc">Designing "One Fine Rate".</div></div>
+            <div class="bento-card span-1"><span class="job-tag">Training</span><div><div class="job-date">Mar 2025 - Present</div><h3 class="job-role">UI/UX Trainer</h3><div class="job-company">Zaalima Development</div></div><div class="job-desc">Guiding interns.</div></div>
+            <div class="bento-card span-1"><span class="job-tag">Startup</span><div><div class="job-date">Nov 2024 - Present</div><h3 class="job-role">UI/UX Designer</h3><div class="job-company">Apnaa Vehicle</div></div><div class="job-desc">Awarded 3rd Prize.</div></div>
+            <div class="bento-card span-1"><span class="job-tag">Internship</span><div><div class="job-date">Mar 2025 - Aug 2025</div><h3 class="job-role">Placement Portal</h3><div class="job-company">SGGS University</div></div><div class="job-desc">Placement dashboard.</div></div>
+            <div class="bento-card span-1"><span class="job-tag">Internship</span><div><div class="job-date">Apr 2025 - May 2025</div><h3 class="job-role">SGT Farms</h3><div class="job-company">SGGS University</div></div><div class="job-desc">E-commerce platform.</div></div>
+            <div class="bento-card span-2"><span class="job-tag">Internship</span><div><div class="job-date">Mar 2025 - May 2025</div><h3 class="job-role">Web Developer</h3><div class="job-company">Zidio Development</div></div><div class="job-desc">Created school websites & apps.</div></div>
         </div>
     </section>
 
-    <section class="edu-section">
-        <h2 class="edu-title">Education<br>& Milestones</h2>
-        <div class="timeline">
-            <div class="timeline-line"><div class="timeline-line-fill"></div></div>
+    <section class="section-padding">
+        <h2 class="section-header">Education</h2>
+        <div class="edu-container">
+            <div class="edu-card"><div class="edu-year-big">2027</div><div class="edu-info"><h3>B.Tech Computer Science</h3><h4>Shree Guru Gobind Singh University</h4><p>Specializing in iOS and mobile application development. (Pursuing)</p></div></div>
+            <div class="edu-card"><div class="edu-year-big">2023</div><div class="edu-info"><h3>B.Tech First Year</h3><h4>Presidency University</h4><p>Specialized in Cyber Security.</p></div></div>
+            <div class="edu-card"><div class="edu-year-big">2022</div><div class="edu-info"><h3>Secondary Education</h3><h4>GD Goenka Public School</h4><p>12th Science Math’s (PCM) & 10th Grade.</p></div></div>
+        </div>
+    </section>
+
+    <section class="vault-horizontal-section vault-section-trigger">
+        <div class="vault-track">
             
-            <div class="edu-item">
-                <div class="edu-dot"></div>
-                <span class="edu-date">Jan 2023 - Jan 2027</span>
-                <h3 class="edu-degree">B.Tech Computer Science</h3>
-                <div class="edu-school">Shree Guru Gobind Singh University, Gurgaon</div>
-                <p style="color:#888">Specializing in iOS and Mobile Application Development.</p>
-            </div>
-
-            <div class="edu-item">
-                <div class="edu-dot"></div>
-                <span class="edu-date">Jan 2022 - Jan 2023</span>
-                <h3 class="edu-degree">B.Tech First Year</h3>
-                <div class="edu-school">Presidency University</div>
-                <p style="color:#888">Specialized in Cyber Security.</p>
-            </div>
-
-            <div class="edu-item">
-                <div class="edu-dot"></div>
-                <span class="edu-date">2016 - 2022</span>
-                <h3 class="edu-degree">Secondary Education</h3>
-                <div class="edu-school">GD Goenka Public School</div>
-                <p style="color:#888">12th Science Math’s (PCM) & 10th Grade.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="vault-section">
-        <h2 class="edu-title" style="margin-bottom:60px;">The Vault</h2>
-        <div class="vault-grid">
-            
-            <div class="vault-card">
-                <span class="vault-type text-accent">Major Achievement</span>
-                <h3 class="vault-title">Startup Innovation Award (3rd Prize)</h3>
-                <div class="vault-issuer">ICC (Innovations Contest Cell)</div>
-                <p style="color:#666; font-size:14px; margin-top:10px;">For contributions to Apnaa Vehicle startup initiative.</p>
-            </div>
-
-            <div class="vault-card">
-                <span class="vault-type">Certification</span>
-                <h3 class="vault-title">JavaScript (Intermediate)</h3>
-                <div class="vault-issuer">HackerRank</div>
-                <p style="color:#666; font-size:14px; margin-top:10px;">April 2023</p>
-            </div>
-
-            <div class="vault-card">
-                <span class="vault-type">Certification</span>
-                <h3 class="vault-title">Problem Solving (Intermediate)</h3>
-                <div class="vault-issuer">HackerRank</div>
-                <p style="color:#666; font-size:14px; margin-top:10px;">April 2023</p>
-            </div>
-
-            <div class="vault-card">
-                <span class="vault-type">Internship</span>
-                <h3 class="vault-title">SGT Farms Intern</h3>
-                <div class="vault-issuer">SGT University</div>
-                <p style="color:#666; font-size:14px; margin-top:10px;">May 2025 - June 2025</p>
-            </div>
-
-            <div class="vault-card">
-                <span class="vault-type">Internship</span>
-                <h3 class="vault-title">TPO Website Development</h3>
-                <div class="vault-issuer">Training & Placement Cell</div>
-                <p style="color:#666; font-size:14px; margin-top:10px;">March 2025 - August 2025</p>
-            </div>
+            <div class="vault-item"><div class="vault-intro"><h2 class="section-header" style="font-size:80px;">The Vault</h2><p style="color:#888; font-size:20px;">A collection of certifications, awards, and milestones.</p></div></div>
+            <div class="vault-item highlight"><div class="v-icon">🏆</div><div><span class="v-date">AWARD</span><h3 class="v-title">Startup Innovation Award</h3><div class="v-issuer">ICC (Innovations Contest Cell)</div><div class="v-desc">Recognized for contributions to the startup initiative Aapnaa Vehicle.</div></div></div>
+            <div class="vault-item"><div class="v-icon">📜</div><div><span class="v-date">22 APR 2023</span><h3 class="v-title">JavaScript (Intermediate)</h3><div class="v-issuer">HackerRank</div><div class="v-desc">Verified certification in intermediate JavaScript concepts and problem solving.</div></div></div>
+            <div class="vault-item"><div class="v-icon">📜</div><div><span class="v-date">22 APR 2023</span><h3 class="v-title">Problem Solving</h3><div class="v-issuer">HackerRank</div><div class="v-desc">Intermediate level problem solving certification.</div></div></div>
+            <div class="vault-item"><div class="v-icon">💼</div><div><span class="v-date">12 MAR 2025</span><h3 class="v-title">TPO Portal Lead</h3><div class="v-issuer">Internship</div><div class="v-desc">Led the design and development of the Training and Placement Officer Portal.</div></div></div>
 
         </div>
     </section>
 
-    <section class="skills-section">
-        <div style="text-align:center; margin-bottom:50px; color:var(--secondary); font-family:'Syne';">TECHNICAL & CREATIVE ARSENAL</div>
-        <div class="skills-container">
-            <span class="skill-word">iOS Design</span>
-            <span class="skill-word">UI/UX</span>
-            <span class="skill-word">VFX</span>
-            <span class="skill-word">Graphic</span>
-            <span class="skill-word">HTML/CSS</span>
-            <span class="skill-word">JavaScript</span>
-            <span class="skill-word">Tailwind</span>
-            <span class="skill-word">Java</span>
-            <span class="skill-word">Python</span>
-            <span class="skill-word">Bootstrap</span>
-            <span class="skill-word">Adobe XD</span>
-            <span class="skill-word">Sketch</span>
-            <span class="skill-word">Figma</span>
-            <span class="skill-word">Illustrator</span>
+    <section class="section-padding">
+        <h2 class="section-header">Arsenal</h2>
+        <div class="skills-wall">
+            <span class="skill-brick">UI/UX Design</span><span class="skill-brick">Figma</span><span class="skill-brick">JavaScript</span><span class="skill-brick">HTML5</span><span class="skill-brick">CSS3</span><span class="skill-brick">Java</span><span class="skill-brick">Python</span><span class="skill-brick">React</span><span class="skill-brick">Adobe XD</span><span class="skill-brick">Sketch</span><span class="skill-brick">VFX Design</span><span class="skill-brick">Graphic Design</span><span class="skill-brick">Wireframing</span><span class="skill-brick">Prototyping</span><span class="skill-brick">Bootstrap</span><span class="skill-brick">Illustrator</span>
         </div>
     </section>
 
     <footer>
-        <p style="color:var(--secondary); margin-bottom:20px;">READY TO COLLABORATE?</p>
         <a href="mailto:alicekatrine23@gmail.com" class="huge-mail">alicekatrine23@gmail.com</a>
         <div style="margin-top:50px; font-family:'Syne'">+91 8130554314 | Gurugram, India</div>
     </footer>
 
     <script>
-        // --- 1. SETUP LENIS (Smooth Scroll) ---
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-        });
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // --- 2. LOADING SEQUENCE ---
-        const counter = { val: 0 };
-        const counterEl = document.querySelector('.loader-counter');
-        const loader = document.querySelector('.loader');
-        const tl = gsap.timeline();
+        // --- LOADER ---
+        const masterTl = gsap.timeline();
+        masterTl.to(".bounce-ball", { y: -50, duration: 0.5, yoyo: true, repeat: 3, ease: "power1.inOut" });
+        masterTl.to(".intro-loader", { yPercent: -100, duration: 1, ease: "power4.inOut" });
+        masterTl.to(".zajno-ball", { scale: 1.5, duration: 0.8, ease: "power2.out" }, "-=0.5");
+        masterTl.to("#z-text-1", { opacity: 1, duration: 0.5 }, "<0.2");
+        masterTl.to(".zajno-ball", { y: -300, scale: 0.1, duration: 0.6, ease: "power2.in", delay: 0.5 });
+        masterTl.to("#z-text-1", { y: -50, opacity: 0, duration: 0.3 }, "<");
+        masterTl.to(".zajno-wrapper", { backgroundColor: "#000000", duration: 0 });
+        masterTl.to(".zajno-ball", { backgroundColor: "#ffffff", y: 300, duration: 0 });
+        masterTl.to(".zajno-ball", { y: 0, scale: 1.5, duration: 0.8, ease: "back.out(1.7)" });
+        masterTl.to("#z-text-2", { opacity: 1, duration: 0.5 }, "-=0.5");
+        masterTl.to(".zajno-ball", { y: -300, scale: 0.1, duration: 0.6, ease: "power2.in", delay: 0.5 });
+        masterTl.to("#z-text-2", { y: -50, opacity: 0, duration: 0.3 }, "<");
+        masterTl.to(".zajno-wrapper", { backgroundColor: "#ffffff", duration: 0 });
+        masterTl.to(".zajno-ball", { backgroundColor: "#000000", y: 300, duration: 0 });
+        masterTl.to(".zajno-ball", { y: 0, scale: 1.5, duration: 0.8, ease: "back.out(1.7)" });
+        masterTl.to("#z-text-3", { opacity: 1, duration: 0.5 }, "-=0.5");
+        masterTl.to(".zajno-ball", { scale: 60, duration: 1.5, ease: "power2.inOut", delay: 0.5 });
+        masterTl.to("#z-text-3", { opacity: 0, duration: 0.3 }, "-=1.2");
+        masterTl.to(".zajno-wrapper", { yPercent: -100, duration: 1, ease: "power3.inOut" });
 
-        tl.to(counter, {
-            val: 100,
-            duration: 2,
-            ease: "power2.inOut",
-            onUpdate: () => { counterEl.textContent = Math.floor(counter.val) + "%"; }
-        });
+        const heroTl = gsap.timeline();
+        masterTl.add(heroTl, "-=0.5"); 
+        heroTl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.5, stagger: 0.1, ease: "power4.out" }, "-=0.8");
+        heroTl.to('.hero-subtitle', { opacity: 1, duration: 1 }, "-=1");
 
-        const words = gsap.utils.toArray('.loader-word');
-        tl.to('.loader-text', {
-            duration: 2,
-            onStart: () => {
-                let i = 0;
-                const interval = setInterval(() => {
-                    if (i >= words.length) i = 0;
-                    gsap.to(words, {y: -30, opacity: 0, duration: 0.2});
-                    gsap.fromTo(words[i], {y: 30, opacity: 0}, {y: 0, opacity: 1, duration: 0.2});
-                    i++;
-                }, 400);
-                setTimeout(() => clearInterval(interval), 1800);
-            }
-        }, "<");
-
-        tl.to(loader, { yPercent: -100, duration: 1, ease: "power4.inOut" });
-
-        // --- 3. HERO ANIMATIONS ---
-        tl.to('.hero-video-wrapper', { opacity: 1, width: '40vw', duration: 1, ease: "power3.out" }, "-=0.5");
-        tl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.5, stagger: 0.1, ease: "power4.out" }, "-=0.8");
-        tl.to('.hero-subtitle', { opacity: 1, duration: 1 }, "-=1");
-
-        // --- 4. SCROLL ANIMATIONS ---
         gsap.registerPlugin(ScrollTrigger);
 
-        const heroScroll = gsap.timeline({
-            scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
-        });
-        heroScroll.to('.hero-video-wrapper', { width: '100vw', height: '100vh', borderRadius: 0 });
-        heroScroll.to('.hero-title', { scale: 1.5, opacity: 0 }, "<");
-
         if (window.innerWidth > 1024) {
-            const gallery = document.querySelector('.gallery-wrapper');
-            gsap.to(gallery, {
-                x: () => -(gallery.scrollWidth - window.innerWidth),
+            // --- PROJECT SCROLL ---
+            const projectTrack = document.querySelector('.project-section-container');
+            const galleryTrack = projectTrack.querySelector('.gallery-track');
+            
+            gsap.to(galleryTrack, {
+                x: () => -(galleryTrack.scrollWidth - window.innerWidth),
                 ease: "none",
-                scrollTrigger: { trigger: ".horizontal-section", pin: true, scrub: 1, end: () => "+=" + gallery.scrollWidth }
+                scrollTrigger: {
+                    trigger: projectTrack,
+                    pin: true,
+                    scrub: 1,
+                    end: () => "+=" + galleryTrack.scrollWidth
+                }
+            });
+
+            // --- VAULT SCROLL (ONE PER SCROLL + MINIMIZE) ---
+            const vaultTrack = document.querySelector('.vault-section-trigger');
+            const vaultInner = vaultTrack.querySelector('.vault-track');
+            const vaultItems = vaultInner.querySelectorAll('.vault-item');
+
+            const vaultScrollTween = gsap.to(vaultInner, {
+                x: () => -(vaultInner.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: vaultTrack,
+                    pin: true,
+                    scrub: 1,
+                    end: () => "+=" + vaultInner.scrollWidth
+                }
+            });
+
+            vaultItems.forEach((item) => {
+                gsap.to(item, {
+                    scale: 0.7, opacity: 0.3, rotationY: 25, x: -150,
+                    scrollTrigger: {
+                        trigger: item,
+                        containerAnimation: vaultScrollTween,
+                        start: "center center",
+                        end: "right center",
+                        scrub: true
+                    }
+                });
             });
         }
 
-        // --- 5. EDUCATION TIMELINE ANIMATION ---
-        gsap.to(".timeline-line-fill", {
-            height: "100%",
-            scrollTrigger: {
-                trigger: ".timeline",
-                start: "top center",
-                end: "bottom center",
-                scrub: 1
-            }
+        // --- EDUCATION REVEAL ---
+        gsap.utils.toArray('.edu-card').forEach((card, i) => {
+            const xVal = i % 2 === 0 ? -200 : 200;
+            gsap.fromTo(card, 
+                { x: xVal, opacity: 0 },
+                { x: 0, opacity: 1, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: card, start: "top 80%" } }
+            );
         });
 
-        gsap.utils.toArray(".edu-item").forEach(item => {
-            gsap.to(item, {
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: item,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-        // --- 6. MOUSE INTERACTIONS ---
         const magneticBtn = document.querySelector('.magnetic-btn');
         document.addEventListener('mousemove', (e) => {
             gsap.to(".cursor-dot", { x: e.clientX, y: e.clientY, duration: 0 });
             gsap.to(".cursor-outline", { x: e.clientX, y: e.clientY, duration: 0.1 });
-            
             const pos = magneticBtn.getBoundingClientRect();
             const x = e.clientX - pos.left - pos.width / 2;
             const y = e.clientY - pos.top - pos.height / 2;
-            const dist = Math.sqrt(x*x + y*y);
-            
-            if (dist < 100) {
+            if (Math.sqrt(x*x + y*y) < 100) {
                 gsap.to(magneticBtn, { x: x * 0.5, y: y * 0.5, duration: 0.3 });
                 gsap.to(".cursor-outline", { scale: 1.5 });
             } else {
