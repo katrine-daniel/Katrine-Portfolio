@@ -16,7 +16,7 @@
         :root {
             --bg: #050505;
             --text: #e1e1e1;
-            --accent: #E0CCBB;
+            --accent: #E0CCBB; /* Soft Beige/Gold */
             --secondary: #888;
             --border: rgba(255,255,255,0.1);
             --gold: #D4AF37;
@@ -40,7 +40,7 @@
         .bounce-ball { width: 50px; height: 50px; background-color: #fff; border-radius: 50%; }
         .loading-text { margin-top: 20px; font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- ZAJNO ANIMATION WRAPPER --- */
+        /* --- ZAJNO STYLE ANIMATION WRAPPER --- */
         .zajno-wrapper { position: fixed; inset: 0; background-color: #ffffff; z-index: 15000; display: flex; justify-content: center; align-items: center; overflow: hidden; }
         .zajno-ball { position: absolute; width: 400px; height: 400px; background-color: #000000; border-radius: 50%; transform: scale(0); }
         .zajno-text-container { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; mix-blend-mode: difference; color: #fff; }
@@ -50,7 +50,7 @@
         nav { position: fixed; top: 0; width: 100%; padding: 30px 50px; display: flex; justify-content: space-between; z-index: 50; mix-blend-mode: difference; }
         .nav-logo { font-weight: 700; letter-spacing: 2px; }
 
-        /* --- HERO SECTION (ZOOM THROUGH) --- */
+        /* --- HERO SECTION --- */
         .hero { 
             height: 100vh; 
             width: 100%; 
@@ -58,13 +58,13 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            background: #000; /* Solid background behind video */
+            background: #000; 
             z-index: 1;
-            overflow: hidden; /* Crucial for zoom effect */
+            overflow: hidden; 
         }
 
         .hero-video-wrapper { 
-            position: absolute; /* Changed from fixed to absolute so it scales with the section */
+            position: absolute; 
             top: 0; 
             left: 0; 
             width: 100%; 
@@ -108,6 +108,56 @@
         .highlight { color: var(--accent); }
         .section-header { font-family: 'Clash Display'; font-size: 60px; text-transform: uppercase; margin-bottom: 60px; border-bottom: 1px solid #333; padding-bottom: 20px; }
 
+        /* --- SCROLL-CONTROLLED ENTRY POINT --- */
+        #project-entry {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg); 
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        .entry-ball {
+            width: 250px;
+            height: 250px;
+            background-color: var(--accent); 
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .entry-text {
+            font-family: 'Clash Display', sans-serif;
+            color: #000; 
+            font-size: 20px;
+            line-height: 1.2;
+            font-weight: 600;
+            position: absolute;
+            z-index: 20;
+        }
+
+        /* The image inside the ball/frame */
+        .entry-image-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0; /* Starts hidden, reveals on scroll */
+            z-index: 5;
+            transform: scale(1.5); /* Starts zoomed in slightly */
+        }
+        
         /* --- PROJECTS --- */
         .project-section-container { height: 100vh; background: #050505; overflow: hidden; display: flex; align-items: center; }
         .gallery-track { display: flex; align-items: center; gap: 5vw; padding-left: 5vw; padding-right: 5vw; width: fit-content; }
@@ -221,6 +271,13 @@
         <div class="bio-text">I'm a UI/UX designer bridging the gap between <span class="highlight">design</span> and <span class="highlight">functionality</span>.</div>
     </section>
 
+    <section id="project-entry">
+        <div class="entry-ball">
+            <div class="entry-text">My Projects<br>Keep Scrolling</div>
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80" class="entry-image-inner" alt="Projects Reveal">
+        </div>
+    </section>
+
     <section id="work" class="project-section-container">
         <div class="gallery-track">
             <div class="project-intro">
@@ -283,17 +340,13 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
+        gsap.registerPlugin(ScrollTrigger);
+
         // --- LOADER & INTRO ANIMATION (FAST VERSION) ---
         const masterTl = gsap.timeline();
-
-        // 1. Initial Bounce
         masterTl.to(".bounce-ball", { y: -50, duration: 0.3, yoyo: true, repeat: 3, ease: "power1.inOut" });
-        
-        // 2. Slide up loader
         masterTl.to(".intro-loader", { yPercent: -100, duration: 0.6, ease: "power4.inOut" });
 
-        // --- SEQUENCE START ---
-        
         // SEQUENCE 1: WEB DESIGNER
         masterTl.to(".zajno-ball", { scale: 5, duration: 0.5, ease: "power2.out" }, "-=0.3");
         masterTl.to("#z-text-1", { opacity: 1, duration: 0.3 }, "<0.1");
@@ -319,38 +372,44 @@
         masterTl.to("#z-text-3", { opacity: 0, duration: 0.2 }, "-=0.6");
         masterTl.to(".zajno-wrapper", { yPercent: -100, duration: 0.8, ease: "power3.inOut" }, "-=0.2");
 
-        // --- HERO TEXT REVEAL ---
+        // HERO TEXT REVEAL
         const heroTl = gsap.timeline();
         masterTl.add(heroTl, "-=0.5"); 
         heroTl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.0, stagger: 0.1, ease: "power4.out" });
         heroTl.to('.hero-subtitle', { opacity: 1, duration: 0.8 }, "-=0.5");
 
         // --- SCROLL TRIGGER LOGIC ---
-        gsap.registerPlugin(ScrollTrigger);
-
         if (window.innerWidth > 1024) {
             
-            // --- NEW: HERO ZOOM-THROUGH EFFECT ---
-            // This pins the hero and scales the video until it disappears, revealing the content below
+            // HERO ZOOM-THROUGH
             const zoomTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".hero",
                     start: "top top",
-                    end: "+=600", // CHANGED: Reduced from 1500 to 600 for a much faster scroll
+                    end: "+=600",
                     pin: true,
-                    scrub: 0.5    // CHANGED: Lowered from 1 to 0.5 for snappy response
+                    scrub: 0.5
                 }
             });
-
-            // 1. Scale video huge (Zoom In)
             zoomTl.to(".hero-video-wrapper", { scale: 30, duration: 1, ease: "power1.in" });
-            // 2. Fade text out and scale it towards camera
             zoomTl.to(".hero-title-container", { scale: 5, opacity: 0, duration: 0.5 }, "<");
-            // 3. Fade video out at the very end to prevent pixelation
             zoomTl.to(".hero-video-wrapper", { opacity: 0, duration: 0.2 }, "-=0.2");
-            // 4. Hide button
             zoomTl.to(".magnetic-btn", { opacity: 0, duration: 0.2 }, "<");
 
+            // SCROLL-BASED BALL EXPANSION
+            const entryTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#project-entry",
+                    start: "top top",
+                    end: "+=1500", 
+                    scrub: 1, 
+                    pin: true 
+                }
+            });
+            entryTl.to(".entry-text", { opacity: 0, scale: 0.5, duration: 0.5 });
+            entryTl.to(".entry-ball", { width: "60vw", height: "50vh", borderRadius: "20px", ease: "power2.inOut", duration: 2 }, "-=0.3");
+            entryTl.to(".entry-image-inner", { opacity: 1, scale: 1, duration: 2 }, "<");
+            entryTl.to(".entry-ball", { width: "100vw", height: "100vh", borderRadius: "0px", ease: "power2.inOut", duration: 2 });
 
             // Project Horizontal Scroll
             const projectTrack = document.querySelector('.project-section-container');
@@ -397,16 +456,26 @@
             });
         }
 
-        // Education Cards Reveal
+        // --- UPDATED: Education Cards Reveal with Scrub (Reverse on scroll up) ---
         gsap.utils.toArray('.edu-card').forEach((card, i) => {
             const xVal = i % 2 === 0 ? -200 : 200;
             gsap.fromTo(card, 
                 { x: xVal, opacity: 0 },
-                { x: 0, opacity: 1, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: card, start: "top 80%" } }
+                { 
+                    x: 0, 
+                    opacity: 1, 
+                    ease: "power3.out", 
+                    scrollTrigger: { 
+                        trigger: card, 
+                        start: "top 85%", // Start fading in when top of card hits 85% viewport height
+                        end: "top 55%",   // Finish fading in when top of card hits 55% viewport height
+                        scrub: 1          // Ties animation progress to scrollbar, enabling reverse
+                    } 
+                }
             );
         });
 
-        // Magnetic Button
+        // Magnetic Button Logic
         const magneticBtn = document.querySelector('.magnetic-btn');
         document.addEventListener('mousemove', (e) => {
             gsap.to(".cursor-dot", { x: e.clientX, y: e.clientY, duration: 0 });
