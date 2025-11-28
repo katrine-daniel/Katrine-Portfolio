@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katrine Alice Daniel | Portfolio</title>
-    
+
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
@@ -16,13 +19,19 @@
         :root {
             --bg: #050505;
             --text: #e1e1e1;
-            --accent: #E0CCBB; /* Soft Beige/Gold */
+            --accent: #E0CCBB;
+            /* Soft Beige/Gold */
             --secondary: #888;
-            --border: rgba(255,255,255,0.1);
+            --border: rgba(255, 255, 255, 0.1);
             --gold: #D4AF37;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
 
         body {
             background-color: var(--bg);
@@ -32,81 +41,224 @@
         }
 
         /* --- CUSTOM CURSOR --- */
-        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; }
-        .cursor-outline { width: 50px; height: 50px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.2s; mix-blend-mode: difference; }
-
-        /* --- LOADER --- */
-        .intro-loader { position: fixed; inset: 0; background-color: #000; z-index: 20000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .bounce-ball { width: 50px; height: 50px; background-color: #fff; border-radius: 50%; }
-        .loading-text { margin-top: 20px; font-family: 'Syne', sans-serif; color: var(--accent); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* --- ZAJNO STYLE ANIMATION WRAPPER --- */
-        .zajno-wrapper { position: fixed; inset: 0; background-color: #ffffff; z-index: 15000; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .zajno-ball { position: absolute; width: 400px; height: 400px; background-color: #000000; border-radius: 50%; transform: scale(0); }
-        .zajno-text-container { position: absolute; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; mix-blend-mode: difference; color: #fff; }
-        .zajno-text { font-family: 'Clash Display', sans-serif; font-size: clamp(40px, 8vw, 120px); font-weight: 700; text-transform: uppercase; position: absolute; opacity: 0; letter-spacing: -2px; text-align: center; white-space: nowrap; }
-
-        /* --- NAV --- */
-        nav { position: fixed; top: 0; width: 100%; padding: 30px 50px; display: flex; justify-content: space-between; z-index: 50; mix-blend-mode: difference; }
-        .nav-logo { font-weight: 700; letter-spacing: 2px; }
-
-        /* --- HERO SECTION --- */
-        .hero { 
-            height: 100vh; 
-            width: 100%; 
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: #000; 
-            z-index: 1;
-            overflow: hidden; 
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        .hero-video-wrapper { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: 0; 
-            overflow: hidden; 
+        .cursor-outline {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        /* --- LOADER --- */
+        .intro-loader {
+            position: fixed;
+            inset: 0;
+            background-color: #000;
+            z-index: 20000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bounce-ball {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-family: 'Syne', sans-serif;
+            color: var(--accent);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- ZAJNO STYLE ANIMATION WRAPPER --- */
+        .zajno-wrapper {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffff;
+            z-index: 15000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .zajno-ball {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: #000000;
+            border-radius: 50%;
+            transform: scale(0);
+        }
+
+        .zajno-text-container {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            mix-blend-mode: difference;
+            color: #fff;
+        }
+
+        .zajno-text {
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(40px, 8vw, 120px);
+            font-weight: 700;
+            text-transform: uppercase;
+            position: absolute;
+            opacity: 0;
+            letter-spacing: -2px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 50;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .hero-video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
             transform-origin: center center;
         }
 
-        .hero-video-wrapper video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            opacity: 0.6; 
+        .hero-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
         }
 
-        .hero-title-container { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            mix-blend-mode: difference; 
+        .hero-title-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            mix-blend-mode: difference;
             z-index: 2;
             position: relative;
         }
 
-        .hero-title { font-family: 'Clash Display', sans-serif; font-size: 10vw; font-weight: 700; line-height: 0.9; text-transform: uppercase; text-align: center; color: #fff; }
-        .hero-subtitle { margin-top: 30px; font-family: 'Syne', sans-serif; letter-spacing: 5px; text-transform: uppercase; font-size: 16px; color: var(--accent); opacity: 0; }
-        
-        .magnetic-btn { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 10; }
+        .hero-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 10vw;
+            font-weight: 700;
+            line-height: 0.9;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            margin-top: 30px;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 16px;
+            color: var(--accent);
+            opacity: 0;
+        }
+
+        .magnetic-btn {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
 
         /* --- CONTENT SECTIONS --- */
         section {
             position: relative;
-            z-index: 2; 
-            background-color: var(--bg); 
+            z-index: 2;
+            background-color: var(--bg);
         }
 
-        .section-padding { padding: 120px 5vw; }
-        .bio-text { font-family: 'Clash Display'; font-size: clamp(24px, 3vw, 40px); line-height: 1.3; max-width: 1200px; }
-        .highlight { color: var(--accent); }
-        .section-header { font-family: 'Clash Display'; font-size: 60px; text-transform: uppercase; margin-bottom: 60px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .section-padding {
+            padding: 120px 5vw;
+        }
+
+        .bio-text {
+            font-family: 'Clash Display';
+            font-size: clamp(24px, 3vw, 40px);
+            line-height: 1.3;
+            max-width: 1200px;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .section-header {
+            font-family: 'Clash Display';
+            font-size: 60px;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
 
         /* --- SCROLL-CONTROLLED ENTRY POINT --- */
         #project-entry {
@@ -115,7 +267,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--bg); 
+            background: var(--bg);
             position: relative;
             overflow: hidden;
             z-index: 5;
@@ -124,7 +276,7 @@
         .entry-ball {
             width: 250px;
             height: 250px;
-            background-color: var(--accent); 
+            background-color: var(--accent);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -132,12 +284,12 @@
             text-align: center;
             z-index: 10;
             position: relative;
-            overflow: hidden; 
+            overflow: hidden;
         }
 
         .entry-text {
             font-family: 'Clash Display', sans-serif;
-            color: #000; 
+            color: #000;
             font-size: 20px;
             line-height: 1.2;
             font-weight: 600;
@@ -153,87 +305,436 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0; /* Starts hidden, reveals on scroll */
+            opacity: 0;
+            /* Starts hidden, reveals on scroll */
             z-index: 5;
-            transform: scale(1.5); /* Starts zoomed in slightly */
+            transform: scale(1.5);
+            /* Starts zoomed in slightly */
         }
-        
+
         /* --- PROJECTS --- */
-        .project-section-container { height: 100vh; background: #050505; overflow: hidden; display: flex; align-items: center; }
-        .gallery-track { display: flex; align-items: center; gap: 5vw; padding-left: 5vw; padding-right: 5vw; width: fit-content; }
-        .project-intro { min-width: 400px; padding-right: 50px; display: flex; flex-direction: column; justify-content: center; }
-        .gallery-item { width: 65vw; height: 70vh; position: relative; flex-shrink: 0; }
-        .project-card { width: 100%; height: 100%; position: relative; background: #111; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s ease; }
-        .project-card:hover { transform: scale(0.98); border-color: var(--accent); }
-        .project-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7); transition: 0.5s; }
-        .project-card:hover .project-img { filter: brightness(1); transform: scale(1.05); }
-        .project-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px; background: linear-gradient(to top, #000, transparent); z-index: 2; }
-        .project-num { font-family: 'Clash Display'; font-size: 8vw; position: absolute; top: 20px; right: 40px; color: rgba(255,255,255,0.1); line-height: 1; }
-        .project-title { font-family: 'Clash Display'; font-size: 48px; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
-        .project-cat { font-family: 'Syne'; color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        .project-section-container {
+            height: 100vh;
+            background: #050505;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .gallery-track {
+            display: flex;
+            align-items: center;
+            gap: 5vw;
+            padding-left: 5vw;
+            padding-right: 5vw;
+            width: fit-content;
+        }
+
+        .project-intro {
+            min-width: 400px;
+            padding-right: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            width: 65vw;
+            height: 70vh;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .project-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #111;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(0.98);
+            border-color: var(--accent);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: 0.5s;
+        }
+
+        .project-card:hover .project-img {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, #000, transparent);
+            z-index: 2;
+        }
+
+        .project-num {
+            font-family: 'Clash Display';
+            font-size: 8vw;
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+        }
+
+        .project-title {
+            font-family: 'Clash Display';
+            font-size: 48px;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .project-cat {
+            font-family: 'Syne';
+            color: var(--accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
         /* --- CAREER BENTO --- */
-        .career-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 100px; }
-        .bento-card { background: #0f0f0f; border: 1px solid var(--border); padding: 30px; border-radius: 12px; position: relative; transition: transform 0.3s, border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .bento-card:hover { transform: translateY(-5px); border-color: var(--accent); background: #151515; }
-        .span-2 { grid-column: span 2; } .span-1 { grid-column: span 1; }
-        .job-date { font-family: 'Syne'; color: var(--accent); font-size: 12px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .job-role { font-family: 'Clash Display'; font-size: 24px; color: #fff; margin-bottom: 5px; }
-        .job-company { font-size: 14px; color: var(--secondary); text-transform: uppercase; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .job-desc { font-size: 14px; color: #aaa; line-height: 1.6; }
-        .job-tag { position: absolute; top: 30px; right: 30px; font-size: 10px; border: 1px solid #333; padding: 5px 10px; border-radius: 20px; text-transform: uppercase; }
+        .career-bento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding-bottom: 100px;
+        }
+
+        .bento-card {
+            background: #0f0f0f;
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: #151515;
+        }
+
+        .span-2 {
+            grid-column: span 2;
+        }
+
+        .span-1 {
+            grid-column: span 1;
+        }
+
+        .job-date {
+            font-family: 'Syne';
+            color: var(--accent);
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .job-role {
+            font-family: 'Clash Display';
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .job-company {
+            font-size: 14px;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .job-desc {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .job-tag {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 10px;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
 
         /* --- EDUCATION --- */
-        .edu-container { display: flex; flex-direction: column; gap: 120px; padding-bottom: 100px; position: relative; overflow: hidden; }
-        .edu-card { display: flex; align-items: center; gap: 80px; opacity: 0; position: relative; }
-        .edu-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .edu-year-big { font-family: 'Clash Display'; font-size: 12vw; font-weight: 700; color: transparent; -webkit-text-stroke: 2px #333; line-height: 1; transition: all 0.5s; }
-        .edu-card:hover .edu-year-big { -webkit-text-stroke: 2px var(--accent); opacity: 0.5; }
-        .edu-info h3 { font-family: 'Clash Display'; font-size: 40px; color: #fff; margin-bottom: 10px; }
-        .edu-info h4 { font-family: 'Syne'; color: var(--accent); margin-bottom: 20px; font-size: 18px; letter-spacing: 1px; }
-        .edu-info p { color: #888; max-width: 500px; font-size: 18px; line-height: 1.6; }
+        .edu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            opacity: 0;
+            position: relative;
+        }
+
+        .edu-card:nth-child(even) {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .edu-year-big {
+            font-family: 'Clash Display';
+            font-size: 12vw;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 2px #333;
+            line-height: 1;
+            transition: all 0.5s;
+        }
+
+        .edu-card:hover .edu-year-big {
+            -webkit-text-stroke: 2px var(--accent);
+            opacity: 0.5;
+        }
+
+        .edu-info h3 {
+            font-family: 'Clash Display';
+            font-size: 40px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .edu-info h4 {
+            font-family: 'Syne';
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .edu-info p {
+            color: #888;
+            max-width: 500px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
 
         /* --- THE VAULT (BIG) --- */
-        .vault-horizontal-section { height: 100vh; background: #0a0a0a; overflow: hidden; display: flex; align-items: center; }
-        .vault-track { display: flex; gap: 60px; padding: 0 10vw; width: fit-content; align-items: center; }
-        .vault-intro { min-width: 500px; padding-right: 80px; border-right: 1px solid #333; margin-right: 40px; display: flex; flex-direction: column; justify-content: center; }
-        .vault-item { min-width: 600px; height: 70vh; background: #0f0f0f; border: 1px solid #222; padding: 60px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: all 0.4s ease; }
-        .vault-item:hover { border-color: var(--accent); background: #121212; }
-        .vault-item.highlight { border-color: var(--gold); background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent); }
-        .v-icon { font-size: 80px; margin-bottom: 40px; color: #333; transition: color 0.3s; }
-        .vault-item:hover .v-icon { color: var(--accent); }
-        .v-date { font-family: 'Syne'; font-size: 14px; color: var(--secondary); margin-bottom: 20px; display: block; letter-spacing: 2px; }
-        .v-title { font-family: 'Clash Display'; font-size: 48px; color: #fff; line-height: 1.1; margin-bottom: 20px; }
-        .v-issuer { font-size: 18px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-        .v-desc { font-size: 16px; color: #999; margin-top: 30px; line-height: 1.6; border-top: 1px solid #222; padding-top: 30px; }
+        .vault-horizontal-section {
+            height: 100vh;
+            background: #0a0a0a;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .vault-track {
+            display: flex;
+            gap: 60px;
+            padding: 0 10vw;
+            width: fit-content;
+            align-items: center;
+        }
+
+        .vault-intro {
+            min-width: 500px;
+            padding-right: 80px;
+            border-right: 1px solid #333;
+            margin-right: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .vault-item {
+            min-width: 600px;
+            height: 70vh;
+            background: #0f0f0f;
+            border: 1px solid #222;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .vault-item:hover {
+            border-color: var(--accent);
+            background: #121212;
+        }
+
+        .vault-item.highlight {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+        }
+
+        .v-icon {
+            font-size: 80px;
+            margin-bottom: 40px;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .vault-item:hover .v-icon {
+            color: var(--accent);
+        }
+
+        .v-date {
+            font-family: 'Syne';
+            font-size: 14px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        .v-title {
+            font-family: 'Clash Display';
+            font-size: 48px;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .v-issuer {
+            font-size: 18px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .v-desc {
+            font-size: 16px;
+            color: #999;
+            margin-top: 30px;
+            line-height: 1.6;
+            border-top: 1px solid #222;
+            padding-top: 30px;
+        }
 
         /* --- SKILLS --- */
-        .skills-wall { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px 0; }
-        .skill-brick { font-family: 'Clash Display'; font-size: clamp(20px, 4vw, 60px); font-weight: 600; color: #333; text-transform: uppercase; padding: 10px 20px; transition: all 0.3s; cursor: default; }
-        .skill-brick:hover { color: #fff; text-shadow: 0 0 10px var(--accent); transform: scale(1.1); }
+        .skills-wall {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 0;
+        }
 
-        footer { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #080808; text-align: center; }
-        .huge-mail { font-family: 'Clash Display'; font-size: 6vw; color: #fff; text-decoration: none; }
-        .huge-mail:hover { font-style: italic; color: var(--accent); }
-        
+        .skill-brick {
+            font-family: 'Clash Display';
+            font-size: clamp(20px, 4vw, 60px);
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-brick:hover {
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent);
+            transform: scale(1.1);
+        }
+
+        footer {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #080808;
+            text-align: center;
+        }
+
+        .huge-mail {
+            font-family: 'Clash Display';
+            font-size: 6vw;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .huge-mail:hover {
+            font-style: italic;
+            color: var(--accent);
+        }
+
         @media(max-width: 1024px) {
-            .career-bento { grid-template-columns: 1fr; }
-            .span-2 { grid-column: span 1; }
-            .hero-title { font-size: 15vw; }
-            .project-title, .v-title { font-size: 32px; }
-            .vault-item { min-width: 85vw; height: 60vh; padding: 30px; }
-            .gallery-item { width: 90vw; }
-            .edu-card, .edu-card:nth-child(even) { flex-direction: column; text-align: center; gap: 20px; }
+            .career-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .span-2 {
+                grid-column: span 1;
+            }
+
+            .hero-title {
+                font-size: 15vw;
+            }
+
+            .project-title,
+            .v-title {
+                font-size: 32px;
+            }
+
+            .vault-item {
+                min-width: 85vw;
+                height: 60vh;
+                padding: 30px;
+            }
+
+            .gallery-item {
+                width: 90vw;
+            }
+
+            .edu-card,
+            .edu-card:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <div class="intro-loader"><div class="bounce-ball"></div><div class="loading-text">Loading</div></div>
-    
+    <div class="intro-loader">
+        <div class="bounce-ball"></div>
+        <div class="loading-text">Loading</div>
+    </div>
+
     <div class="zajno-wrapper">
         <div class="zajno-ball"></div>
         <div class="zajno-text-container">
@@ -258,7 +759,10 @@
             </video>
         </div>
         <div class="hero-title-container">
-            <h1 class="hero-title"><div class="line">KATRINE</div><div class="line">ALICE DANIEL</div></h1>
+            <h1 class="hero-title">
+                <div class="line">KATRINE</div>
+                <div class="line">ALICE DANIEL</div>
+            </h1>
             <p class="hero-subtitle">UI/UX Designer & Creative Developer</p>
         </div>
         <div class="magnetic-btn" onclick="document.querySelector('#intro').scrollIntoView({behavior: 'smooth'})">
@@ -268,13 +772,20 @@
 
     <section id="intro" class="section-padding">
         <p style="color:var(--accent); margin-bottom:20px; text-transform:uppercase;">Introduction</p>
-        <div class="bio-text">I'm a UI/UX designer bridging the gap between <span class="highlight">design</span> and <span class="highlight">functionality</span>.</div>
+        <div class="bio-text">I'm a UI/UX designer working across education, startups, and freelance projects. I’ve led
+            interface
+            designs for university dashboards, startup websites, and VFX walkthroughs.I share ideas on
+            teamwork, communication, and design trends while mentoring interns and teammates. My work
+            blends creative visuals with clean functionality, using tools like HTML, CSS, JavaScript, and Figma.I build
+            responsive layouts tailored to client needs and ensure smooth user experiences across
+            devices, combining strong visual design skills with practical front-end development expertise.
     </section>
 
     <section id="project-entry">
         <div class="entry-ball">
             <div class="entry-text">My Projects<br>Keep Scrolling</div>
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80" class="entry-image-inner" alt="Projects Reveal">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80"
+                class="entry-image-inner" alt="Projects Reveal">
         </div>
     </section>
 
@@ -282,50 +793,196 @@
         <div class="gallery-track">
             <div class="project-intro">
                 <h2 class="section-header" style="margin-bottom:20px;">Selected<br>Works</h2>
-                <p style="color:#888; font-size:18px;">A showcase of my recent projects in UI/UX, Web Development, and Startup Innovation.</p>
+                <p style="color:#888; font-size:18px;">A showcase of my recent projects in UI/UX, Web Development, and
+                    Startup Innovation.</p>
             </div>
-            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" class="project-img" alt="One Fine Rate"><div class="project-num">01</div><div class="project-overlay"><h3 class="project-title">One Fine Rate</h3><div class="project-cat">Praxis Services</div></div></div></div>
-            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80" class="project-img" alt="Apnaa Vehicle"><div class="project-num">02</div><div class="project-overlay"><h3 class="project-title">Apnaa Vehicle</h3><div class="project-cat">Startup • Award Winner</div></div></div></div>
-            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" class="project-img" alt="Uni Placement"><div class="project-num">03</div><div class="project-overlay"><h3 class="project-title">Uni Placement</h3><div class="project-cat">System Design</div></div></div></div>
-            <div class="gallery-item"><div class="project-card"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80" class="project-img" alt="SGT Farms"><div class="project-num">04</div><div class="project-overlay"><h3 class="project-title">SGT Farms</h3><div class="project-cat">E-commerce</div></div></div></div>
+            <div class="gallery-item">
+                <div class="project-card"><img
+                        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80"
+                        class="project-img" alt="One Fine Rate">
+                    <div class="project-num">01</div>
+                    <div class="project-overlay">
+                        <h3 class="project-title">One Fine Rate</h3>
+                        <div class="project-cat">Praxis Services</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="project-card"><img
+                        src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80"
+                        class="project-img" alt="Apnaa Vehicle">
+                    <div class="project-num">02</div>
+                    <div class="project-overlay">
+                        <h3 class="project-title">Apnaa Vehicle</h3>
+                        <div class="project-cat">Startup • Award Winner</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="project-card"><img
+                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                        class="project-img" alt="Uni Placement">
+                    <div class="project-num">03</div>
+                    <div class="project-overlay">
+                        <h3 class="project-title">Uni Placement</h3>
+                        <div class="project-cat">System Design</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="project-card"><img
+                        src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80"
+                        class="project-img" alt="SGT Farms">
+                    <div class="project-num">04</div>
+                    <div class="project-overlay">
+                        <h3 class="project-title">SGT Farms</h3>
+                        <div class="project-cat">E-commerce</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="experience" class="section-padding">
         <h2 class="section-header">Career Journey</h2>
         <div class="career-bento">
-            <div class="bento-card span-2"><span class="job-tag">Full Time</span><div><div class="job-date">Jun 2025 - Present</div><h3 class="job-role">UI/UX Designer</h3><div class="job-company">Praxis Services Pvt. Ltd.</div></div><div class="job-desc">Designing "One Fine Rate".</div></div>
-            <div class="bento-card span-1"><span class="job-tag">Training</span><div><div class="job-date">Mar 2025 - Present</div><h3 class="job-role">UI/UX Trainer</h3><div class="job-company">Zaalima Development</div></div><div class="job-desc">Guiding interns.</div></div>
-            <div class="bento-card span-1"><span class="job-tag">Startup</span><div><div class="job-date">Nov 2024 - Present</div><h3 class="job-role">UI/UX Designer</h3><div class="job-company">Apnaa Vehicle</div></div><div class="job-desc">Awarded 3rd Prize.</div></div>
-            <div class="bento-card span-1"><span class="job-tag">Internship</span><div><div class="job-date">Mar 2025 - Aug 2025</div><h3 class="job-role">Placement Portal</h3><div class="job-company">SGGS University</div></div><div class="job-desc">Placement dashboard.</div></div>
-            <div class="bento-card span-1"><span class="job-tag">Internship</span><div><div class="job-date">Apr 2025 - May 2025</div><h3 class="job-role">SGT Farms</h3><div class="job-company">SGGS University</div></div><div class="job-desc">E-commerce platform.</div></div>
-            <div class="bento-card span-2"><span class="job-tag">Internship</span><div><div class="job-date">Mar 2025 - May 2025</div><h3 class="job-role">Web Developer</h3><div class="job-company">Zidio Development</div></div><div class="job-desc">Created school websites & apps.</div></div>
+            <div class="bento-card span-2"><span class="job-tag">Full Time</span>
+                <div>
+                    <div class="job-date">Jun 2025 - Present</div>
+                    <h3 class="job-role">UI/UX Designer</h3>
+                    <div class="job-company">Praxis Services Pvt. Ltd.</div>
+                </div>
+                <div class="job-desc">Designing "One Fine Rate".</div>
+            </div>
+            <div class="bento-card span-1"><span class="job-tag">Training</span>
+                <div>
+                    <div class="job-date">Mar 2025 - Present</div>
+                    <h3 class="job-role">UI/UX Trainer</h3>
+                    <div class="job-company">Zaalima Development</div>
+                </div>
+                <div class="job-desc">Guiding interns.</div>
+            </div>
+            <div class="bento-card span-1"><span class="job-tag">Startup</span>
+                <div>
+                    <div class="job-date">Nov 2024 - Present</div>
+                    <h3 class="job-role">UI/UX Designer</h3>
+                    <div class="job-company">Apnaa Vehicle</div>
+                </div>
+                <div class="job-desc">Awarded 3rd Prize.</div>
+            </div>
+            <div class="bento-card span-1"><span class="job-tag">Internship</span>
+                <div>
+                    <div class="job-date">Mar 2025 - Aug 2025</div>
+                    <h3 class="job-role">Placement Portal</h3>
+                    <div class="job-company">SGGS University</div>
+                </div>
+                <div class="job-desc">Placement dashboard.</div>
+            </div>
+            <div class="bento-card span-1"><span class="job-tag">Internship</span>
+                <div>
+                    <div class="job-date">Apr 2025 - May 2025</div>
+                    <h3 class="job-role">SGT Farms</h3>
+                    <div class="job-company">SGGS University</div>
+                </div>
+                <div class="job-desc">E-commerce platform.</div>
+            </div>
+            <div class="bento-card span-2"><span class="job-tag">Internship</span>
+                <div>
+                    <div class="job-date">Mar 2025 - May 2025</div>
+                    <h3 class="job-role">Web Developer</h3>
+                    <div class="job-company">Zidio Development</div>
+                </div>
+                <div class="job-desc">Created school websites & apps.</div>
+            </div>
         </div>
     </section>
 
     <section class="section-padding">
         <h2 class="section-header">Education</h2>
         <div class="edu-container">
-            <div class="edu-card"><div class="edu-year-big">2027</div><div class="edu-info"><h3>B.Tech Computer Science</h3><h4>Shree Guru Gobind Singh University</h4><p>Specializing in iOS and mobile application development. (Pursuing)</p></div></div>
-            <div class="edu-card"><div class="edu-year-big">2023</div><div class="edu-info"><h3>B.Tech First Year</h3><h4>Presidency University</h4><p>Specialized in Cyber Security.</p></div></div>
-            <div class="edu-card"><div class="edu-year-big">2022</div><div class="edu-info"><h3>Secondary Education</h3><h4>GD Goenka Public School</h4><p>12th Science Math’s (PCM) & 10th Grade.</p></div></div>
+            <div class="edu-card">
+                <div class="edu-year-big">2027</div>
+                <div class="edu-info">
+                    <h3>B.Tech Computer Science</h3>
+                    <h4>Shree Guru Gobind Singh University</h4>
+                    <p>Specializing in iOS and mobile application development. (Pursuing)</p>
+                </div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-year-big">2023</div>
+                <div class="edu-info">
+                    <h3>B.Tech First Year</h3>
+                    <h4>Presidency University</h4>
+                    <p>Specialized in Cyber Security.</p>
+                </div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-year-big">2022</div>
+                <div class="edu-info">
+                    <h3>Secondary Education</h3>
+                    <h4>GD Goenka Public School</h4>
+                    <p>12th Science Math’s (PCM) & 10th Grade.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="vault-horizontal-section vault-section-trigger">
         <div class="vault-track">
-            <div class="vault-item"><div class="vault-intro"><h2 class="section-header" style="font-size:80px;">The Vault</h2><p style="color:#888; font-size:20px;">A collection of certifications, awards, and milestones.</p></div></div>
-            <div class="vault-item highlight"><div class="v-icon">🏆</div><div><span class="v-date">AWARD</span><h3 class="v-title">Startup Innovation Award</h3><div class="v-issuer">ICC (Innovations Contest Cell)</div><div class="v-desc">Recognized for contributions to the startup initiative Aapnaa Vehicle.</div></div></div>
-            <div class="vault-item"><div class="v-icon">📜</div><div><span class="v-date">22 APR 2023</span><h3 class="v-title">JavaScript (Intermediate)</h3><div class="v-issuer">HackerRank</div><div class="v-desc">Verified certification in intermediate JavaScript concepts and problem solving.</div></div></div>
-            <div class="vault-item"><div class="v-icon">📜</div><div><span class="v-date">22 APR 2023</span><h3 class="v-title">Problem Solving</h3><div class="v-issuer">HackerRank</div><div class="v-desc">Intermediate level problem solving certification.</div></div></div>
-            <div class="vault-item"><div class="v-icon">💼</div><div><span class="v-date">12 MAR 2025</span><h3 class="v-title">TPO Portal Lead</h3><div class="v-issuer">Internship</div><div class="v-desc">Led the design and development of the Training and Placement Officer Portal.</div></div></div>
+            <div class="vault-item">
+                <div class="vault-intro">
+                    <h2 class="section-header" style="font-size:80px;">The Vault</h2>
+                    <p style="color:#888; font-size:20px;">A collection of certifications, awards, and milestones.</p>
+                </div>
+            </div>
+            <div class="vault-item highlight">
+                <div class="v-icon">🏆</div>
+                <div><span class="v-date">AWARD</span>
+                    <h3 class="v-title">Startup Innovation Award</h3>
+                    <div class="v-issuer">ICC (Innovations Contest Cell)</div>
+                    <div class="v-desc">Recognized for contributions to the startup initiative Aapnaa Vehicle.</div>
+                </div>
+            </div>
+            <div class="vault-item">
+                <div class="v-icon">📜</div>
+                <div><span class="v-date">22 APR 2023</span>
+                    <h3 class="v-title">JavaScript (Intermediate)</h3>
+                    <div class="v-issuer">HackerRank</div>
+                    <div class="v-desc">Verified certification in intermediate JavaScript concepts and problem solving.
+                    </div>
+                </div>
+            </div>
+            <div class="vault-item">
+                <div class="v-icon">📜</div>
+                <div><span class="v-date">22 APR 2023</span>
+                    <h3 class="v-title">Problem Solving</h3>
+                    <div class="v-issuer">HackerRank</div>
+                    <div class="v-desc">Intermediate level problem solving certification.</div>
+                </div>
+            </div>
+            <div class="vault-item">
+                <div class="v-icon">💼</div>
+                <div><span class="v-date">12 MAR 2025</span>
+                    <h3 class="v-title">TPO Portal Lead</h3>
+                    <div class="v-issuer">Internship</div>
+                    <div class="v-desc">Led the design and development of the Training and Placement Officer Portal.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="section-padding">
         <h2 class="section-header">Arsenal</h2>
         <div class="skills-wall">
-            <span class="skill-brick">UI/UX Design</span><span class="skill-brick">Figma</span><span class="skill-brick">JavaScript</span><span class="skill-brick">HTML5</span><span class="skill-brick">CSS3</span><span class="skill-brick">Java</span><span class="skill-brick">Python</span><span class="skill-brick">React</span><span class="skill-brick">Adobe XD</span><span class="skill-brick">Sketch</span><span class="skill-brick">VFX Design</span><span class="skill-brick">Graphic Design</span><span class="skill-brick">Wireframing</span><span class="skill-brick">Prototyping</span><span class="skill-brick">Bootstrap</span><span class="skill-brick">Illustrator</span>
+            <span class="skill-brick">UI/UX Design</span><span class="skill-brick">Figma</span><span
+                class="skill-brick">JavaScript</span><span class="skill-brick">HTML5</span><span
+                class="skill-brick">CSS3</span><span class="skill-brick">Java</span><span
+                class="skill-brick">Python</span><span class="skill-brick">React</span><span class="skill-brick">Adobe
+                XD</span><span class="skill-brick">Sketch</span><span class="skill-brick">VFX Design</span><span
+                class="skill-brick">Graphic Design</span><span class="skill-brick">Wireframing</span><span
+                class="skill-brick">Prototyping</span><span class="skill-brick">Bootstrap</span><span
+                class="skill-brick">Illustrator</span>
         </div>
     </section>
 
@@ -374,13 +1031,13 @@
 
         // HERO TEXT REVEAL
         const heroTl = gsap.timeline();
-        masterTl.add(heroTl, "-=0.5"); 
+        masterTl.add(heroTl, "-=0.5");
         heroTl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.0, stagger: 0.1, ease: "power4.out" });
         heroTl.to('.hero-subtitle', { opacity: 1, duration: 0.8 }, "-=0.5");
 
         // --- SCROLL TRIGGER LOGIC ---
         if (window.innerWidth > 1024) {
-            
+
             // HERO ZOOM-THROUGH
             const zoomTl = gsap.timeline({
                 scrollTrigger: {
@@ -401,9 +1058,9 @@
                 scrollTrigger: {
                     trigger: "#project-entry",
                     start: "top top",
-                    end: "+=1500", 
-                    scrub: 1, 
-                    pin: true 
+                    end: "+=1500",
+                    scrub: 1,
+                    pin: true
                 }
             });
             entryTl.to(".entry-text", { opacity: 0, scale: 0.5, duration: 0.5 });
@@ -414,7 +1071,7 @@
             // Project Horizontal Scroll
             const projectTrack = document.querySelector('.project-section-container');
             const galleryTrack = projectTrack.querySelector('.gallery-track');
-            
+
             gsap.to(galleryTrack, {
                 x: () => -(galleryTrack.scrollWidth - window.innerWidth),
                 ease: "none",
@@ -459,18 +1116,18 @@
         // --- UPDATED: Education Cards Reveal with Scrub (Reverse on scroll up) ---
         gsap.utils.toArray('.edu-card').forEach((card, i) => {
             const xVal = i % 2 === 0 ? -200 : 200;
-            gsap.fromTo(card, 
+            gsap.fromTo(card,
                 { x: xVal, opacity: 0 },
-                { 
-                    x: 0, 
-                    opacity: 1, 
-                    ease: "power3.out", 
-                    scrollTrigger: { 
-                        trigger: card, 
+                {
+                    x: 0,
+                    opacity: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: card,
                         start: "top 85%", // Start fading in when top of card hits 85% viewport height
                         end: "top 55%",   // Finish fading in when top of card hits 55% viewport height
                         scrub: 1          // Ties animation progress to scrollbar, enabling reverse
-                    } 
+                    }
                 }
             );
         });
@@ -483,7 +1140,7 @@
             const pos = magneticBtn.getBoundingClientRect();
             const x = e.clientX - pos.left - pos.width / 2;
             const y = e.clientY - pos.top - pos.height / 2;
-            if (Math.sqrt(x*x + y*y) < 100) {
+            if (Math.sqrt(x * x + y * y) < 100) {
                 gsap.to(magneticBtn, { x: x * 0.5, y: y * 0.5, duration: 0.3 });
                 gsap.to(".cursor-outline", { scale: 1.5 });
             } else {
@@ -493,4 +1150,5 @@
         });
     </script>
 </body>
+
 </html>
