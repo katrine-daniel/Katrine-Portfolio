@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Design & Blender Showcase | Katrine Portfolio</title>
+
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#0a0805',
+            text: '#f2eae1',
+            accent: '#f97316',
+            gold: '#eab308'
+          },
+          fontFamily: {
+            clash: ['Clash Display', 'sans-serif'],
+            syne: ['Syne', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+</head>
+<body class="bg-bg text-text font-manrope">
+  <div class="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_18%_18%,rgba(249,115,22,0.18),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(234,179,8,0.12),transparent_22%)]"></div>
+
+  <header class="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
+    <div class="px-[5vw] py-5 flex items-center justify-between">
+      <a href="../index.html" class="font-clash text-xl md:text-2xl uppercase tracking-[2px] text-white hover:text-accent transition">KATRINE.</a>
+
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <section class="min-h-[65vh] pt-[140px] pb-[60px] px-[5vw] flex items-end">
+      <div class="w-full">
+        <p class="font-syne text-[11px] md:text-sm uppercase tracking-[4px] text-accent font-semibold mb-4">03 / 3D Art & Modeling Track</p>
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_.9fr] gap-10 items-end">
+          <div>
+            <h1 class="font-clash text-[14vw] md:text-[7vw] leading-[0.88] uppercase text-white max-w-[900px]">
+              Blender & 3D Environments
+            </h1>
+          </div>
+          <div class="max-w-[560px] lg:ml-auto">
+            <p class="text-white/75 text-base md:text-xl leading-relaxed">
+              Hard-surface props, stylized environment assets, PBR texturing workflows, and cinematic lighting setups rendered in Cycles & EEVEE.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Gallery Grid -->
+    <section class="px-[5vw] pb-[140px]">
+      <div class="mb-10 pb-6 border-b border-white/10">
+        <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-1">Renders & Concepts</p>
+        <h2 class="font-clash text-[8vw] md:text-[3vw] uppercase leading-[0.95] text-white">3D Asset Showcase</h2>
+      </div>
+
+      <div id="blenderGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({ duration: 1.05, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    const blenderAssets = [
+      {
+        title: "Cyberpunk Mech Armor",
+        type: "Hard Surface Model",
+        software: ["Blender 4.1", "Substance Painter", "Cycles"],
+        image: "https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=1600&q=80",
+        polyCount: "42,000 Tris",
+        textures: "4K PBR Workflow"
+      },
+      {
+        title: "Neon Alley Environment",
+        type: "Game Asset Pack",
+        software: ["Blender", "Unreal Engine 5", "EEVEE"],
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&q=80",
+        polyCount: "125,000 Tris",
+        textures: "Modular Trim Sheets"
+      },
+      {
+        title: "Stylized Sci-Fi Drone",
+        type: "Prop & Rig",
+        software: ["Blender Rigging", "Geometry Nodes"],
+        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&q=80",
+        polyCount: "18,500 Tris",
+        textures: "Hand-painted PBR"
+      },
+      {
+        title: "Ancient Shrine Ruins",
+        type: "Cinematic Scene",
+        software: ["Blender", "Cycles X", "Photoshop"],
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
+        polyCount: "85,000 Tris",
+        textures: "Nanite & Master Materials"
+      },
+      {
+        title: "Modular Corridor Kit",
+        type: "Environment Kit",
+        software: ["Blender Modifiers", "Substance"],
+        image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80",
+        polyCount: "35,000 Tris",
+        textures: "4K Trim Sheet Set"
+      }
+    ];
+
+    const blenderGrid = document.getElementById("blenderGrid");
+    blenderAssets.forEach((asset, i) => {
+      const card = document.createElement("div");
+      card.className = "group relative min-h-[440px] overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.03] p-8 flex flex-col justify-between transition-all duration-500 hover:border-accent/50 hover:shadow-[0_20px_60px_rgba(249,115,22,0.2)]";
+
+      card.innerHTML = `
+        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10"></div>
+        <img src="${asset.image}" alt="${asset.title}" class="absolute inset-0 h-full w-full object-cover opacity-45 transition-transform duration-700 group-hover:scale-108 group-hover:opacity-65" />
+
+        <div class="relative z-20 flex items-start justify-between">
+          <span class="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[10px] uppercase tracking-[2px] text-accent backdrop-blur-md">${asset.type}</span>
+          <span class="font-clash text-4xl text-white/20 font-bold">0${i + 1}</span>
+        </div>
+
+        <div class="relative z-20 mt-20">
+          <h3 class="font-clash text-3xl font-semibold text-white uppercase group-hover:text-accent transition-colors">${asset.title}</h3>
+          <p class="mt-2 text-white/60 text-xs tracking-[1px] uppercase">${asset.polyCount} • ${asset.textures}</p>
+
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${asset.software.map(s => `<span class="rounded-full bg-white/10 border border-white/15 px-3 py-1 text-[10px] uppercase tracking-[1px] text-white/80">${s}</span>`).join('')}
+          </div>
+        </div>
+      `;
+      blenderGrid.appendChild(card);
+    });
+
+    gsap.from("#blenderGrid > div", { opacity: 0, y: 40, stagger: 0.1, duration: 0.7, ease: "power3.out" });
+  </script>
+</body>
+</html>
