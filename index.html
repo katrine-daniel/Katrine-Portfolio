@@ -190,7 +190,7 @@
                 </p>
             </div>
 
-            <div id="projects-overlap-desktop" class="relative hidden h-[420vh] lg:block">
+            <div id="projects-overlap-desktop" class="relative hidden h-[480vh] lg:block">
                 <div class="sticky top-0 flex h-screen items-center">
                     <div class="relative h-[78vh] w-full [perspective:1800px]">
 
@@ -284,64 +284,19 @@
                             </div>
                         </a>
 
-                        <a href="blender/blender.html"
-                            data-bg="#140f09"
-                            data-glow1="#f97316"
-                            data-glow2="#eab308"
-                            class="project-card absolute inset-0 z-[3] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
-                            <div class="absolute inset-0 bg-[linear-gradient(135deg,#7c2d12_0%,#f97316_55%,#0a0805_100%)]"></div>
-                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)] opacity-30"></div>
-
-                            <div class="relative z-10 flex flex-col justify-between p-12">
-                                <div>
-                                    <div class="flex items-start justify-between gap-4">
-                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">03 / 3D Art</span>
-                                        <span class="font-clash text-[90px] leading-none text-white/10">03</span>
-                                    </div>
-                                    <h3 class="mt-4 font-clash text-[5vw] uppercase leading-[0.9] text-white">Blender</h3>
-                                    <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">
-                                        Hard-surface props, stylized environment assets, PBR texturing workflows, and cinematic lighting setups.
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <div class="mt-8 flex flex-wrap gap-2">
-                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">3D Model</span>
-                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">PBR Textures</span>
-                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Cycles</span>
-                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Lighting</span>
-                                    </div>
-
-                                    <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
-                                        Open Project
-                                        <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="relative z-10 flex items-center justify-center p-8">
-                                <div class="relative h-[78vh] w-full overflow-hidden rounded-[24px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
-                                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1600&q=80"
-                                        alt="Blender Preview"
-                                        class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
-                                </div>
-                            </div>
-                        </a>
-
                         <a href="designs/uiux.html"
                             data-bg="#140d22"
                             data-glow1="#7c3aed"
                             data-glow2="#a855f7"
-                            class="project-card absolute inset-0 z-[4] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
+                            class="project-card absolute inset-0 z-[3] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
                             <div class="absolute inset-0 bg-[linear-gradient(135deg,#4c1d95_0%,#7c3aed_45%,#090914_100%)]"></div>
                             <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)] opacity-30"></div>
 
                             <div class="relative z-10 flex flex-col justify-between p-12">
                                 <div>
                                     <div class="flex items-start justify-between gap-4">
-                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">04 / Design</span>
-                                        <span class="font-clash text-[90px] leading-none text-white/10">04</span>
+                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">03 / Design</span>
+                                        <span class="font-clash text-[90px] leading-none text-white/10">03</span>
                                     </div>
                                     <h3 class="mt-4 font-clash text-[5vw] uppercase leading-[0.9] text-white">UI/UX</h3>
                                     <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">
@@ -884,20 +839,24 @@
 
         if (window.innerWidth >= 1024 && desktopCards.length) {
             gsap.set(desktopCards, {
-                yPercent: (i) => i === 0 ? 0 : 120,
+                yPercent: (i) => i === 0 ? 0 : 105,
                 scale: (i) => i === 0 ? 1 : 0.96,
-                rotateX: (i) => i === 0 ? 0 : -10,
+                rotateX: (i) => i === 0 ? 0 : -8,
+                opacity: (i) => i === 0 ? 1 : 1,
                 transformOrigin: "center center"
             });
 
             setTheme(desktopCards[0]);
 
+            const cardCount = desktopCards.length;
+            const totalScroll = cardCount * 1500;
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#projects-overlap-desktop",
                     start: "top top",
-                    end: "+=4000",
-                    scrub: 1,
+                    end: "+=" + totalScroll,
+                    scrub: 1.2,
                     pin: "#projects-overlap-desktop .sticky",
                     anticipatePin: 1
                 }
@@ -906,25 +865,29 @@
             desktopCards.forEach((card, index) => {
                 if (index === 0) return;
 
+                const pos = (index - 1) * 1.2;
+
+                // Slide current card up into view
                 tl.to(card, {
                     yPercent: 0,
                     scale: 1,
                     rotateX: 0,
-                    duration: 1,
-                    ease: "none",
+                    duration: 1.2,
+                    ease: "power2.out",
                     onStart: () => setTheme(card),
                     onReverseStart: () => setTheme(desktopCards[index - 1]),
                     onReverseComplete: () => setTheme(desktopCards[index - 1])
-                }, index - 1);
+                }, pos);
 
+                // Push previous card slightly back
                 tl.to(desktopCards[index - 1], {
-                    scale: 0.92,
-                    yPercent: -6,
-                    rotateX: 6,
-                    opacity: 0.82,
-                    duration: 1,
-                    ease: "none"
-                }, index - 1);
+                    scale: 0.93,
+                    yPercent: -5,
+                    rotateX: 5,
+                    opacity: 0.75,
+                    duration: 1.2,
+                    ease: "power2.out"
+                }, pos);
             });
         } else if (mobileCards.length) {
             setTheme(mobileCards[0]);
