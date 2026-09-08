@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unity Project | Katrine</title>
+
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#050505',
+            text: '#e7e7e7',
+            accent: '#8ab4ff'
+          },
+          fontFamily: {
+            clash: ['Clash Display', 'sans-serif'],
+            syne: ['Syne', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+  <style>
+    body { overflow-x: hidden; }
+    .clip-reveal { clip-path: polygon(12% 0%,100% 0%,100% 86%,90% 100%,0% 100%,0% 14%); }
+  </style>
+</head>
+<body class="bg-bg text-text font-manrope">
+  <div id="pageAmbient" class="fixed inset-0 pointer-events-none opacity-90"></div>
+
+  <header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-black/25 backdrop-blur-xl">
+    <div class="px-[5vw] py-5 flex items-center justify-between">
+      <a href="./unity.html" class="font-clash text-xl md:text-2xl uppercase tracking-[2px] text-white">← UNITY</a>
+
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
+          Back Home
+        </a>
+        <a href="../projects/project.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
+          Projects
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <section class="min-h-screen pt-[110px] md:pt-[130px] px-[3vw] pb-[60px] flex items-end">
+      <div class="w-full rounded-[28px] md:rounded-[38px] border border-white/10 bg-black/45 backdrop-blur-xl overflow-hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-[1.08fr_.92fr] min-h-[84vh]">
+          <div class="relative p-4 md:p-6 flex items-end">
+            <div id="heroImageWrap" class="clip-reveal relative h-[48vh] md:h-[72vh] w-full overflow-hidden rounded-[22px] md:rounded-[30px] border border-white/10">
+              <img id="heroImage" src="" alt="" class="h-full w-full object-cover scale-[1.08] opacity-0">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+            </div>
+          </div>
+
+          <div class="flex items-center px-6 py-8 md:px-10">
+            <div class="max-w-[760px]">
+              <p id="projectEyebrow" class="font-syne text-[11px] uppercase tracking-[4px] text-accent/80 mb-5">Unity / Project</p>
+              <h1 id="projectTitle" class="font-clash text-[15vw] md:text-[8vw] uppercase leading-[0.88] text-white"></h1>
+              <p id="projectSubtitle" class="mt-5 text-white/72 text-lg md:text-2xl leading-relaxed max-w-[620px]"></p>
+
+              <div id="heroTags" class="mt-8 flex flex-wrap gap-3"></div>
+
+              <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[720px]">
+                <div class="rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-syne text-[10px] uppercase tracking-[3px] text-white/40">Engine</p>
+                  <p class="mt-2 text-white/85">Unity</p>
+                </div>
+                <div class="rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-syne text-[10px] uppercase tracking-[3px] text-white/40">Type</p>
+                  <p id="statType" class="mt-2 text-white/85">Prototype</p>
+                </div>
+                <div class="rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-syne text-[10px] uppercase tracking-[3px] text-white/40">Focus</p>
+                  <p id="statFocus" class="mt-2 text-white/85">Gameplay</p>
+                </div>
+                <div class="rounded-[20px] border border-white/10 bg-white/[0.04] p-4">
+                  <p class="font-syne text-[10px] uppercase tracking-[3px] text-white/40">Status</p>
+                  <p class="mt-2 text-white/85">Playable</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-[5vw] py-[90px] md:py-[120px]">
+      <div class="grid grid-cols-1 xl:grid-cols-[.95fr_1.05fr] gap-8 items-center">
+        <div class="reveal-block">
+          <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-4">Description</p>
+          <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.9] text-white">About the game</h2>
+          <p id="descriptionText" class="mt-6 text-white/78 text-base md:text-xl leading-relaxed max-w-[680px]"></p>
+        </div>
+
+        <div class="reveal-media clip-reveal overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] min-h-[340px] md:min-h-[520px]">
+          <img id="descriptionImage" src="" alt="" class="h-full w-full object-cover scale-[1.08] opacity-0">
+        </div>
+      </div>
+    </section>
+
+    <section class="px-[5vw] py-[90px] md:py-[120px] border-y border-white/6 bg-black/20">
+      <div class="grid grid-cols-1 xl:grid-cols-[1.02fr_.98fr] gap-8 items-start">
+        <div class="reveal-media clip-reveal overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] min-h-[340px] md:min-h-[520px] order-2 xl:order-1">
+          <img id="challengeImage" src="" alt="" class="h-full w-full object-cover scale-[1.08] opacity-0">
+        </div>
+
+        <div class="reveal-block order-1 xl:order-2">
+          <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-4">Challenges Faced</p>
+          <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.9] text-white">What was difficult</h2>
+          <div id="challengeList" class="mt-8 grid gap-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-[5vw] py-[90px] md:py-[120px]">
+      <div class="mb-10">
+        <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-4">Material Used</p>
+        <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.9] text-white">Assets & materials</h2>
+      </div>
+      <div id="materialsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"></div>
+    </section>
+
+    <section class="px-[5vw] py-[90px] md:py-[120px] border-y border-white/6 bg-black/20">
+      <div class="mb-10">
+        <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-4">Workflow Map</p>
+        <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.9] text-white">Process flow</h2>
+      </div>
+      <div id="workflowGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5"></div>
+    </section>
+
+    <section class="px-[5vw] py-[90px] md:py-[120px]">
+      <div class="grid grid-cols-1 xl:grid-cols-[.9fr_1.1fr] gap-8 items-center">
+        <div class="reveal-block">
+          <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-4">Final Working</p>
+          <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.9] text-white">Playable result</h2>
+          <p id="finalText" class="mt-6 text-white/78 text-base md:text-xl leading-relaxed max-w-[680px]"></p>
+        </div>
+
+        <div class="reveal-media overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.04] min-h-[340px] md:min-h-[520px] p-3 md:p-5">
+          <div class="clip-reveal h-full min-h-[300px] md:min-h-[480px] overflow-hidden rounded-[20px] border border-white/10 bg-black/30">
+            <video id="finalVideo" class="h-full w-full object-cover" controls playsinline>
+              <source src="../image/Untitled design (1) (1).mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({
+      duration: 1.05,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    const projects = {
+      "gravity-shift-arena": {
+        title: "Gravity Shift Arena",
+        subtitle: "A fast Unity combat prototype built around gravity flips, momentum, and readable chaos.",
+        description: "This game explores physics-first combat inside a compact arena. The player uses directional gravity shifts to reposition, dodge, and gain attack advantage while the environment and enemies respond to the new orientation. The goal was to make movement feel expressive without losing clarity.",
+        challengeImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&q=80",
+        descriptionImage: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1600&q=80",
+        challenges: [
+          "Balancing gravity changes so movement stayed exciting but still controllable.",
+          "Keeping the camera readable during sudden directional flips.",
+          "Making enemy attacks understandable while the world orientation keeps changing."
+        ],
+        tags: ["C#", "Physics", "Combat", "Arena"],
+        type: "Combat Prototype",
+        focus: "Physics Feel",
+        materials: [
+          { title: "Arena Blockout", img: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&q=80" },
+          { title: "Enemy Concept", img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=80" },
+          { title: "VFX References", img: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80" },
+          { title: "UI Markers", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80" }
+        ],
+        workflow: [
+          { title: "Idea", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80" },
+          { title: "Blockout", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80" },
+          { title: "Mechanics Test", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80" },
+          { title: "Polish", img: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1200&q=80" }
+        ],
+        finalText: "The final prototype delivered a tighter gravity loop, better camera recovery, and more dramatic combat moments. It became a strong base for future enemy variants and arena expansions.",
+        ambient: "radial-gradient(circle at 18% 18%, rgba(255,90,54,0.18), transparent 24%), radial-gradient(circle at 80% 20%, rgba(96,165,250,0.14), transparent 24%), radial-gradient(circle at 50% 80%, rgba(255,255,255,0.03), transparent 18% )"
+      },
+
+      "neon-runner-x": {
+        title: "Neon Runner X",
+        subtitle: "A high-speed Unity runner prototype focused on timing, lane switching, and visual rhythm.",
+        description: "This project was designed around speed clarity. The core challenge was making a fast-moving experience feel exciting while ensuring obstacles, collectible paths, and lane transitions stayed immediately readable.",
+        challengeImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80",
+        image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1600&q=80",
+        descriptionImage: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80",
+        challenges: [
+          "Maintaining speed without sacrificing obstacle readability.",
+          "Keeping the lane-switch timing responsive and satisfying.",
+          "Balancing visual effects so the scene felt energetic but not noisy."
+        ],
+        tags: ["Speed", "Systems", "Timing", "Runner"],
+        type: "Runner Prototype",
+        focus: "Movement Feel",
+        materials: [
+          { title: "Track Pieces", img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=80" },
+          { title: "FX Palette", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80" },
+          { title: "UI Layout", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80" },
+          { title: "Enemy Props", img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=80" }
+        ],
+        workflow: [
+          { title: "Moodboard", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80" },
+          { title: "Greybox", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80" },
+          { title: "Speed Test", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80" },
+          { title: "Final Tune", img: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1200&q=80" }
+        ],
+        finalText: "The final result delivered a more polished sense of acceleration, cleaner lane feedback, and a better reward loop through collectibles and near-miss moments.",
+        ambient: "radial-gradient(circle at 18% 18%, rgba(244,63,94,0.18), transparent 24%), radial-gradient(circle at 80% 20%, rgba(37,99,235,0.14), transparent 24%), radial-gradient(circle at 50% 80%, rgba(255,255,255,0.03), transparent 18% )"
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("project") || "gravity-shift-arena";
+    const data = projects[slug] || projects["gravity-shift-arena"];
+
+    document.title = `${data.title} | Unity Project`;
+
+    document.getElementById("pageAmbient").style.background = data.ambient;
+    document.getElementById("projectEyebrow").textContent = `Unity / ${data.type}`;
+    document.getElementById("projectTitle").textContent = data.title;
+    document.getElementById("projectSubtitle").textContent = data.subtitle;
+    document.getElementById("descriptionText").textContent = data.description;
+    document.getElementById("heroImage").src = data.image;
+    document.getElementById("heroImage").alt = data.title;
+    document.getElementById("descriptionImage").src = data.descriptionImage;
+    document.getElementById("challengeImage").src = data.challengeImage;
+    document.getElementById("statType").textContent = data.type;
+    document.getElementById("statFocus").textContent = data.focus;
+    document.getElementById("finalText").textContent = data.finalText;
+
+    document.getElementById("heroTags").innerHTML = data.tags.map(tag =>
+      `<span class="rounded-full border border-white/15 bg-white/10 px-4 py-3 text-[10px] uppercase tracking-[2px] text-white/88">${tag}</span>`
+    ).join("");
+
+    document.getElementById("challengeList").innerHTML = data.challenges.map(item => `
+      <div class="rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
+        <p class="text-white/82 leading-relaxed text-base md:text-lg">${item}</p>
+      </div>
+    `).join("");
+
+    document.getElementById("materialsGrid").innerHTML = data.materials.map(item => `
+      <div class="material-card rounded-[22px] overflow-hidden border border-white/10 bg-white/[0.04]">
+        <div class="h-[260px] overflow-hidden">
+          <img src="${item.img}" alt="${item.title}" class="h-full w-full object-cover material-image scale-[1.06] opacity-0">
+        </div>
+        <div class="p-5">
+          <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/50">Material</p>
+          <h3 class="mt-2 font-clash text-2xl uppercase text-white">${item.title}</h3>
+        </div>
+      </div>
+    `).join("");
+
+    document.getElementById("workflowGrid").innerHTML = data.workflow.map((item, i) => `
+      <div class="workflow-card rounded-[22px] overflow-hidden border border-white/10 bg-white/[0.04]">
+        <div class="h-[260px] overflow-hidden">
+          <img src="${item.img}" alt="${item.title}" class="h-full w-full object-cover workflow-image scale-[1.06] opacity-0">
+        </div>
+        <div class="p-5">
+          <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/50">Step ${i + 1}</p>
+          <h3 class="mt-2 font-clash text-2xl uppercase text-white">${item.title}</h3>
+        </div>
+      </div>
+    `).join("");
+
+    gsap.fromTo("#heroImageWrap",
+      { clipPath: "polygon(50% 50%,50% 50%,50% 50%,50% 50%)" },
+      { clipPath: "polygon(12% 0%,100% 0%,100% 86%,90% 100%,0% 100%,0% 14%)", duration: 1.15, ease: "power4.out" }
+    );
+
+    gsap.to("#heroImage", {
+      opacity: 1,
+      scale: 1,
+      duration: 1.15,
+      ease: "power3.out",
+      delay: 0.06
+    });
+
+    gsap.from("#projectTitle, #projectSubtitle, #heroTags span, #projectEyebrow, #statType, #statFocus", {
+      y: 30,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 0.8,
+      ease: "power3.out",
+      delay: 0.18
+    });
+
+    gsap.utils.toArray(".reveal-block").forEach(block => {
+      gsap.from(block, {
+        scrollTrigger: {
+          trigger: block,
+          start: "top 80%"
+        },
+        opacity: 0,
+        y: 70,
+        duration: 0.9,
+        ease: "power3.out"
+      });
+    });
+
+    gsap.utils.toArray(".reveal-media").forEach(wrap => {
+      const media = wrap.querySelector("img, video");
+      gsap.fromTo(wrap,
+        { clipPath: "polygon(50% 50%,50% 50%,50% 50%,50% 50%)" },
+        {
+          clipPath: "polygon(12% 0%,100% 0%,100% 86%,90% 100%,0% 100%,0% 14%)",
+          duration: 1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top 78%"
+          }
+        }
+      );
+
+      if (media) {
+        gsap.to(media, {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top 78%"
+          }
+        });
+      }
+    });
+
+    gsap.utils.toArray(".material-card, .workflow-card").forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 88%"
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.97,
+        duration: 0.8,
+        delay: i * 0.03,
+        ease: "power3.out"
+      });
+    });
+
+    gsap.utils.toArray(".material-image, .workflow-image").forEach(img => {
+      gsap.to(img, {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: img,
+          start: "top 88%"
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unity Projects | Katrine</title>
+
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#050505',
+            text: '#e7e7e7',
+            accent: '#8ab4ff'
+          },
+          fontFamily: {
+            clash: ['Clash Display', 'sans-serif'],
+            syne: ['Syne', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+  <style>
+    body { overflow-x: hidden; }
+  </style>
+</head>
+<body class="bg-bg text-text font-manrope">
+  <div class="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.18),transparent_24%),radial-gradient(circle_at_80%_20%,rgba(96,165,250,0.12),transparent_20%),radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.04),transparent_18%)]"></div>
+
+  <header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-black/25 backdrop-blur-xl">
+    <div class="px-[5vw] py-5 flex items-center justify-between">
+      <a href="../index.html" class="font-clash text-xl md:text-2xl uppercase tracking-[2px] text-white">KATRINE.</a>
+
+      <div class="flex items-center gap-3">
+        <a href="../projects/project.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
+          All Projects
+        </a>
+        <button id="shuffleBtn" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10 hover:border-white/20">
+          Shuffle Projects
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <section class="min-h-screen pt-[120px] md:pt-[140px] pb-[60px] px-[5vw] flex items-end">
+      <div class="w-full">
+        <p class="font-syne text-[11px] md:text-sm uppercase tracking-[4px] text-accent/90 mb-5">Unity Projects</p>
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_.9fr] gap-10 items-end">
+          <div>
+            <h1 class="font-clash text-[16vw] md:text-[8vw] leading-[0.88] uppercase text-white max-w-[900px]">
+              Open a world.<br>Enter the case study.
+            </h1>
+          </div>
+          <div class="max-w-[560px] lg:ml-auto">
+            <p class="text-white/68 text-base md:text-xl leading-relaxed">
+              6 random projects, oversized layouts, and separate immersive pages for every build.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-[5vw] pb-[120px]">
+      <div class="mb-8">
+        <p class="font-syne text-[11px] uppercase tracking-[3px] text-white/45 mb-2">Selected Set</p>
+        <h2 class="font-clash text-[12vw] md:text-[4.5vw] uppercase leading-[0.92] text-white">6 Random Projects</h2>
+      </div>
+      <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({
+      duration: 1.05,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    const unityProjects = [
+      {
+        slug: "gravity-shift-arena",
+        title: "Gravity Shift Arena",
+        subtitle: "Doing physics-driven combat right.",
+        tags: ["C#", "Physics", "Combat", "Arena"],
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&q=80",
+        accentA: "#ff5a36",
+        accentB: "#60a5fa"
+      },
+      {
+        slug: "neon-runner-x",
+        title: "Neon Runner X",
+        subtitle: "High-speed loops for reactive play.",
+        tags: ["Speed", "Systems", "Timing", "Runner"],
+        image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1600&q=80",
+        accentA: "#f43f5e",
+        accentB: "#2563eb"
+      },
+      {
+        slug: "echo-dungeon",
+        title: "Echo Dungeon",
+        subtitle: "A dark loop of light, stealth, and pulse.",
+        tags: ["Stealth", "Lighting", "Pulse", "AI"],
+        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&q=80",
+        accentA: "#8b5cf6",
+        accentB: "#38bdf8"
+      },
+      {
+        slug: "void-drifter",
+        title: "Void Drifter",
+        subtitle: "Drift, dodge, and survive the collapse.",
+        tags: ["Space", "Inertia", "Survival", "VFX"],
+        image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80",
+        accentA: "#06b6d4",
+        accentB: "#6366f1"
+      },
+      {
+        slug: "mecha-district",
+        title: "Mecha District",
+        subtitle: "Heavy impact in a dense urban map.",
+        tags: ["Mech", "Destruction", "Impact", "TPS"],
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80",
+        accentA: "#ef4444",
+        accentB: "#f59e0b"
+      },
+      {
+        slug: "shardfall",
+        title: "Shardfall",
+        subtitle: "Traversal built around collapsing worlds.",
+        tags: ["Traversal", "Verticality", "Platforming", "Timing"],
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1600&q=80",
+        accentA: "#3b82f6",
+        accentB: "#f97316"
+      },
+      {
+        slug: "signal-breaker",
+        title: "Signal Breaker",
+        subtitle: "Hack combat through timing windows.",
+        tags: ["UI Combat", "Timing", "Hack", "Feedback"],
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80",
+        accentA: "#22c55e",
+        accentB: "#0ea5e9"
+      },
+      {
+        slug: "rogue-circuit",
+        title: "Rogue Circuit",
+        subtitle: "Compact rooms, endless tension.",
+        tags: ["Rogue", "Rooms", "Replay", "Modifiers"],
+        image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1600&q=80",
+        accentA: "#e11d48",
+        accentB: "#2563eb"
+      }
+    ];
+
+    const projectGrid = document.getElementById("projectGrid");
+    const shuffleBtn = document.getElementById("shuffleBtn");
+
+    const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
+    const pickSix = () => shuffleArray(unityProjects).slice(0, 6);
+
+    function renderGrid() {
+      const selected = pickSix();
+      projectGrid.innerHTML = "";
+
+      selected.forEach((project, index) => {
+        const card = document.createElement("a");
+        card.href = `./unity-project.html?project=${project.slug}`;
+        card.className = "unity-card group relative min-h-[420px] md:min-h-[540px] overflow-hidden rounded-[26px] md:rounded-[34px] border border-white/10 bg-white/[0.03] text-left block";
+
+        card.innerHTML = `
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(to_bottom,rgba(255,255,255,0.02),rgba(0,0,0,0.18))]"></div>
+          <div class="absolute inset-0 opacity-80" style="background:linear-gradient(135deg, ${project.accentA}20, transparent 55%, ${project.accentB}18);"></div>
+          <img src="${project.image}" alt="${project.title}" class="absolute inset-0 h-full w-full object-cover opacity-45 scale-[1.03] transition duration-700 group-hover:scale-[1.08] group-hover:opacity-55" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent"></div>
+
+          <div class="relative z-10 h-full flex flex-col justify-between p-6 md:p-8">
+            <div class="flex items-start justify-between gap-5">
+              <span class="font-syne text-[11px] uppercase tracking-[3px] text-white/65">Unity / ${String(index + 1).padStart(2, "0")}</span>
+              <span class="font-clash text-[64px] md:text-[86px] leading-none text-white/10">${String(index + 1).padStart(2, "0")}</span>
+            </div>
+
+            <div>
+              <h3 class="font-clash text-[13vw] md:text-[4vw] uppercase leading-[0.9] text-white max-w-[560px]">${project.title}</h3>
+              <p class="mt-4 max-w-[520px] text-white/75 text-sm md:text-base leading-relaxed">${project.subtitle}</p>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                ${project.tags.map(tag => `<span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">${tag}</span>`).join("")}
+              </div>
+
+              <div class="mt-8 inline-flex items-center gap-3 font-syne text-[11px] uppercase tracking-[3px] text-white/88">
+                Open Project Page
+                <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+              </div>
+            </div>
+          </div>
+        `;
+        projectGrid.appendChild(card);
+      });
+
+      gsap.from(".unity-card", {
+        opacity: 0,
+        y: 70,
+        scale: 0.97,
+        stagger: 0.08,
+        duration: 0.9,
+        ease: "power3.out"
+      });
+    }
+
+    shuffleBtn.addEventListener("click", renderGrid);
+    renderGrid();
+  </script>
+</body>
+</html>

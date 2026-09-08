@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Katrine | Game Developer Portfolio</title>
+
+
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet" />
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#050505',
+                        text: '#e1e1e1',
+                        accent: '#E0CCBB',
+                        secondary: '#888888',
+                        gold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        clash: ['Clash Display', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                        manrope: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        floaty: 'floaty 3s ease-in-out infinite',
+                        marquee: 'marquee 20s linear infinite',
+                        pulseSoft: 'pulseSoft 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        floaty: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '0.35' },
+                            '50%': { opacity: '0.9' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+
+    <style>
+        * { cursor: none; }
+        body { overflow-x: hidden; }
+
+
+        .disc-card:hover .disc-img { filter: brightness(1); transform: scale(1.05); }
+        .disc-img { filter: brightness(0.7); transition: 0.5s; }
+
+
+        .bento-card:hover { transform: translateY(-5px); border-color: #E0CCBB; background:#151515; }
+
+
+        .edu-card { opacity: 0; }
+        .edu-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+        .edu-year-big { color: transparent; -webkit-text-stroke: 2px #333; transition: all .5s; }
+        .edu-card:hover .edu-year-big { -webkit-text-stroke: 2px #E0CCBB; opacity: .5; }
+
+
+        .vault-item.highlight { border-color: #D4AF37; background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent); }
+        .vault-item:hover .v-icon { color: #E0CCBB; }
+
+
+        .huge-mail:hover { font-style: italic; color: #E0CCBB; }
+
+
+        #robot-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 42px; height: 42px;
+            pointer-events: none;
+            z-index: 9999;
+            filter: drop-shadow(0 0 6px rgba(224,204,187,0.6));
+        }
+
+
+        .split-word {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+
+        .split-word-inner {
+            display: inline-block;
+            transform: translateY(110%);
+        }
+
+
+        @media (max-width: 1024px) {
+            .edu-card, .edu-card:nth-child(even) { flex-direction: column; text-align: center; gap: 20px; }
+            #robot-cursor { display: none; }
+            * { cursor: auto !important; }
+        }
+    </style>
+</head>
+
+
+<body class="bg-bg text-text font-manrope">
+
+
+    <nav class="fixed top-0 w-full px-[24px] md:px-[50px] py-[24px] md:py-[30px] flex justify-between z-50" style="mix-blend-mode:difference;">
+        <div class="nav-logo font-bold tracking-[2px]">KATRINE.</div>
+        <div class="text-[12px] md:text-base">
+            <a href="#projects-showcase" class="text-white no-underline mr-5">WORK</a>
+            <a href="#experience" class="text-white no-underline mr-5">INFO</a>
+            <a href="#vault" class="text-white no-underline">VAULT</a>
+        </div>
+    </nav>
+
+
+    <section class="hero h-screen w-full relative flex justify-center items-center bg-black z-[1] overflow-hidden">
+        <div class="hero-video-wrapper absolute top-0 left-0 w-full h-full z-0 overflow-hidden" style="transform-origin:center center;">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-60">
+                <source src="image/Untitled design (1) (1).mp4" type="video/mp4" />
+            </video>
+        </div>
+
+
+        <div class="absolute inset-0 z-[1] bg-gradient-to-b from-black/10 via-black/20 to-black/80"></div>
+
+
+        <div class="absolute inset-0 z-[1] opacity-[0.06]">
+            <div class="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
+        </div>
+
+
+        <div class="hero-title-container flex flex-col justify-center items-center z-[2] relative px-6" style="mix-blend-mode:difference;">
+            <h1 class="hero-title font-clash text-[14vw] md:text-[10vw] font-bold leading-[0.9] uppercase text-center text-white">
+                <div class="line">KATRINE</div>
+                <div class="line">ALICE DANIEL</div>
+            </h1>
+        </div>
+
+
+        <div class="magnetic-btn absolute bottom-[40px] md:bottom-[50px] left-1/2 -translate-x-1/2 w-[90px] h-[90px] md:w-[100px] md:h-[100px] border border-white/20 rounded-full flex justify-center items-center z-10"
+             onclick="document.querySelector('#intro').scrollIntoView({behavior: 'smooth'})">
+            <span class="magnetic-text text-sm">Scroll</span>
+        </div>
+    </section>
+
+
+<section id="intro" class="relative z-[2] overflow-hidden bg-bg px-[5vw] py-[110px] md:py-[140px]">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.04]">
+        <div class="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
+    </div>
+
+
+    <div class="relative z-10"></div>
+</section> 
+    <section id="projects-showcase"
+        class="relative z-[2] overflow-hidden bg-[#0b1220] px-[10px] py-[120px] transition-colors duration-700 md:px-[16px] md:py-[160px]">
+
+        <div id="projects-bg-1"
+            class="pointer-events-none absolute -left-[12%] -top-[8%] h-[360px] w-[360px] rounded-full bg-[#3b82f6]/30 blur-3xl transition-all duration-700 md:h-[620px] md:w-[620px]"></div>
+
+        <div id="projects-bg-2"
+            class="pointer-events-none absolute -bottom-[10%] -right-[12%] h-[320px] w-[320px] rounded-full bg-[#1d4ed8]/20 blur-3xl transition-all duration-700 md:h-[560px] md:w-[560px]"></div>
+
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.20)_65%,rgba(0,0,0,0.55)_100%)]"></div>
+
+        <div class="relative z-10 w-full">
+            <div class="mb-12 px-[6px] md:mb-16 md:px-[10px]">
+                <p class="mb-4 font-syne text-sm uppercase tracking-[3px] text-white/70" data-bot-jump>Project Gateway</p>
+                <h2 id="projects-heading" class="font-clash text-[15vw] uppercase leading-[0.9] text-white md:text-[7vw]">
+                    Selected Worlds
+                </h2>
+                <p id="projects-subheading" class="mt-6 max-w-[760px] text-base text-white/70 md:mt-8 md:text-xl">
+                    Explore four creative tracks — from weekly gameplay challenges to 3D design systems and interface experiments — each opening into its own dedicated page.
+                </p>
+            </div>
+
+            <div id="projects-overlap-desktop" class="relative hidden h-[320vh] lg:block">
+                <div class="sticky top-0 flex h-screen items-center">
+                    <div class="relative h-[78vh] w-full [perspective:1800px]">
+
+                        <a href="unity/unity.html"
+                            data-bg="#0b1220"
+                            data-glow1="#3b82f6"
+                            data-glow2="#1d4ed8"
+                            class="project-card absolute inset-0 z-[1] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
+                            <div class="absolute inset-0 bg-[linear-gradient(135deg,#2563eb_0%,#0f172a_100%)]"></div>
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)] opacity-30"></div>
+
+                            <div class="relative z-10 flex flex-col justify-between p-12">
+                                <div>
+                                    <div class="flex items-start justify-between gap-4">
+                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">01 / Engine</span>
+                                        <span class="font-clash text-[90px] leading-none text-white/10">01</span>
+                                    </div>
+                                    <h3 class="mt-4 font-clash text-[5vw] uppercase leading-[0.9] text-white">Unity</h3>
+                                    <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">
+                                        5 weekly game-jam challenges — dummy builds, gameplay systems, outcomes, and learnings through rapid prototyping.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <div class="mt-8 flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">C#</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Physics</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Gameplay</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Prototype</span>
+                                    </div>
+
+                                    <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                        Open Project
+                                        <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 flex items-center justify-center p-8">
+                                <div class="relative h-[78vh] w-full overflow-hidden rounded-[24px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+                                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80"
+                                        alt="Unity Preview"
+                                        class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="unreal%20engine/unreal.html"
+                            data-bg="#1a0d0b"
+                            data-glow1="#ff5a36"
+                            data-glow2="#7c2d12"
+                            class="project-card absolute inset-0 z-[2] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
+                            <div class="absolute inset-0 bg-[linear-gradient(135deg,#111111_0%,#7c2d12_55%,#0a0a0a_100%)]"></div>
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)] opacity-30"></div>
+
+                            <div class="relative z-10 flex flex-col justify-between p-12">
+                                <div>
+                                    <div class="flex items-start justify-between gap-4">
+                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">02 / Engine</span>
+                                        <span class="font-clash text-[90px] leading-none text-white/10">02</span>
+                                    </div>
+                                    <h3 class="mt-4 font-clash text-[5vw] uppercase leading-[0.9] text-white">Unreal Engine</h3>
+                                    <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">
+                                        5 weekly Blueprint-driven prototypes with cinematic ambition, combat systems, mood lighting, and immersive scene building.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <div class="mt-8 flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Blueprint</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Combat</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Lighting</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Cinematics</span>
+                                    </div>
+
+                                    <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                        Open Project
+                                        <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 flex items-center justify-center p-8">
+                                <div class="relative h-[78vh] w-full overflow-hidden rounded-[24px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+                                    <img src="https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=1600&q=80"
+                                        alt="Unreal Engine Preview"
+                                        class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="designs/uiux.html"
+                            data-bg="#140d22"
+                            data-glow1="#7c3aed"
+                            data-glow2="#a855f7"
+                            class="project-card absolute inset-0 z-[4] grid min-h-[78vh] grid-cols-[38%_62%] overflow-hidden rounded-[30px] border border-white/10 shadow-[0_30px_120px_rgba(0,0,0,0.35)] will-change-transform group">
+                            <div class="absolute inset-0 bg-[linear-gradient(135deg,#4c1d95_0%,#7c3aed_45%,#090914_100%)]"></div>
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)] opacity-30"></div>
+
+                            <div class="relative z-10 flex flex-col justify-between p-12">
+                                <div>
+                                    <div class="flex items-start justify-between gap-4">
+                                        <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">04 / Design</span>
+                                        <span class="font-clash text-[90px] leading-none text-white/10">04</span>
+                                    </div>
+                                    <h3 class="mt-4 font-clash text-[5vw] uppercase leading-[0.9] text-white">UI/UX</h3>
+                                    <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">
+                                        5 interface and experience case studies for playable systems, menus, HUDs, onboarding flows, and game usability.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <div class="mt-8 flex flex-wrap gap-2">
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">HUD</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Menus</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Systems</span>
+                                        <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Flows</span>
+                                    </div>
+
+                                    <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                        Open Project
+                                        <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 flex items-center justify-center p-8">
+                                <div class="relative h-[78vh] w-full overflow-hidden rounded-[24px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
+                                    <img src="https://images.unsplash.com/photo-1559028012-7b0ac74dbba9?w=1600&q=80"
+                                        alt="UI UX Preview"
+                                        class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-5 md:gap-7 lg:hidden">
+
+                <a href="unity/unity.html"
+                    data-bg="#0b1220"
+                    data-glow1="#3b82f6"
+                    data-glow2="#1d4ed8"
+                    class="project-mobile-card group relative grid min-h-[78vh] grid-cols-1 overflow-hidden rounded-[24px] border border-white/10 transition-transform duration-500 hover:scale-[0.995] md:min-h-[90vh] md:grid-cols-[38%_62%] md:rounded-[30px]">
+                    <div class="absolute inset-0 bg-[linear-gradient(135deg,#2563eb_0%,#0f172a_100%)]"></div>
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.18),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)]"></div>
+
+                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
+                        <div>
+                            <div class="flex items-start justify-between gap-4">
+                                <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">01 / Engine</span>
+                                <span class="font-clash text-[64px] leading-none text-white/10 md:text-[90px]">01</span>
+                            </div>
+                            <h3 class="mt-4 font-clash text-[16vw] uppercase leading-[0.9] text-white md:text-[5vw]">Unity</h3>
+                            <p class="mt-5 max-w-[420px] text-sm leading-relaxed text-white/80 md:text-lg">
+                                5 weekly game-jam challenges — dummy builds, gameplay systems, outcomes, and learnings through rapid prototyping.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="mt-8 flex flex-wrap gap-2">
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">C#</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Physics</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Gameplay</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Prototype</span>
+                            </div>
+
+                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                Open Project
+                                <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex items-center justify-center p-3 md:p-8">
+                        <div class="relative h-[320px] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)] md:h-[78vh] md:rounded-[24px]">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80"
+                                alt="Unity Preview"
+                                class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="unreal%20engine/unreal.html"
+                    data-bg="#1a0d0b"
+                    data-glow1="#ff5a36"
+                    data-glow2="#7c2d12"
+                    class="project-mobile-card group relative grid min-h-[78vh] grid-cols-1 overflow-hidden rounded-[24px] border border-white/10 transition-transform duration-500 hover:scale-[0.995] md:min-h-[90vh] md:grid-cols-[38%_62%] md:rounded-[30px]">
+                    <div class="absolute inset-0 bg-[linear-gradient(135deg,#111111_0%,#7c2d12_55%,#0a0a0a_100%)]"></div>
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)]"></div>
+
+                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
+                        <div>
+                            <div class="flex items-start justify-between gap-4">
+                                <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">02 / Engine</span>
+                                <span class="font-clash text-[64px] leading-none text-white/10 md:text-[90px]">02</span>
+                            </div>
+                            <h3 class="mt-4 font-clash text-[16vw] uppercase leading-[0.9] text-white md:text-[5vw]">Unreal Engine</h3>
+                            <p class="mt-5 max-w-[420px] text-sm leading-relaxed text-white/80 md:text-lg">
+                                5 weekly Blueprint-driven prototypes with cinematic ambition, combat systems, mood lighting, and immersive scene building.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="mt-8 flex flex-wrap gap-2">
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Blueprint</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Combat</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Lighting</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Cinematics</span>
+                            </div>
+
+                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                Open Project
+                                <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex items-center justify-center p-3 md:p-8">
+                        <div class="relative h-[320px] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)] md:h-[78vh] md:rounded-[24px]">
+                            <img src="https://images.unsplash.com/photo-1633613286848-e6f43bbafb8d?w=1600&q=80"
+                                alt="Unreal Engine Preview"
+                                class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="designs/uiux.html"
+                    data-bg="#140d22"
+                    data-glow1="#7c3aed"
+                    data-glow2="#a855f7"
+                    class="project-mobile-card group relative grid min-h-[78vh] grid-cols-1 overflow-hidden rounded-[24px] border border-white/10 transition-transform duration-500 hover:scale-[0.995] md:min-h-[90vh] md:grid-cols-[38%_62%] md:rounded-[30px]">
+                    <div class="absolute inset-0 bg-[linear-gradient(135deg,#4c1d95_0%,#7c3aed_45%,#090914_100%)]"></div>
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(255,255,255,0.10),transparent_25%)]"></div>
+
+                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
+                        <div>
+                            <div class="flex items-start justify-between gap-4">
+                                <span class="font-syne text-sm uppercase tracking-[2px] text-white/75">04 / Design</span>
+                                <span class="font-clash text-[64px] leading-none text-white/10 md:text-[90px]">04</span>
+                            </div>
+                            <h3 class="mt-4 font-clash text-[16vw] uppercase leading-[0.9] text-white md:text-[5vw]">UI/UX</h3>
+                            <p class="mt-5 max-w-[420px] text-sm leading-relaxed text-white/80 md:text-lg">
+                                5 interface and experience case studies for playable systems, menus, HUDs, onboarding flows, and game usability.
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="mt-8 flex flex-wrap gap-2">
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">HUD</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Menus</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Systems</span>
+                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-2 text-[10px] uppercase tracking-[2px] text-white/85">Flows</span>
+                            </div>
+
+                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white">
+                                Open Project
+                                <span class="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex items-center justify-center p-3 md:p-8">
+                        <div class="relative h-[320px] w-full overflow-hidden rounded-[18px] border border-white/10 bg-black/20 shadow-[0_20px_80px_rgba(0,0,0,0.35)] md:h-[78vh] md:rounded-[24px]">
+                            <img src="https://images.unsplash.com/photo-1559028012-7b0ac74dbba9?w=1600&q=80"
+                                alt="UI UX Preview"
+                                class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-[2] bg-[#090909] px-[5vw] py-[90px] md:py-[110px] border-y border-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8">
+                <div class="font-clash text-5xl text-accent">20+</div>
+                <p class="text-secondary text-sm uppercase tracking-[2px] mt-3">Weekly Experiments</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8">
+                <div class="font-clash text-5xl text-accent">4</div>
+                <p class="text-secondary text-sm uppercase tracking-[2px] mt-3">Creative Tracks</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8">
+                <div class="font-clash text-5xl text-accent">15+</div>
+                <p class="text-secondary text-sm uppercase tracking-[2px] mt-3">Systems Explored</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8">
+                <div class="font-clash text-5xl text-accent">∞</div>
+                <p class="text-secondary text-sm uppercase tracking-[2px] mt-3">Ideas in Progress</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="relative z-[2] bg-bg px-[5vw] py-[100px] md:py-[120px]">
+        <h2 class="font-clash text-[48px] md:text-[60px] uppercase mb-[60px] border-b border-[#333] pb-5">Career Journey</h2>
+        <div class="career-bento grid grid-cols-1 md:grid-cols-3 gap-5 pb-24">
+
+            <div class="bento-card md:col-span-2 bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Full Time</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Jun 2025 - Present</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">Gameplay Programmer</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Lorem Studios Pvt. Ltd.</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">Prototyping core gameplay systems in Unity.</div>
+            </div>
+
+            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Training</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Present</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">Game Dev Mentor</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Ipsum Academy</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">Guiding interns through jam projects.</div>
+            </div>
+
+            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Freelance</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Nov 2024 - Present</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">3D Environment Artist</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Dolor Interactive</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">Modular level-art kits in Blender.</div>
+            </div>
+
+            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Aug 2025</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">UI Systems Intern</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Sit Amet Games</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">HUD & menu flow prototyping.</div>
+            </div>
+
+            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Apr 2025 - May 2025</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">Level Design Intern</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Consectetur Labs</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">Blockout & pacing for a puzzle title.</div>
+            </div>
+
+            <div class="bento-card md:col-span-2 bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+                <div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - May 2025</div>
+                    <h3 class="font-clash text-2xl text-white mb-[5px]">Unreal Blueprint Intern</h3>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Adipiscing Studio</div>
+                </div>
+                <div class="text-sm text-[#aaa] leading-relaxed">Built combat prototypes in Unreal Engine.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-[2] bg-bg px-[5vw] py-[100px] md:py-[120px]">
+        <h2 class="font-clash text-[48px] md:text-[60px] uppercase mb-[60px] border-b border-[#333] pb-5">Education</h2>
+        <div class="edu-container flex flex-col gap-[90px] md:gap-[120px] pb-24 relative overflow-hidden">
+
+            <div class="edu-card flex items-center gap-20">
+                <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2027</div>
+                <div class="edu-info">
+                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">B.Tech Computer Science</h3>
+                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Lorem Ipsum University</h4>
+                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Specializing in game engine architecture. (Pursuing)</p>
+                </div>
+            </div>
+
+            <div class="edu-card flex items-center gap-20">
+                <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2023</div>
+                <div class="edu-info">
+                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">B.Tech First Year</h3>
+                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Dolor Sit University</h4>
+                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Specialized in Interactive Media.</p>
+                </div>
+            </div>
+
+            <div class="edu-card flex items-center gap-20">
+                <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2022</div>
+                <div class="edu-info">
+                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">Secondary Education</h3>
+                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Amet Consectetur School</h4>
+                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">12th Science, Math (PCM) & 10th Grade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-[2] bg-[#090909] px-[5vw] py-[100px] md:py-[120px] border-y border-white/5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8 md:p-10">
+                <p class="text-accent uppercase font-syne tracking-[2px] text-xs mb-4">Current Focus</p>
+                <h3 class="font-clash text-3xl md:text-4xl uppercase mb-4 text-white">Building fast,<br>learning faster.</h3>
+                <p class="text-[#999] max-w-[520px]">Lorem ipsum dolor sit amet — right now I’m focusing on rapid gameplay prototyping, cleaner UI systems, and stronger visual storytelling across both engine and design workflows.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-[#111] p-8 md:p-10">
+                <p class="text-accent uppercase font-syne tracking-[2px] text-xs mb-4">Process</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="border border-white/10 rounded-xl p-5">
+                        <span class="font-clash text-3xl text-accent">01</span>
+                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Idea</p>
+                    </div>
+                    <div class="border border-white/10 rounded-xl p-5">
+                        <span class="font-clash text-3xl text-accent">02</span>
+                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Prototype</p>
+                    </div>
+                    <div class="border border-white/10 rounded-xl p-5">
+                        <span class="font-clash text-3xl text-accent">03</span>
+                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Playtest</p>
+                    </div>
+                    <div class="border border-white/10 rounded-xl p-5">
+                        <span class="font-clash text-3xl text-accent">04</span>
+                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Polish</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vault" class="vault-horizontal-section vault-section-trigger relative z-[2] bg-[#0a0a0a] h-screen overflow-hidden flex items-center">
+        <div class="vault-track flex gap-[40px] md:gap-[60px] px-[8vw] md:px-[10vw] w-fit items-center">
+            <div class="vault-item min-w-[320px] md:min-w-[500px] h-[70vh] bg-[#0f0f0f] border border-[#222] p-[30px] md:p-[60px] flex flex-col justify-center relative transition-all duration-[400ms] pr-20 border-r border-[#333] mr-10">
+                <div class="vault-intro flex flex-col justify-center">
+                    <h2 class="font-clash text-[48px] md:text-[80px] uppercase mb-[40px] md:mb-[60px] border-b border-[#333] pb-5">The Vault</h2>
+                    <p class="text-[#888] text-lg md:text-xl">A collection of certifications, awards, and milestones.</p>
+                </div>
+            </div>
+
+            <div class="vault-item highlight min-w-[340px] md:min-w-[600px] h-[70vh] bg-[#0f0f0f] border border-[#222] p-[30px] md:p-[60px] flex flex-col justify-between relative transition-all duration-[400ms] hover:border-accent hover:bg-[#121212]" data-bot-jump>
+                <div class="v-icon text-7xl md:text-8xl mb-10 text-[#333] transition-colors duration-300">🏆</div>
+                <div>
+                    <span class="v-date font-syne text-sm text-secondary mb-5 block tracking-[2px]">AWARD</span>
+                    <h3 class="v-title font-clash text-3xl md:text-5xl text-white leading-[1.1] mb-5">Game Jam Winner</h3>
+                    <div class="v-issuer text-lg text-[#666] uppercase tracking-[1px]">Lorem Ipsum Game Jam</div>
+                    <div class="v-desc text-base text-[#999] mt-[30px] leading-relaxed border-t border-[#222] pt-[30px]">Recognized for best gameplay mechanic in a 48-hour jam.</div>
+                </div>
+            </div>
+
+            <div class="vault-item min-w-[340px] md:min-w-[600px] h-[70vh] bg-[#0f0f0f] border border-[#222] p-[30px] md:p-[60px] flex flex-col justify-between relative transition-all duration-[400ms] hover:border-accent hover:bg-[#121212]" data-bot-jump>
+                <div class="v-icon text-7xl md:text-8xl mb-10 text-[#333] transition-colors duration-300">📜</div>
+                <div>
+                    <span class="v-date font-syne text-sm text-secondary mb-5 block tracking-[2px]">22 APR 2024</span>
+                    <h3 class="v-title font-clash text-3xl md:text-5xl text-white leading-[1.1] mb-5">Unity Certified Associate</h3>
+                    <div class="v-issuer text-lg text-[#666] uppercase tracking-[1px]">Unity Technologies</div>
+                    <div class="v-desc text-base text-[#999] mt-[30px] leading-relaxed border-t border-[#222] pt-[30px]">Verified certification in core Unity gameplay programming.</div>
+                </div>
+            </div>
+
+            <div class="vault-item min-w-[340px] md:min-w-[600px] h-[70vh] bg-[#0f0f0f] border border-[#222] p-[30px] md:p-[60px] flex flex-col justify-between relative transition-all duration-[400ms] hover:border-accent hover:bg-[#121212]" data-bot-jump>
+                <div class="v-icon text-7xl md:text-8xl mb-10 text-[#333] transition-colors duration-300">📜</div>
+                <div>
+                    <span class="v-date font-syne text-sm text-secondary mb-5 block tracking-[2px]">10 JUN 2024</span>
+                    <h3 class="v-title font-clash text-3xl md:text-5xl text-white leading-[1.1] mb-5">Unreal Blueprint Fundamentals</h3>
+                    <div class="v-issuer text-lg text-[#666] uppercase tracking-[1px]">Epic Games</div>
+                    <div class="v-desc text-base text-[#999] mt-[30px] leading-relaxed border-t border-[#222] pt-[30px]">Completed self-paced Blueprint scripting fundamentals.</div>
+                </div>
+            </div>
+
+            <div class="vault-item min-w-[340px] md:min-w-[600px] h-[70vh] bg-[#0f0f0f] border border-[#222] p-[30px] md:p-[60px] flex flex-col justify-between relative transition-all duration-[400ms] hover:border-accent hover:bg-[#121212]" data-bot-jump>
+                <div class="v-icon text-7xl md:text-8xl mb-10 text-[#333] transition-colors duration-300">💼</div>
+                <div>
+                    <span class="v-date font-syne text-sm text-secondary mb-5 block tracking-[2px]">12 MAR 2025</span>
+                    <h3 class="v-title font-clash text-3xl md:text-5xl text-white leading-[1.1] mb-5">Lead Prototyper</h3>
+                    <div class="v-issuer text-lg text-[#666] uppercase tracking-[1px]">Internship</div>
+                    <div class="v-desc text-base text-[#999] mt-[30px] leading-relaxed border-t border-[#222] pt-[30px]">Led weekly rapid-prototyping sprints across four disciplines.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-[2] bg-[#080808] px-[5vw] py-[110px] text-center">
+        <p class="text-accent uppercase font-syne tracking-[3px] text-xs mb-5">Open for opportunities</p>
+        <h2 class="font-clash text-[14vw] md:text-[5vw] uppercase text-white leading-[0.95] max-w-[900px] mx-auto">
+            Gameplay. Systems. Visual Thinking.
+        </h2>
+        <p class="text-secondary text-lg max-w-[650px] mx-auto mt-8">
+            Looking for roles in gameplay programming, prototyping, technical design, 3D support, and interface systems for games.
+        </p>
+    </section>
+
+    <footer class="h-[70vh] md:h-[80vh] flex flex-col justify-center items-center bg-[#080808] text-center px-6">
+        <a href="mailto:alicekatrine23@gmail.com" class="huge-mail font-clash text-[10vw] md:text-[6vw] text-white no-underline break-all md:break-normal">alicekatrine23@gmail.com</a>
+        <div class="mt-[40px] md:mt-[50px] font-syne text-sm md:text-base">+91 8130554314 | Gurugram, India</div>
+    </footer>
+
+    <div id="robot-cursor"></div>
+
+    <script>
+        const lenis = new Lenis({
+            duration: 1.0,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        function splitWords(selector) {
+            const el = document.querySelector(selector);
+            if (!el) return [];
+            const text = el.textContent.trim().split(' ');
+            el.innerHTML = text.map(word => `<span class="split-word"><span class="split-word-inner">${word}</span></span>`).join(' ');
+            return el.querySelectorAll('.split-word-inner');
+        }
+
+        const projectWords = splitWords('#projects-heading');
+
+        const heroTl = gsap.timeline();
+        heroTl.from('.hero-title .line', { y: 100, opacity: 0, duration: 1.0, stagger: 0.1, ease: "power4.out", delay: 0.2 });
+        heroTl.to('.hero-subtitle', { opacity: 1, duration: 0.8 }, "-=0.5");
+
+        if (window.innerWidth > 1024) {
+            const zoomTl = gsap.timeline({
+                scrollTrigger: { trigger: ".hero", start: "top top", end: "+=600", pin: true, scrub: 0.5 }
+            });
+            zoomTl.to(".hero-video-wrapper", { scale: 2.2, duration: 1, ease: "power1.in" });
+            zoomTl.to(".hero-title-container", { scale: 4.5, opacity: 0, duration: 0.5 }, "<");
+            zoomTl.to(".hero-video-wrapper", { opacity: 0, duration: 0.2 }, "-=0.2");
+            zoomTl.to(".magnetic-btn", { opacity: 0, duration: 0.2 }, "<");
+        }
+
+        gsap.from(projectWords, {
+            scrollTrigger: {
+                trigger: "#projects-showcase",
+                start: "top 75%",
+                toggleActions: "play reverse play reverse"
+            },
+            yPercent: 110,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: "power3.out"
+        });
+
+        gsap.from("#projects-subheading", {
+            scrollTrigger: {
+                trigger: "#projects-showcase",
+                start: "top 68%",
+                toggleActions: "play reverse play reverse"
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            delay: 0.15
+        });
+
+        const projectsSection = document.getElementById('projects-showcase');
+        const projectsBg1 = document.getElementById('projects-bg-1');
+        const projectsBg2 = document.getElementById('projects-bg-2');
+        const desktopCards = gsap.utils.toArray('#projects-overlap-desktop .project-card');
+        const mobileCards = gsap.utils.toArray('.project-mobile-card');
+
+        const setTheme = (card) => {
+            if (!card) return;
+
+            gsap.to(projectsSection, {
+                backgroundColor: card.dataset.bg,
+                duration: 0.45,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+            gsap.to(projectsBg1, {
+                backgroundColor: card.dataset.glow1,
+                duration: 0.45,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+            gsap.to(projectsBg2, {
+                backgroundColor: card.dataset.glow2,
+                duration: 0.45,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        };
+
+        if (window.innerWidth >= 1024 && desktopCards.length) {
+            gsap.set(desktopCards, {
+                yPercent: (i) => i === 0 ? 0 : 120,
+                scale: (i) => i === 0 ? 1 : 0.96,
+                rotateX: (i) => i === 0 ? 0 : -10,
+                transformOrigin: "center center"
+            });
+
+            setTheme(desktopCards[0]);
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#projects-overlap-desktop",
+                    start: "top top",
+                    end: "+=3200",
+                    scrub: 1,
+                    pin: "#projects-overlap-desktop .sticky",
+                    anticipatePin: 1
+                }
+            });
+
+            desktopCards.forEach((card, index) => {
+                if (index === 0) return;
+
+                tl.to(card, {
+                    yPercent: 0,
+                    scale: 1,
+                    rotateX: 0,
+                    duration: 1,
+                    ease: "none",
+                    onStart: () => setTheme(card),
+                    onReverseStart: () => setTheme(desktopCards[index - 1]),
+                    onReverseComplete: () => setTheme(desktopCards[index - 1])
+                }, index - 1);
+
+                tl.to(desktopCards[index - 1], {
+                    scale: 0.92,
+                    yPercent: -6,
+                    rotateX: 6,
+                    opacity: 0.82,
+                    duration: 1,
+                    ease: "none"
+                }, index - 1);
+            });
+        } else if (mobileCards.length) {
+            setTheme(mobileCards[0]);
+
+            mobileCards.forEach((card) => {
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 65%",
+                    end: "bottom 45%",
+                    onEnter: () => setTheme(card),
+                    onEnterBack: () => setTheme(card)
+                });
+
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 82%",
+                        toggleActions: "play reverse play reverse"
+                    },
+                    opacity: 0,
+                    y: 80,
+                    scale: 0.96,
+                    duration: 0.9,
+                    ease: "power3.out"
+                });
+            });
+        }
+
+        gsap.utils.toArray('.bento-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 88%",
+                    toggleActions: "play reverse play reverse"
+                },
+                opacity: 0,
+                y: 40,
+                duration: 0.7,
+                delay: i * 0.05,
+                ease: "power2.out"
+            });
+        });
+
+        gsap.utils.toArray('.edu-card').forEach((card, i) => {
+            const xVal = i % 2 === 0 ? -200 : 200;
+            gsap.fromTo(card, { x: xVal, opacity: 0 }, {
+                x: 0, opacity: 1, ease: "power3.out",
+                scrollTrigger: { trigger: card, start: "top 85%", end: "top 55%", scrub: 1 }
+            });
+        });
+
+        const vaultTrack = document.querySelector('.vault-section-trigger');
+        const vaultInner = vaultTrack.querySelector('.vault-track');
+        const vaultItems = vaultInner.querySelectorAll('.vault-item');
+
+        if (window.innerWidth > 1024) {
+            const vaultScrollTween = gsap.to(vaultInner, {
+                x: () => -(vaultInner.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: { trigger: vaultTrack, pin: true, scrub: 1, end: () => "+=" + vaultInner.scrollWidth }
+            });
+
+            vaultItems.forEach((item) => {
+                gsap.to(item, {
+                    scale: 0.78, opacity: 0.35, rotationY: 18, x: -120,
+                    scrollTrigger: { trigger: item, containerAnimation: vaultScrollTween, start: "center center", end: "right center", scrub: true }
+                });
+            });
+        }
+
+        const magneticBtn = document.querySelector('.magnetic-btn');
+
+        const bot = document.getElementById('robot-cursor');
+        bot.innerHTML = `<svg width="42" height="42" viewBox="0 0 40 40" fill="none">
+            <rect x="10" y="8" width="20" height="18" rx="6" fill="#E0CCBB"/>
+            <rect x="14" y="14" width="4" height="4" fill="#050505"/>
+            <rect x="22" y="14" width="4" height="4" fill="#050505"/>
+            <rect x="16" y="21" width="8" height="2" fill="#050505"/>
+            <rect x="6" y="14" width="4" height="10" rx="2" fill="#E0CCBB"/>
+            <rect x="30" y="14" width="4" height="10" rx="2" fill="#E0CCBB"/>
+            <rect x="16" y="2" width="8" height="6" rx="2" fill="#E0CCBB"/>
+            <circle cx="20" cy="2" r="2" fill="#D4AF37"/>
+            <rect x="12" y="26" width="6" height="8" rx="2" fill="#cfcfcf"/>
+            <rect x="22" y="26" width="6" height="8" rx="2" fill="#cfcfcf"/>
+        </svg>`;
+
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+        let botX = mouseX, botY = mouseY, floatOffset = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (magneticBtn) {
+                const pos = magneticBtn.getBoundingClientRect();
+                const x = e.clientX - pos.left - pos.width / 2;
+                const y = e.clientY - pos.top - pos.height / 2;
+                if (Math.sqrt(x * x + y * y) < 100) {
+                    gsap.to(magneticBtn, { x: x * 0.5, y: y * 0.5, duration: 0.3 });
+                } else {
+                    gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.3 });
+                }
+            }
+        });
+
+        function animateBot() {
+            botX += (mouseX - botX) * 0.15;
+            botY += (mouseY - botY) * 0.15;
+            floatOffset += 0.08;
+            const floatY = Math.sin(floatOffset) * 4;
+            bot.style.transform = `translate(${botX - 21}px, ${botY - 21 + floatY}px) rotate(${(mouseX - botX) * 0.5}deg)`;
+            requestAnimationFrame(animateBot);
+        }
+        animateBot();
+
+        document.addEventListener('click', () => {
+            gsap.to(bot, { scale: 1.4, duration: 0.1, yoyo: true, repeat: 1, ease: 'power1.inOut' });
+        });
+
+        document.querySelectorAll('[data-bot-jump]').forEach((el) => {
+            ScrollTrigger.create({
+                trigger: el,
+                start: 'top 75%',
+                onEnter: () => {
+                    gsap.to(bot, {
+                        y: '-=35',
+                        duration: 0.25,
+                        ease: 'power2.out',
+                        onComplete: () => {
+                            gsap.to(bot, { y: '+=35', duration: 0.35, ease: 'bounce.out' });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
