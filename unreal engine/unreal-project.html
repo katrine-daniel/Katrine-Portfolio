@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pacman | Katrine Portfolio</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{accent:'#ff5a36'},fontFamily:{clash:['Clash Display','sans-serif'],syne:['Syne','sans-serif'],manrope:['Manrope','sans-serif']}}}};</script>
+  <style>
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:#050505; overflow-x:hidden; }
+    body.project-flappy-bird { background:#050505; background-image:radial-gradient(circle at 78% 9%, rgba(24,191,255,.16), transparent 24rem), radial-gradient(circle at 16% 42%, rgba(48,214,99,.09), transparent 28rem); }
+    body.project-flappy-bird::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.14; background-image:linear-gradient(rgba(105,224,255,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(105,224,255,.22) 1px, transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom, black, transparent 72%); }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    .site-nav { background:linear-gradient(180deg, rgba(5,5,5,.78), rgba(5,5,5,0)); }
+    .nav-inner { border:1px solid rgba(255,255,255,.12); background:rgba(8,13,18,.58); box-shadow:0 12px 40px rgba(0,0,0,.2); backdrop-filter:blur(18px); }
+    .project-hero { position:relative; isolation:isolate; background:linear-gradient(135deg, #050708 0%, #07131a 42%, #102e30 100%); }
+    .project-hero::before { content:""; position:absolute; inset:0; z-index:-1; opacity:.35; background:radial-gradient(circle at 72% 34%, rgba(68,213,255,.42), transparent 25%), radial-gradient(circle at 15% 80%, rgba(114,224,74,.18), transparent 27%); }
+    .hero-frame { box-shadow:0 0 0 1px rgba(121,224,255,.15), 0 35px 100px rgba(0,0,0,.55), 0 0 80px rgba(23,178,222,.15); }
+    .hero-frame img { filter:saturate(1.08) contrast(1.04); }
+    .hero-kicker { color:#7eeaff; }
+    .hero-title { text-shadow:0 0 34px rgba(85,214,255,.2); }
+    .metric-strip { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.12); }
+    .metric-strip strong { color:#8deaff; }
+    .flappy-accent { color:#8deaff; }
+    .flappy-section { background:linear-gradient(180deg, rgba(5,5,5,0), rgba(7,25,31,.72)); }
+    .gallery-card img { box-shadow:0 18px 60px rgba(0,0,0,.38); transition:transform .5s ease, filter .5s ease; }
+    .gallery-card:hover img { transform:scale(1.02); filter:saturate(1.15) brightness(1.06); }
+    body.project-flappy-bird .gallery-image-2 { object-position:72% 30%; }
+    body.project-flappy-bird .gallery-image-3 { object-position:20% 75%; }
+    body.project-flappy-bird .gallery-image-4 { object-position:50% 90%; }
+    .gallery-viewport { cursor:grab; scrollbar-width:none; }
+    .gallery-viewport::-webkit-scrollbar { display:none; }
+    .gallery-viewport.dragging { cursor:grabbing; }
+    .gallery-track { width:max-content; }
+    .gallery-card { width:min(76vw, 900px); }
+    @media (max-width:640px) { .gallery-card { width:86vw; } }
+  </style>
+</head>
+<body class="bg-[#050505] font-manrope text-white">
+  <nav class="site-nav fixed top-0 z-50 w-full px-[14px] py-[14px] md:px-[30px] md:py-[20px]">
+    <div class="nav-inner flex items-center justify-between rounded-full px-5 py-3 md:px-7 md:py-4">
+    <a href="../index.html" class="font-bold tracking-[2px] text-white no-underline">KATRINE.</a>
+    <div class="text-[11px] md:text-sm">
+      <a href="../index.html#projects-showcase" class="mr-5 text-white no-underline">WORK</a>
+      <a href="../index.html#experience" class="mr-5 text-white no-underline">INFO</a>
+      <a href="../index.html#vault" class="text-white no-underline">VAULT</a>
+    </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="project-hero min-h-screen px-[5vw] pb-0 pt-36 md:pt-44">
+      <div class="mx-auto max-w-[1500px] text-center">
+        <p class="hero-kicker font-syne text-[10px] uppercase tracking-[4px]">02 / Unreal Engine · 3D Retro Arcade Remake</p>
+        <h1 id="projectTitle" class="hero-title mt-8 font-clash text-[15vw] uppercase leading-[.8] md:text-[10vw]">PACMAN</h1>
+        <p id="projectSubtitle" class="mx-auto mt-9 max-w-[720px] text-base leading-relaxed text-white/65 md:text-xl">A neon maze prototype with grid movement, ghost states, pellets, and classic arcade pressure.</p>
+        <div id="projectTags" class="mt-8 flex flex-wrap justify-center gap-2"></div>
+        <div class="hero-frame mt-16 overflow-hidden rounded-[22px] border border-white/10 bg-black md:mt-24">
+          <img id="heroImage" src="" alt="Project preview" class="h-[38vh] w-full object-cover md:h-[58vh]">
+        </div>
+        <div class="metric-strip mx-auto grid max-w-[900px] grid-cols-3 gap-3 rounded-2xl p-4 text-left md:gap-8 md:p-6">
+          <div><strong class="font-clash text-2xl md:text-3xl">01</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Core Loop</p></div>
+          <div><strong class="font-clash text-2xl md:text-3xl">UE5</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Built In</p></div>
+          <div><strong class="font-clash text-2xl md:text-3xl">60</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Frame Focus</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="flappy-section border-t border-white/10 px-[8vw] py-28 md:py-44">
+      <div class="mx-auto max-w-[1120px]">
+        <p id="aboutLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">01 / About the Project</p>
+        <div class="mt-8 grid gap-12 md:grid-cols-[.8fr_1.2fr]">
+          <h2 id="aboutHeading" class="reveal font-clash text-[12vw] uppercase leading-[.84] md:text-[6vw]">What this build is about</h2>
+          <p id="overviewText" class="reveal max-w-[720px] text-lg leading-[1.8] text-white/65 md:pt-8 md:text-xl"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="learned" class="bg-[#f0ede6] px-[8vw] py-28 text-black md:py-44">
+      <div class="mx-auto grid max-w-[1120px] gap-12 md:grid-cols-[.85fr_1.15fr]">
+        <div><p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-black/45">02 / What I Learned</p><h2 id="learnedHeading" class="reveal mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[6vw]">Simple rules make deep play.</h2></div>
+        <div id="learnedText" class="space-y-7 md:pt-10"><p class="reveal text-lg leading-[1.8] text-black/70">Pacman taught me that a small set of rules can create a surprisingly rich game. Movement, timing, and enemy personality all need to be readable before they can feel exciting.</p><p class="reveal text-lg leading-[1.8] text-black/70">The most important work happened in the details: buffered turns, fair collision space, and feedback that tells the player why a moment succeeded or failed.</p></div>
+      </div>
+    </section>
+
+    <section id="features" class="flappy-section px-[8vw] py-28 md:py-44">
+      <div class="mx-auto max-w-[1120px]"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">03 / Game Features</p><h2 id="featuresHeading" class="reveal mt-8 max-w-[850px] font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">A maze full of readable pressure.</h2><div id="featuresList" class="mt-20 grid border-t border-white/15 md:grid-cols-3"></div></div>
+    </section>
+
+    <section id="challenges" class="bg-black px-[8vw] py-28 md:py-44"><div class="mx-auto max-w-[1120px] text-center"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">04 / Challenges</p><h2 id="challengesHeading" class="reveal mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">Where things broke.</h2><p id="challengesIntro" class="reveal mx-auto mt-10 max-w-[680px] text-base leading-[1.8] text-white/60 md:text-lg">The hard part was preserving the sharp feel of the original while building a 3D version with more visual space and more systems running at once.</p><div id="challengesList" class="mt-20 grid gap-5 text-left md:grid-cols-3"></div></div></section>
+
+    <section id="gallery" class="overflow-hidden border-t border-white/10 py-28 md:py-44"><div class="mb-14 px-[8vw]"><p class="font-syne text-[10px] uppercase tracking-[4px] text-white/40">05 / Game Images</p><h2 class="mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">Inside the arcade.</h2><p class="mt-6 max-w-[620px] text-white/55">Drag left or right, or use the mouse wheel, to explore the project images.</p></div><div id="galleryViewport" class="gallery-viewport overflow-x-auto"><div id="galleryTrack" class="gallery-track flex gap-5 px-[8vw]"></div></div></section>
+
+    <section id="result" class="bg-[#f0ede6] px-[6vw] py-28 text-black md:py-44"><div class="mx-auto max-w-[1400px]"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-black/45">06 / Final Result</p><div class="mt-10 grid items-center gap-12 lg:grid-cols-[1.15fr_.85fr]"><div class="reveal overflow-hidden rounded-[20px] bg-black"><img id="resultImage" src="../image/pacman.png" alt="Final Pacman result" class="h-[48vh] w-full object-cover md:h-[66vh]"></div><div><h2 id="resultHeading" class="reveal font-clash text-[14vw] uppercase leading-[.82] md:text-[7vw]">Ready to play.</h2><p id="resultText" class="reveal mt-8 max-w-[520px] text-lg leading-[1.8] text-black/65">The final result is a playable 3D Pacman loop with readable ghost behavior, responsive movement, satisfying power moments, and a clear arcade identity.</p><a href="../index.html#projects-showcase" class="reveal mt-10 inline-flex rounded-full bg-black px-7 py-4 font-syne text-[10px] uppercase tracking-[3px] text-white">Back to projects</a></div></div></div></section>
+  </main>
+
+  <script>
+    const projects={
+      pacman:{title:'PACMAN',subtitle:'A neon maze prototype with grid movement, ghost states, pellets, and classic arcade pressure.',image:'../image/pacman.png',gallery:[['../image/pacman.png','Arcade View'],['../image/flappy-bird.png','Gameplay Reference'],['../image/dungeon.png','Environment Study'],['../image/forest.png','Atmosphere Study']],tags:['Ghost AI','Grid Navigation','Retro Arcade'],overview:'Pacman is a 3D arcade remake built around faithful ghost behaviors, tile-center navigation, pellet consumption, frightened timers, and readable retro feedback.',learnedHeading:'Simple rules make deep play.',learned:['Pacman taught me that a small set of rules can create a surprisingly rich game. Movement, timing, and enemy personality all need to be readable before they can feel exciting.','The most important work happened in the details: buffered turns, fair collision space, and feedback that tells the player why a moment succeeded or failed.'],featuresHeading:'A maze full of readable pressure.',features:[['Ghost AI','Distinct chase, scatter, frightened, and return states give every ghost a role.'],['Grid Navigation','Tile-center movement and corner buffering make turns feel immediate and fair.'],['Arcade Feedback','Pellets, power states, sound cues, and score moments keep the loop alive.']],challengesHeading:'Where things broke.',challengesIntro:'The hard part was preserving the sharp feel of the original while building a 3D version with more visual space and more systems running at once.',challenges:[['Corner Snagging','Queued input and tile-center checks keep turns responsive.'],['Ghost Timing','State timers needed to stay tense without feeling random.'],['Pellet Performance','Instanced items keep a full maze responsive during play.']],resultHeading:'Ready to play.',resultText:'The final result is a playable 3D Pacman loop with readable ghost behavior, responsive movement, satisfying power moments, and a clear arcade identity.'},
+      'flappy-bird':{title:'FLAPPY BIRD',subtitle:'A pixel-style Unreal Engine remake with sharp jump physics, pooled green pipes, and instant arcade restarts.',image:'../image/flappy-bird.png',gallery:[['../image/flappy-bird.png','Full Gameplay Frame'],['../image/flappy-bird.png','Pipe Gap Composition'],['../image/flappy-bird.png','Pixel Skyline Background'],['../image/flappy-bird.png','Score Loop Preview']],tags:['Jump Physics','Object Pooling','Fair Collision'],overview:'This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a scrolling city skyline background, just like the original mobile game.',learnedHeading:'Small tuning changes matter.',learned:['Making the hit box smaller instead of exact size makes the game feel more fair to play.','Reusing old pipes instead of creating new ones stops lag and keeps the game smooth.','Changing gravity and jump force helps the game feel sharp and fun, not slow or floaty.'],featuresHeading:'A tiny loop with instant feedback.',features:[['Tap To Jump','Press a button to make the bird jump, then let gravity pull it back down through the gap.'],['Pooled Pipes','Green pipes spawn with gaps and are reused instead of constantly creating new actors.'],['Score And Restart','The score rises as pipes are passed, while quick restarts keep another attempt close.']],challengesHeading:'Where the feel needed work.',challengesIntro:'The biggest problems were a floaty jump, small frame drops from spawning pipes, and collisions that ended runs too early.',challenges:[['Floaty Jump','Increasing jump force and making gravity stronger while falling made the bird feel sharp instead of soft.'],['Pipe Lag','Object pooling removed the small lag caused by spawning new pipes every two seconds.'],['Unfair Collision','Making the pipe hit box 15% smaller created a fairer, more readable game over.']],resultHeading:'Simple. Sharp. Replayable.',resultText:'The final result is a simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, a score system, and a city skyline that keeps the arcade loop moving.'},
+      'off-roading':{title:'OFF ROADING',subtitle:'A gritty 4x4 prototype focused on suspension, surface friction, and responsive off-road handling.',image:'../image/off-roading.png',tags:['Vehicle Physics','Suspension','Mud Friction'],overview:'A physics-driven vehicle study where traction, weight, suspension travel, and camera feedback work together.'},
+      'mountains-ue':{title:'MOUNTAINS - UE',subtitle:'An alpine landscape prototype exploring streaming, slope materials, volumetric clouds, and traversal scale.',image:'../image/mountains.png',tags:['World Partition','Auto Material','Volumetric Weather'],overview:'A large landscape study built around long sightlines, material transitions, landmarks, and traversal.'}
+    };
+    const slug=new URLSearchParams(location.search).get('project')||'pacman';
+    const project=projects[slug]||projects.pacman;
+    document.body.classList.add(`project-${slug}`);
+    document.title=`${project.title} | Katrine Portfolio`;
+    document.getElementById('projectTitle').textContent=project.title;
+    document.getElementById('projectSubtitle').textContent=project.subtitle;
+    document.getElementById('heroImage').src=project.image;
+    document.getElementById('heroImage').alt=`${project.title} project preview`;
+    document.getElementById('projectTags').innerHTML=project.tags.map(tag=>`<span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 font-syne text-[10px] uppercase tracking-[2px] text-white/75">${tag}</span>`).join('');
+    document.getElementById('overviewText').textContent=project.overview;
+    document.getElementById('aboutHeading').textContent=project.title==='FLAPPY BIRD'?'A faithful arcade remake':'What this build is about';
+    document.getElementById('learnedHeading').textContent=project.learnedHeading;
+    document.getElementById('learnedText').innerHTML=project.learned.map(text=>`<p class="reveal text-lg leading-[1.8] text-black/70">${text}</p>`).join('');
+    document.getElementById('featuresHeading').textContent=project.featuresHeading;
+    document.getElementById('featuresList').innerHTML=project.features.map((feature,index)=>`<article class="reveal border-b border-white/15 py-8 md:border-r md:px-7 ${index===0?'md:first:pl-0':''} ${index===project.features.length-1?'md:last:border-r-0 md:last:pr-0':''}"><span class="font-clash text-5xl text-accent">0${index+1}</span><h3 class="mt-8 text-xl">${feature[0]}</h3><p class="mt-3 text-white/50">${feature[1]}</p></article>`).join('');
+    document.getElementById('challengesHeading').textContent=project.challengesHeading;
+    document.getElementById('challengesIntro').textContent=project.challengesIntro;
+    document.getElementById('challengesList').innerHTML=project.challenges.map((challenge,index)=>`<article class="reveal border-t border-accent pt-5"><span class="font-clash text-4xl text-accent">0${index+1}</span><h3 class="mt-6 font-clash text-2xl uppercase">${challenge[0]}</h3><p class="mt-4 text-white/50">${challenge[1]}</p></article>`).join('');
+    document.getElementById('resultImage').src=project.image;
+    document.getElementById('resultImage').alt=`Final ${project.title} result`;
+    document.getElementById('resultHeading').textContent=project.resultHeading;
+    document.getElementById('resultText').textContent=project.resultText;
+    document.getElementById('galleryTrack').innerHTML=project.gallery.map((item,index)=>`<figure class="gallery-card shrink-0"><img src="${item[0]}" alt="${project.title} ${item[1]}" class="h-[48vh] w-full rounded-[18px] border border-white/10 object-cover md:h-[60vh] gallery-image-${index+1}"><figcaption class="mt-4 font-syne text-[10px] uppercase tracking-[3px] text-white/40">0${index+1} / ${item[1]}</figcaption></figure>`).join('');
+
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
+    const viewport=document.getElementById('galleryViewport');
+    let dragging=false,startX=0,startScroll=0;
+    viewport.addEventListener('pointerdown',event=>{dragging=true;startX=event.clientX;startScroll=viewport.scrollLeft;viewport.classList.add('dragging');viewport.setPointerCapture(event.pointerId)});
+    viewport.addEventListener('pointermove',event=>{if(dragging)viewport.scrollLeft=startScroll-(event.clientX-startX)});
+    const stopDragging=()=>{dragging=false;viewport.classList.remove('dragging')};
+    viewport.addEventListener('pointerup',stopDragging);
+    viewport.addEventListener('pointercancel',stopDragging);
+    viewport.addEventListener('wheel',event=>{if(Math.abs(event.deltaY)>Math.abs(event.deltaX)){viewport.scrollLeft+=event.deltaY;event.preventDefault()}},{passive:false});
+  </script>
+</body>
+</html>
