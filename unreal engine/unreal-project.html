@@ -438,14 +438,13 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="border-t border-white/10 bg-[#05070b] px-[5vw] py-20 md:py-28">
       <div class="mx-auto max-w-[1380px]">
-        <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">01 / Architecture Overview</p>
+        <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">About the Project</p>
 
         <div class="mt-8 grid items-start gap-12 lg:grid-cols-12">
           <!-- Left Column: Heading + Featured Image Showcase Card -->
           <div class="lg:col-span-6 space-y-7">
             <h2 id="aboutHeading" class="reveal font-clash text-4xl sm:text-5xl md:text-6xl lg:text-[62px] uppercase leading-[0.98] tracking-tight text-white">
-              RE-ENGINEERING<br>
-              <span class="text-[#00f59b]">THE ARCADE</span>
+              About the Project
             </h2>
 
             <!-- Featured Showcase Image Card -->
@@ -468,33 +467,22 @@
             </div>
           </div>
 
-          <!-- Right Column: Rich Editorial Description & Architecture Tags -->
+          <!-- Right Column: Rich Description & What I Wanted to Learn -->
           <div class="lg:col-span-6 space-y-6 pt-2 lg:pt-4">
-            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.5] tracking-tight text-white/90">
-              This is my Unreal Engine 5 architecture study of Flappy Bird. Rather than a quick toy, it is engineered around production standards: non-linear falling gravity, pre-allocated actor pooling queues, and an inset collision capsule that prevents frustrating boundary clips.
+            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.6] tracking-tight text-white/90">
+              This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a city skyline background, just like the original mobile game.
             </p>
 
-            <p class="reveal text-base sm:text-lg leading-[1.8] text-white/65">
-              In this rebuild, custom Blueprints calculate non-linear gravity falloff so the bird snaps briskly downwards after reaching its jump apex, while pre-allocated pipe actors cycle across a recycled viewport queue to maintain rock-solid 60 FPS performance.
-            </p>
-
-            <!-- Technical Pillar Badges -->
-            <div class="reveal pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-                <span class="block font-mono text-[10px] uppercase text-[#00f59b] tracking-wider">Hitbox Inset</span>
-                <strong class="block text-sm text-white font-medium mt-1">15% Tolerance</strong>
-                <span class="text-[11px] text-white/45 block mt-0.5">Fair near-misses</span>
+            <!-- What I Wanted to Learn Box -->
+            <div id="wantedToLearnWrap" class="reveal rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-md">
+              <div class="flex items-center justify-between">
+                <span id="wantedToLearnBadge" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b] font-semibold">02 / Goals</span>
+                <span id="wantedToLearnPill" class="rounded px-2.5 py-0.5 font-mono text-[10px] bg-emerald-500/20 text-[#00f59b] border border-emerald-500/30">LEARNING OBJECTIVE</span>
               </div>
-              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-                <span class="block font-mono text-[10px] uppercase text-[#00d2ff] tracking-wider">Actor Pooling</span>
-                <strong class="block text-sm text-white font-medium mt-1">Zero GC Hitch</strong>
-                <span class="text-[11px] text-white/45 block mt-0.5">Pre-warmed queue</span>
-              </div>
-              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
-                <span class="block font-mono text-[10px] uppercase text-amber-400 tracking-wider">Descent Curve</span>
-                <strong class="block text-sm text-white font-medium mt-1">Snappy Apex</strong>
-                <span class="text-[11px] text-white/45 block mt-0.5">+1180 px/s² Gravity</span>
-              </div>
+              <h3 id="wantedToLearnHeading" class="mt-4 font-clash text-2xl uppercase tracking-tight text-white">What I Wanted to Learn</h3>
+              <p id="wantedToLearnDesc" class="mt-3 text-base sm:text-lg leading-[1.8] text-white/75">
+                I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to make a simple 2D-style arcade game feel fun to play.
+              </p>
             </div>
           </div>
         </div>
@@ -619,62 +607,42 @@
       </div>
     </section>
 
-    <!-- WHAT I LEARNED SECTION -->
-    <section id="learned" class="px-[8vw] py-24 md:py-36">
-      <div class="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[.85fr_1.15fr]">
-        <div>
-          <p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px]">02 / Engineering Insights</p>
-          <h2 id="learnedHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] md:text-[5.5vw]">
-            Small tuning changes matter.
-          </h2>
-        </div>
-        <div id="learnedText" class="space-y-6 lg:pt-8">
-          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-            <h4 class="font-clash text-lg uppercase text-[#00f59b]">01 / Hitbox Forgiveness</h4>
-            <p class="mt-2 text-base leading-relaxed text-white/70">
-              Making collision 15% smaller than the visible sprite prevents frustrating deaths when the player barely skims an edge, preserving momentum and rewarding risk.
-            </p>
-          </div>
-          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-            <h4 class="font-clash text-lg uppercase text-[#00d2ff]">02 / Memory & Actor Recycling</h4>
-            <p class="mt-2 text-base leading-relaxed text-white/70">
-              Reusing old pipe actors instead of repeatedly creating and destroying them prevents garbage collection frame drops, keeping gameplay butter-smooth.
-            </p>
-          </div>
-          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-            <h4 class="font-clash text-lg uppercase text-amber-400">03 / Gravity Snappiness</h4>
-            <p class="mt-2 text-base leading-relaxed text-white/70">
-              Tuning gravity stronger during the downward descent makes the game feel immediate and responsive rather than slow, mushy, or floaty.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- GAME FEATURES SECTION -->
     <section id="features" class="border-t border-white/10 bg-gradient-to-b from-[#070d13] to-[#040608] px-[8vw] py-24 md:py-36">
       <div class="mx-auto max-w-[1200px]">
-        <p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">03 / Mechanics Breakdown</p>
+        <p id="featuresLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">02 / Key Mechanics</p>
         <h2 id="featuresHeading" class="reveal mt-6 max-w-[900px] font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">
-          A tiny loop with instant feedback.
+          Game Features
         </h2>
         
-        <div id="featuresList" class="mt-16 grid gap-6 md:grid-cols-3"></div>
+        <div id="featuresList" class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </section>
 
-    <!-- CHALLENGES SECTION -->
+    <!-- PROBLEMS I FACED (CHALLENGES) SECTION -->
     <section id="challenges" class="border-t border-white/10 bg-[#030508] px-[8vw] py-24 md:py-36">
       <div class="mx-auto max-w-[1200px] text-center">
-        <p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-red-400">04 / Problems Solved</p>
+        <p id="challengesLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-red-400">03 / Problems Solved</p>
         <h2 id="challengesHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[6vw]">
-          Where the feel needed work.
+          Problems I Faced
         </h2>
-        <p id="challengesIntro" class="reveal mx-auto mt-8 max-w-[700px] text-base leading-relaxed text-white/65 md:text-lg">
-          Building in a heavy modern game engine like Unreal Engine requires intentional friction against default behaviors:
+        <p id="challengesIntro" class="reveal mx-auto mt-8 max-w-[700px] text-base leading-relaxed text-white/65 md:text-lg" style="display: none;">
         </p>
 
         <div id="challengesList" class="mt-16 grid gap-6 text-left md:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- WHAT I LEARNED SECTION -->
+    <section id="learned" class="border-t border-white/10 bg-[#05070a] px-[8vw] py-24 md:py-36">
+      <div class="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[.85fr_1.15fr]">
+        <div>
+          <p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">04 / Key Takeaways</p>
+          <h2 id="learnedHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] md:text-[5.5vw]">
+            What I Learned
+          </h2>
+        </div>
+        <div id="learnedText" class="space-y-6 lg:pt-8"></div>
       </div>
     </section>
 
@@ -706,15 +674,17 @@
         <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div>
             <p id="resultLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-red-400">
-              06 / VIDEO TUTORIALS & GUIDES
+              05 / OUTCOME & REFERENCES
             </p>
             <h2 id="resultHeading" class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
-              REFERENCES
+              FINAL RESULT
             </h2>
           </div>
-          <p class="reveal max-w-[480px] text-sm md:text-base text-white/60">
-            Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.
-          </p>
+          <div class="max-w-[580px]">
+            <p id="resultDesc" class="reveal text-base md:text-lg text-white/85 leading-relaxed font-normal">
+              A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a score system, just like the original game.
+            </p>
+          </div>
         </div>
 
         <!-- YouTube Video Links Grid -->
@@ -850,15 +820,18 @@
     const projects = {
       'flappy-bird': {
         title: 'FLAPPY BIRD',
-        subtitle: 'An engineered Unreal Engine 5 prototype featuring deterministic jump impulse physics, pooled pipe actors with zero garbage collection hitching, and fair collision box budgeting.',
+        subtitle: 'A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a score system, just like the original game.',
         image: '../image/flappy-night.jpg',
         heroBg: '../image/flappy-hero-bg.jpg',
         kicker: '02 / UNREAL ENGINE 5 · BLUEPRINT & PHYSICS LAB',
         accent: '#00f59b',
         glow1: '#00f59b',
         glow2: '#00d2ff',
-        aboutHeading: 'RE-ENGINEERING<br><span class="text-[#00f59b]">THE ARCADE</span>',
-        overview: 'This is my Unreal Engine 5 architecture study of Flappy Bird. Rather than a quick toy, it is engineered around production standards: non-linear falling gravity, pre-allocated actor pooling queues, and an inset collision capsule that prevents frustrating boundary clips.',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        overview: 'This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a city skyline background, just like the original mobile game.',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to make a simple 2D-style arcade game feel fun to play.',
         tags: ['UE5 Blueprints', 'Jump Kinematics', 'Actor Object Pooling', 'Fair Collision Tolerance'],
         gallery: [
           ['../image/flappy-bird.png', 'Classic Arcade Frame & In-Game View'],
@@ -912,29 +885,37 @@
             </div>`
           }
         ],
-        learnedHeading: 'Small tuning changes matter.',
-        learned: [
-          'Making collision 15% smaller than the visible sprite prevents frustrating deaths when skimming an edge, preserving momentum.',
-          'Reusing old pipes instead of creating and destroying them removes garbage collection lag spikes and preserves 60 FPS.',
-          'Increasing downward gravity acceleration while keeping jump impulse snappy gives player control without feeling floaty.'
-        ],
-        featuresHeading: 'A tiny loop with instant feedback.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
         features: [
-          ['Tap To Jump', 'Precise vertical impulse (-390 px/s) balanced with quadratic gravitational pull (+1180 px/s²).'],
-          ['Pooled Pipes', 'Pre-warmed actor array cycles offscreen seamlessly without garbage collection overhead.'],
-          ['Score & Audio Synthesis', 'Real-time score detection, Web Audio 8-bit sound synthesizers, and instant restarts.']
+          'Tap or press a button to make the bird jump up, then gravity pulls it back down',
+          'Green pipes spawn with gaps for the bird to fly through',
+          'Score counter shows on screen and goes up as you pass pipes',
+          'Scrolling city background for a moving, arcade feel',
+          'Game restarts quickly so you can try again'
         ],
-        challengesHeading: 'Where the feel needed work.',
-        challengesIntro: 'Unreal Engine defaults create floaty characters and garbage collection pauses unless deliberately engineered for high-cadence 2D gameplay.',
+        challengesLabel: '03 / Problems Solved',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
         challenges: [
-          ['Floaty Jump Physics', 'Increased jump impulse and multiplied falling gravity to give the bird a punchy, snappy apex.'],
-          ['Pipe Spawning Hitch', 'Actor object pooling completely removed frame-time spikes caused by actor destruction every 2s.'],
-          ['Unforgiving Collision', 'Reduced capsule bounds by 15% to allow thrilling close shaves through tight pipe openings.']
+          ['Floaty jump (Day 2)', "The bird's jump felt too soft, not sharp. I fixed it by increasing jump force and making gravity stronger while falling."],
+          ['Lag from new pipes (Day 3)', "New pipes were spawning every 2 seconds, causing small lag. I fixed it by reusing old pipes instead of making new ones (object pooling)."],
+          ['Unfair collision (Day 4)', "The pipe's hit box was too big, so the game ended too early. I made the hit box 15% smaller for a fairer feel."]
         ],
+        learnedLabel: '04 / Key Takeaways',
+        learnedHeading: 'What I Learned',
+        learned: [
+          'Making the hit box smaller instead of exact size makes the game feel more fair to play.',
+          'Reusing old pipes instead of creating new ones stops lag and keeps the game smooth.',
+          'Changing gravity and jump force helps the game feel sharp and fun, not slow or floaty.'
+        ],
+        finalResultLabel: '05 / Project Conclusion',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a score system, just like the original game.',
         references: [
           ['Unreal Engine 5: Flappy Bird Blueprint Guide', 'PaperZD & Physics', 'Complete walkthrough on PaperZD character blueprints, 2D viewport camera setup, vertical jump velocity impulse, and terminal velocity clamps.', 'https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+tutorial'],
           ['Actor Object Pooling & Zero GC Lag in UE5', 'Memory & GC', 'Architecture teardown on pre-allocating obstacle actor pools and cycling off-screen actors to eliminate garbage collector hitching and preserve 60 FPS.', 'https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner'],
-          ['Hitbox Forgiveness & Fair Collision Bounds', 'GDC & Game Feel', 'Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates edge-of-the-seat near misses instead of frustration.', 'https://www.youtube.com/results?search_query=flappy+bird+collision+hitbox+design+gdc']
+          ['Hitbox Forgiveness & Fair Collision Bounds', 'GDC & Game Feel', 'Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates edge-of-the-seat near misses instead of frustration.', 'https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+collision+hitbox+design+gdc']
         ]
       },
       'off-roading': {
@@ -946,6 +927,7 @@
         accent: '#f97316',
         glow1: '#f97316',
         glow2: '#eab308',
+        aboutLabel: '01 / Architecture Overview',
         aboutHeading: 'ENGINEERING<br><span class="text-[#f97316]">ALL-TERRAIN GRIP</span>',
         overview: 'Off-Roading is an Unreal Engine 5 vehicle dynamics study engineered with the Chaos Physics solver. It focuses on independent multi-link suspension kinematics, progressive damper curves, mud tire friction, and dynamic differential torque distribution across brutal rock and mud terrains.',
         tags: ['UE5 Chaos Physics', '4-Link Suspension', 'Mud Friction Model', 'Differential Torque'],
@@ -957,6 +939,12 @@
         ],
         labHeading: 'Chaos Vehicle Dynamics Lab',
         labSub: 'Inspecting spring compression curves, dynamic Pacejka friction slip, and locked differential power transfer.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
         labPanels: [
           {
             num: '01 / SUSPENSION', badge: 'PROGRESSIVE DAMPER', color: '#f97316', title: 'Multi-Link Flex',
@@ -1029,6 +1017,7 @@
         accent: '#38bdf8',
         glow1: '#38bdf8',
         glow2: '#e0f2fe',
+        aboutLabel: '01 / Architecture Overview',
         aboutHeading: 'PROCEDURAL<br><span class="text-[#38bdf8]">ALPINE MAJESTY</span>',
         overview: 'Mountains is a large-scale alpine environment study in Unreal Engine 5 utilizing World Partition, Nanite geometric streaming, slope-angle procedural landscape materials, and dynamic volumetric snowfall weather systems.',
         tags: ['World Partition', 'Volumetric Snow Weather', 'Nanite Landscape', 'Dynamic Snow Drift'],
@@ -1040,6 +1029,12 @@
         ],
         labHeading: 'Alpine World & Weather Lab',
         labSub: 'Exploring procedural snow accumulation, real-time wind particle drift, and 16km² Nanite terrain streaming.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
         labPanels: [
           {
             num: '01 / WEATHER', badge: 'VOLUMETRIC BLIZZARD', color: '#38bdf8', title: 'Snowfall Physics',
@@ -1158,15 +1153,28 @@
     const aboutFeaturedImg = document.getElementById('aboutFeaturedImg');
     if (aboutFeaturedImg && project.image) aboutFeaturedImg.src = project.image;
 
-    // About section headings
+    // About section headings & learning goals
+    const aboutLabel = document.getElementById('aboutLabel');
+    if (aboutLabel && project.aboutLabel) aboutLabel.textContent = project.aboutLabel;
+
     const aboutHeading = document.getElementById('aboutHeading');
     if (aboutHeading && project.aboutHeading) aboutHeading.innerHTML = project.aboutHeading;
 
     const overviewText = document.getElementById('overviewText');
     if (overviewText && project.overview) overviewText.textContent = project.overview;
 
-    const learnedHeading = document.getElementById('learnedHeading');
-    if (learnedHeading) learnedHeading.textContent = project.learnedHeading || 'Insights from development';
+    const wantedWrap = document.getElementById('wantedToLearnWrap');
+    if (wantedWrap) {
+      if (project.wantedToLearn) {
+        wantedWrap.style.display = 'block';
+        const wHeading = document.getElementById('wantedToLearnHeading');
+        const wDesc = document.getElementById('wantedToLearnDesc');
+        if (wHeading && project.wantedToLearnHeading) wHeading.textContent = project.wantedToLearnHeading;
+        if (wDesc) wDesc.textContent = project.wantedToLearn;
+      } else {
+        wantedWrap.style.display = 'none';
+      }
+    }
 
     // Lab section populate
     const labContainer = document.getElementById('labPanelsContainer');
@@ -1185,29 +1193,59 @@
     }
 
     // Features populate
+    if (project.featuresLabel && document.getElementById('featuresLabel')) document.getElementById('featuresLabel').textContent = project.featuresLabel;
+    if (project.featuresHeading && document.getElementById('featuresHeading')) document.getElementById('featuresHeading').textContent = project.featuresHeading;
     if (project.features) {
-      document.getElementById('featuresHeading').textContent = project.featuresHeading;
-      document.getElementById('featuresList').innerHTML = project.features.map((feature, index) => `
-        <article class="lab-card reveal rounded-2xl p-7 text-left">
-          <span class="font-mono text-xs font-bold" style="color: ${project.accent || '#00f59b'}">FEATURE 0${index + 1}</span>
-          <h3 class="mt-4 font-clash text-2xl uppercase text-white">${feature[0]}</h3>
-          <p class="mt-3 text-sm leading-relaxed text-white/60">${feature[1]}</p>
-        </article>
-      `).join('');
+      document.getElementById('featuresList').innerHTML = project.features.map((feature, index) => {
+        const title = Array.isArray(feature) ? feature[0] : feature;
+        const desc = (Array.isArray(feature) && feature[1]) ? feature[1] : '';
+        return `
+          <article class="lab-card reveal rounded-2xl p-7 text-left flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs font-bold" style="color: ${project.accent || '#00f59b'}">FEATURE 0${index + 1}</span>
+              <h3 class="mt-4 font-clash text-xl uppercase text-white leading-snug">${title}</h3>
+              ${desc ? `<p class="mt-3 text-sm leading-relaxed text-white/60">${desc}</p>` : ''}
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
-    // Challenges populate
+    // Challenges populate (Problems I Faced)
+    if (project.challengesLabel && document.getElementById('challengesLabel')) document.getElementById('challengesLabel').textContent = project.challengesLabel;
+    if (project.challengesHeading && document.getElementById('challengesHeading')) document.getElementById('challengesHeading').textContent = project.challengesHeading;
+    const challengesIntro = document.getElementById('challengesIntro');
+    if (challengesIntro) {
+      challengesIntro.textContent = project.challengesIntro || '';
+      challengesIntro.style.display = project.challengesIntro ? 'block' : 'none';
+    }
     if (project.challenges) {
-      document.getElementById('challengesHeading').textContent = project.challengesHeading;
-      document.getElementById('challengesIntro').textContent = project.challengesIntro;
       document.getElementById('challengesList').innerHTML = project.challenges.map((challenge, index) => `
         <article class="lab-card reveal rounded-2xl border-t-2 p-7" style="border-top-color: ${project.accent || '#00f59b'}">
-          <span class="font-mono text-xs font-bold text-white/50">CHALLENGE 0${index + 1}</span>
+          <span class="font-mono text-xs font-bold text-white/50">PROBLEM 0${index + 1}</span>
           <h3 class="mt-4 font-clash text-2xl uppercase text-white">${challenge[0]}</h3>
           <p class="mt-3 text-sm leading-relaxed text-white/60">${challenge[1]}</p>
         </article>
       `).join('');
     }
+
+    // Learned populate (What I Learned)
+    if (project.learnedLabel && document.getElementById('learnedLabel')) document.getElementById('learnedLabel').textContent = project.learnedLabel;
+    if (project.learnedHeading && document.getElementById('learnedHeading')) document.getElementById('learnedHeading').textContent = project.learnedHeading;
+    const learnedContainer = document.getElementById('learnedText');
+    if (learnedContainer && project.learned) {
+      learnedContainer.innerHTML = project.learned.map((item, index) => `
+        <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+          <h4 class="font-clash text-lg uppercase" style="color: ${project.accent || '#00f59b'}">0${index + 1} / Key Takeaway</h4>
+          <p class="mt-2 text-base sm:text-lg leading-relaxed text-white/75">${item}</p>
+        </div>
+      `).join('');
+    }
+
+    // Final Result populate
+    if (project.finalResultLabel && document.getElementById('resultLabel')) document.getElementById('resultLabel').textContent = project.finalResultLabel;
+    if (project.finalResultHeading && document.getElementById('resultHeading')) document.getElementById('resultHeading').textContent = project.finalResultHeading;
+    if (project.finalResult && document.getElementById('resultDesc')) document.getElementById('resultDesc').textContent = project.finalResult;
 
     // References populate dynamically per project
     const referencesGrid = document.getElementById('referencesGrid');
