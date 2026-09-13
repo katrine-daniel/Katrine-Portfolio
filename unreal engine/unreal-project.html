@@ -3,143 +3,906 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pacman | Katrine Portfolio</title>
+  <title>Flappy Bird | Unreal Engine 5 Architecture | Katrine Portfolio</title>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{accent:'#ff5a36'},fontFamily:{clash:['Clash Display','sans-serif'],syne:['Syne','sans-serif'],manrope:['Manrope','sans-serif']}}}};</script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#ff5a36',
+            neon: '#00f59b',
+            cyanGlow: '#00d2ff',
+            arcadeYellow: '#ffd000'
+          },
+          fontFamily: {
+            clash: ['Clash Display', 'sans-serif'],
+            syne: ['Syne', 'sans-serif'],
+            manrope: ['Manrope', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
   <style>
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { background:#050505; overflow-x:hidden; }
-    body.project-flappy-bird { background:#050505; background-image:radial-gradient(circle at 78% 9%, rgba(24,191,255,.16), transparent 24rem), radial-gradient(circle at 16% 42%, rgba(48,214,99,.09), transparent 28rem); }
-    body.project-flappy-bird::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.14; background-image:linear-gradient(rgba(105,224,255,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(105,224,255,.22) 1px, transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom, black, transparent 72%); }
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-    .site-nav { background:linear-gradient(180deg, rgba(5,5,5,.78), rgba(5,5,5,0)); }
-    .nav-inner { border:1px solid rgba(255,255,255,.12); background:rgba(8,13,18,.58); box-shadow:0 12px 40px rgba(0,0,0,.2); backdrop-filter:blur(18px); }
-    .project-hero { position:relative; isolation:isolate; background:linear-gradient(135deg, #050708 0%, #07131a 42%, #102e30 100%); }
-    .project-hero::before { content:""; position:absolute; inset:0; z-index:-1; opacity:.35; background:radial-gradient(circle at 72% 34%, rgba(68,213,255,.42), transparent 25%), radial-gradient(circle at 15% 80%, rgba(114,224,74,.18), transparent 27%); }
-    .hero-frame { box-shadow:0 0 0 1px rgba(121,224,255,.15), 0 35px 100px rgba(0,0,0,.55), 0 0 80px rgba(23,178,222,.15); }
-    .hero-frame img { filter:saturate(1.08) contrast(1.04); }
-    .hero-kicker { color:#7eeaff; }
-    .hero-title { text-shadow:0 0 34px rgba(85,214,255,.2); }
-    .metric-strip { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.12); }
-    .metric-strip strong { color:#8deaff; }
-    .flappy-accent { color:#8deaff; }
-    .flappy-section { background:linear-gradient(180deg, rgba(5,5,5,0), rgba(7,25,31,.72)); }
-    .gallery-card img { box-shadow:0 18px 60px rgba(0,0,0,.38); transition:transform .5s ease, filter .5s ease; }
-    .gallery-card:hover img { transform:scale(1.02); filter:saturate(1.15) brightness(1.06); }
-    body.project-flappy-bird .gallery-image-2 { object-position:72% 30%; }
-    body.project-flappy-bird .gallery-image-3 { object-position:20% 75%; }
-    body.project-flappy-bird .gallery-image-4 { object-position:50% 90%; }
-    .gallery-viewport { cursor:grab; scrollbar-width:none; }
-    .gallery-viewport::-webkit-scrollbar { display:none; }
-    .gallery-viewport.dragging { cursor:grabbing; }
-    .gallery-track { width:max-content; }
-    .gallery-card { width:min(76vw, 900px); }
-    @media (max-width:640px) { .gallery-card { width:86vw; } }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #050505; overflow-x: hidden; color: #f1f5f9; }
+    
+    /* Dedicated Flappy Bird Cyber-Dark Atmosphere */
+    body.project-flappy-bird {
+      background: #040608;
+      background-image: 
+        radial-gradient(circle at 82% 8%, rgba(0, 245, 155, 0.14), transparent 32rem),
+        radial-gradient(circle at 14% 35%, rgba(0, 210, 255, 0.12), transparent 30rem),
+        radial-gradient(circle at 50% 80%, rgba(255, 208, 0, 0.05), transparent 36rem);
+    }
+    body.project-flappy-bird::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.18;
+      background-image: 
+        linear-gradient(rgba(0, 245, 155, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 155, 0.18) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black 20%, transparent 90%);
+    }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
+    .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
+
+    .project-hero { position: relative; isolation: isolate; overflow: hidden; }
+    .hero-bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-bg-layer img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.42;
+      filter: saturate(1.25) brightness(0.85);
+      transform: scale(1.04);
+      animation: subtleHeroZoom 24s infinite alternate ease-in-out;
+    }
+    @keyframes subtleHeroZoom {
+      0% { transform: scale(1.02); }
+      100% { transform: scale(1.08); }
+    }
+    .flappy-hero-glow {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.5;
+      background: radial-gradient(circle at 50% 32%, rgba(0,245,155,.24), transparent 48%),
+                  radial-gradient(circle at 80% 48%, rgba(0,210,255,.2), transparent 40%);
+    }
+
+    /* Arcade Screen Frame */
+    .arcade-cabinet {
+      background: linear-gradient(180deg, #101921 0%, #080d12 100%);
+      border: 1px solid rgba(0, 245, 155, 0.28);
+      box-shadow: 0 0 50px rgba(0, 245, 155, 0.12), 0 30px 90px rgba(0,0,0,0.85);
+    }
+    .arcade-screen {
+      position: relative;
+      background: #020305;
+      box-shadow: inset 0 0 35px rgba(0,0,0,0.85);
+      overflow: hidden;
+    }
+    .arcade-screen.crt-enabled::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.38) 50%);
+      background-size: 100% 4px;
+      z-index: 20;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* Section dynamic styles for Flappy Bird */
+    body.project-flappy-bird #learned {
+      background: #070c12;
+      color: #f1f5f9;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    body.project-flappy-bird #learned p {
+      color: rgba(255,255,255,0.72);
+    }
+    body.project-flappy-bird #learned h2,
+    body.project-flappy-bird #learned #learnedHeading {
+      color: #ffffff;
+    }
+    body.project-flappy-bird #learned #learnedLabel {
+      color: #00f59b;
+    }
+
+    body.project-flappy-bird #result {
+      background: #05080c;
+      color: #f1f5f9;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    body.project-flappy-bird #result p {
+      color: rgba(255,255,255,0.72);
+    }
+    body.project-flappy-bird #result h2,
+    body.project-flappy-bird #result #resultHeading {
+      color: #ffffff;
+    }
+    body.project-flappy-bird #result #resultLabel {
+      color: #00d2ff;
+    }
+    body.project-flappy-bird #result .result-back-btn {
+      background: rgba(255,255,255,0.06);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+    }
+    body.project-flappy-bird #result .result-back-btn:hover {
+      background: rgba(0, 245, 155, 0.15);
+      border-color: rgba(0, 245, 155, 0.5);
+      color: #00f59b;
+      box-shadow: 0 0 30px rgba(0, 245, 155, 0.25);
+    }
+
+    .yt-ref-card {
+      background: rgba(12, 18, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 28px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+    }
+    .yt-ref-card:hover {
+      border-color: rgba(239, 68, 68, 0.5);
+      background: rgba(18, 25, 36, 0.85);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(239, 68, 68, 0.12), 0 0 30px rgba(239, 68, 68, 0.08);
+    }
+
+    /* Gallery Styling */
+    .gallery-card {
+      width: min(76vw, 860px);
+      transition: transform 0.4s ease;
+    }
+    .gallery-card:hover {
+      transform: translateY(-4px);
+    }
+    .gallery-card img {
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+    .gallery-card:hover img {
+      transform: scale(1.025);
+      filter: saturate(1.12) brightness(1.05);
+    }
+    .gallery-viewport { cursor: grab; scrollbar-width: none; }
+    .gallery-viewport::-webkit-scrollbar { display: none; }
+    .gallery-viewport.dragging { cursor: grabbing; }
+
+    /* Interactive Physics Lab Cards */
+    .lab-card {
+      background: rgba(11, 18, 26, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+    }
+    .lab-card:hover {
+      border-color: rgba(0, 245, 155, 0.35);
+      box-shadow: 0 12px 35px rgba(0, 245, 155, 0.08);
+    }
+
+    /* Flappy Canvas HUD Pulse */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+    .pulse-glow { animation: pulseGlow 2.4s infinite ease-in-out; }
   </style>
 </head>
 <body class="bg-[#050505] font-manrope text-white">
+
+  <!-- Floating Navigation -->
   <nav class="site-nav fixed top-0 z-50 w-full px-[14px] py-[14px] md:px-[30px] md:py-[20px]">
     <div class="nav-inner flex items-center justify-between rounded-full px-5 py-3 md:px-7 md:py-4">
-    <a href="../index.html" class="font-bold tracking-[2px] text-white no-underline">KATRINE.</a>
-    <div class="text-[11px] md:text-sm">
-      <a href="../index.html#projects-showcase" class="mr-5 text-white no-underline">WORK</a>
-      <a href="../index.html#experience" class="mr-5 text-white no-underline">INFO</a>
-      <a href="../index.html#vault" class="text-white no-underline">VAULT</a>
-    </div>
+      <a href="../index.html" class="flex items-center gap-2 font-bold tracking-[2px] text-white no-underline">
+        <span class="inline-block h-2 w-2 rounded-full bg-[#00f59b] shadow-[0_0_8px_#00f59b]"></span>
+        <span>KATRINE.</span>
+      </a>
+      <div class="flex items-center gap-5 text-[11px] md:text-sm">
+        <a href="../index.html#projects-showcase" class="text-white/70 transition hover:text-[#00f59b] no-underline">WORK</a>
+        <a href="../index.html#experience" class="text-white/70 transition hover:text-[#00f59b] no-underline">INFO</a>
+        <a href="../index.html#vault" class="text-white/70 transition hover:text-[#00f59b] no-underline">VAULT</a>
+        <a href="../index.html" class="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-syne text-[10px] uppercase tracking-[2px] text-white transition hover:border-[#00f59b] hover:text-[#00f59b] no-underline">← Back to Portfolio</a>
+      </div>
     </div>
   </nav>
 
   <main>
-    <section class="project-hero min-h-screen px-[5vw] pb-0 pt-36 md:pt-44">
+    <!-- HERO SECTION -->
+    <section class="project-hero min-h-screen px-[5vw] pb-16 pt-32 md:pt-40">
+      <!-- Atmospheric Cinematic Game Background Layer -->
+      <div class="hero-bg-layer">
+        <img src="../image/flappy-hero-bg.jpg" alt="Unreal Engine 5 Hero Scene Background" />
+        <!-- Top fade, bottom fade, and vignette gradients for seamless obsidian blending -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#040608]/90 via-[#040608]/45 to-[#040608]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,transparent_20%,#040608_80%)]"></div>
+        <!-- Ambient Neon Glow Spheres -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-[#00f59b]/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/4 w-[420px] h-[320px] bg-[#00d2ff]/12 rounded-full blur-[130px] pointer-events-none"></div>
+      </div>
+      <div class="flappy-hero-glow"></div>
       <div class="mx-auto max-w-[1500px] text-center">
-        <p class="hero-kicker font-syne text-[10px] uppercase tracking-[4px]">02 / Unreal Engine · 3D Retro Arcade Remake</p>
-        <h1 id="projectTitle" class="hero-title mt-8 font-clash text-[15vw] uppercase leading-[.8] md:text-[10vw]">PACMAN</h1>
-        <p id="projectSubtitle" class="mx-auto mt-9 max-w-[720px] text-base leading-relaxed text-white/65 md:text-xl">A neon maze prototype with grid movement, ghost states, pellets, and classic arcade pressure.</p>
-        <div id="projectTags" class="mt-8 flex flex-wrap justify-center gap-2"></div>
-        <div class="hero-frame mt-16 overflow-hidden rounded-[22px] border border-white/10 bg-black md:mt-24">
-          <img id="heroImage" src="" alt="Project preview" class="h-[38vh] w-full object-cover md:h-[58vh]">
+        
+        <!-- Kicker Badge -->
+        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-950/45 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(0,245,155,0.15)]">
+          <span class="inline-block h-1.5 w-1.5 animate-ping rounded-full bg-[#00f59b]"></span>
+          <p id="heroKicker" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b]">02 / UNREAL ENGINE 5 · BLUEPRINT & PHYSICS LAB</p>
         </div>
-        <div class="metric-strip mx-auto grid max-w-[900px] grid-cols-3 gap-3 rounded-2xl p-4 text-left md:gap-8 md:p-6">
-          <div><strong class="font-clash text-2xl md:text-3xl">01</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Core Loop</p></div>
-          <div><strong class="font-clash text-2xl md:text-3xl">UE5</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Built In</p></div>
-          <div><strong class="font-clash text-2xl md:text-3xl">60</strong><p class="mt-1 font-syne text-[9px] uppercase tracking-[2px] text-white/45">Frame Focus</p></div>
+
+        <!-- Main Title -->
+        <h1 id="projectTitle" class="mt-6 font-clash text-[14vw] uppercase leading-[.82] tracking-tight md:text-[8.5vw] bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(0,245,155,0.25)]">
+          FLAPPY BIRD
+        </h1>
+
+        <!-- Subtitle -->
+        <p id="projectSubtitle" class="mx-auto mt-6 max-w-[800px] text-base leading-relaxed text-white/80 md:text-xl font-normal drop-shadow-md">
+          An engineered Unreal Engine 5 prototype featuring deterministic jump impulse physics, pooled pipe actors with zero garbage collection hitching, and fair collision box budgeting.
+        </p>
+
+        <!-- Dynamic Tags -->
+        <div id="projectTags" class="mt-8 flex flex-wrap justify-center gap-2.5"></div>
+
+        <!-- PROJECT SHOWCASE HERO FRAME -->
+        <div class="hero-frame mx-auto mt-12 max-w-[1150px] overflow-hidden rounded-[26px] border border-white/15 bg-black/70 shadow-[0_30px_90px_rgba(0,0,0,0.7)] backdrop-blur-md md:mt-16 group">
+          <div class="relative h-[42vh] w-full overflow-hidden md:h-[62vh]">
+            <img id="heroImage" src="../image/flappy-night.jpg" alt="Flappy Bird Project Preview" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+              <span class="inline-flex items-center gap-2 rounded-lg bg-black/80 px-3 py-1.5 font-mono text-[11px] font-semibold text-[#00f59b] backdrop-blur-md border border-emerald-500/30">
+                <span class="h-2 w-2 rounded-full bg-[#00f59b] shadow-[0_0_8px_#00f59b]"></span>
+                UNREAL ENGINE 5.4 · GAMEPLAY VIEWPORT
+              </span>
+              <span class="font-mono text-[11px] text-white/70 bg-black/70 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-md hidden sm:inline">60 FPS · FAIR HITBOX</span>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="border-t border-white/10 bg-[#05070b] px-[5vw] py-20 md:py-28">
+      <div class="mx-auto max-w-[1380px]">
+        <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">01 / Architecture Overview</p>
+
+        <div class="mt-8 grid items-start gap-12 lg:grid-cols-12">
+          <!-- Left Column: Heading + Featured Image Showcase Card -->
+          <div class="lg:col-span-6 space-y-7">
+            <h2 id="aboutHeading" class="reveal font-clash text-4xl sm:text-5xl md:text-6xl lg:text-[62px] uppercase leading-[0.98] tracking-tight text-white">
+              RE-ENGINEERING<br>
+              <span class="text-[#00f59b]">THE ARCADE</span>
+            </h2>
+
+            <!-- Featured Showcase Image Card -->
+            <div class="reveal group relative overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40">
+              <div class="relative h-60 sm:h-72 w-full overflow-hidden rounded-xl bg-black">
+                <img id="aboutFeaturedImg" src="../image/flappy-bird.png" alt="Flappy Bird Blueprint Preview" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+                <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <span class="inline-flex items-center gap-1.5 rounded-md bg-black/75 px-2.5 py-1 font-mono text-[10px] font-semibold text-[#00f59b] backdrop-blur-md border border-emerald-500/30">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#00f59b] shadow-[0_0_6px_#00f59b]"></span>
+                    UE5.4 BLUEPRINT ENGINE
+                  </span>
+                  <span class="font-mono text-[10px] text-white/60 bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">60 FPS · FAIR COLLISION</span>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center justify-between px-1">
+                <strong class="text-sm font-semibold text-white">Classic Pixel Visuals & Kinematics</strong>
+                <span class="text-[11px] font-mono text-white/45">FIG 01 · CORE ARCHITECTURE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Rich Editorial Description & Architecture Tags -->
+          <div class="lg:col-span-6 space-y-6 pt-2 lg:pt-4">
+            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.5] tracking-tight text-white/90">
+              This is my Unreal Engine 5 architecture study of Flappy Bird. Rather than a quick toy, it is engineered around production standards: non-linear falling gravity, pre-allocated actor pooling queues, and an inset collision capsule that prevents frustrating boundary clips.
+            </p>
+
+            <p class="reveal text-base sm:text-lg leading-[1.8] text-white/65">
+              In this rebuild, custom Blueprints calculate non-linear gravity falloff so the bird snaps briskly downwards after reaching its jump apex, while pre-allocated pipe actors cycle across a recycled viewport queue to maintain rock-solid 60 FPS performance.
+            </p>
+
+            <!-- Technical Pillar Badges -->
+            <div class="reveal pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
+                <span class="block font-mono text-[10px] uppercase text-[#00f59b] tracking-wider">Hitbox Inset</span>
+                <strong class="block text-sm text-white font-medium mt-1">15% Tolerance</strong>
+                <span class="text-[11px] text-white/45 block mt-0.5">Fair near-misses</span>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
+                <span class="block font-mono text-[10px] uppercase text-[#00d2ff] tracking-wider">Actor Pooling</span>
+                <strong class="block text-sm text-white font-medium mt-1">Zero GC Hitch</strong>
+                <span class="text-[11px] text-white/45 block mt-0.5">Pre-warmed queue</span>
+              </div>
+              <div class="rounded-xl border border-white/10 bg-white/5 p-3.5 backdrop-blur-md">
+                <span class="block font-mono text-[10px] uppercase text-amber-400 tracking-wider">Descent Curve</span>
+                <strong class="block text-sm text-white font-medium mt-1">Snappy Apex</strong>
+                <span class="text-[11px] text-white/45 block mt-0.5">+1180 px/s² Gravity</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="about" class="flappy-section border-t border-white/10 px-[8vw] py-28 md:py-44">
-      <div class="mx-auto max-w-[1120px]">
-        <p id="aboutLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">01 / About the Project</p>
-        <div class="mt-8 grid gap-12 md:grid-cols-[.8fr_1.2fr]">
-          <h2 id="aboutHeading" class="reveal font-clash text-[12vw] uppercase leading-[.84] md:text-[6vw]">What this build is about</h2>
-          <p id="overviewText" class="reveal max-w-[720px] text-lg leading-[1.8] text-white/65 md:pt-8 md:text-xl"></p>
+    <!-- INTERACTIVE UNREAL ENGINE 5 PHYSICS & BLUEPRINT LAB -->
+    <section id="flappyLab" class="border-t border-white/10 bg-[#060a0f] px-[8vw] py-24 md:py-36">
+      <div class="mx-auto max-w-[1200px]">
+        
+        <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
+          <div>
+            <p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00d2ff]">Interactive Engineering Showcase</p>
+            <h2 class="reveal mt-3 font-clash text-[10vw] uppercase leading-[.9] text-white md:text-[5vw]">UE5 Systems & Blueprint Lab</h2>
+          </div>
+          <p class="reveal max-w-[420px] text-sm text-white/55">
+            Explore the core architectural mechanics designed to elevate feel and performance beyond generic clones.
+          </p>
+        </div>
+
+        <!-- 3 Interactive Diagnostic Panels -->
+        <div class="mt-14 grid gap-6 md:grid-cols-3">
+          
+          <!-- Panel 1: Hitbox Forgiveness -->
+          <div class="lab-card reveal rounded-2xl p-7 text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs font-bold text-[#00f59b]">01 / COLLISION</span>
+              <span class="rounded bg-emerald-500/20 px-2 py-0.5 font-mono text-[10px] text-[#00f59b]">FAIR HITBOX</span>
+            </div>
+            <h3 class="mt-4 font-clash text-2xl uppercase text-white">Hitbox Tolerance</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/60">
+              Standard bounding boxes end runs prematurely on transparent pixel edges. Reducing the collision capsule by 15% creates the classic near-miss adrenaline feeling.
+            </p>
+
+            <!-- Interactive Hitbox Graphic Preview -->
+            <div class="relative mt-6 h-40 overflow-hidden rounded-xl border border-white/10 bg-black/60 p-4">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <!-- Pipe Representation -->
+                <div class="absolute right-8 top-0 h-16 w-10 rounded-b bg-emerald-700 border border-emerald-400/50"></div>
+                <div class="absolute right-8 bottom-0 h-16 w-10 rounded-t bg-emerald-700 border border-emerald-400/50"></div>
+                <!-- Bird Box -->
+                <div class="relative flex h-14 w-14 items-center justify-center">
+                  <span class="absolute inset-0 rounded-full border border-dashed border-red-500/60" title="100% Strict Box"></span>
+                  <span class="absolute inset-2 rounded-full border-2 border-[#00f59b] bg-[#00f59b]/20 shadow-[0_0_12px_#00f59b]" title="85% Tuned Fair Box"></span>
+                  <span class="text-xl">🐥</span>
+                </div>
+              </div>
+              <div class="absolute bottom-2 left-3 font-mono text-[9px] text-white/50">
+                <span class="text-red-400">--- Strict Box</span> | <span class="text-[#00f59b]">― Tuned (Active)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 2: Actor Object Pooling -->
+          <div class="lab-card reveal rounded-2xl p-7 text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs font-bold text-[#00d2ff]">02 / OPTIMIZATION</span>
+              <span class="rounded bg-cyan-500/20 px-2 py-0.5 font-mono text-[10px] text-[#00d2ff]">OBJECT POOLING</span>
+            </div>
+            <h3 class="mt-4 font-clash text-2xl uppercase text-white">Actor Recycling</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/60">
+              Instantiating and destroying Blueprint actors every 2 seconds triggers garbage collection hitches. We pre-warm 4 pipe pairs and cycle them offscreen.
+            </p>
+
+            <!-- Interactive Queue Graphic -->
+            <div class="relative mt-6 flex h-40 flex-col justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono">
+              <div class="flex items-center justify-between text-[10px] text-white/40">
+                <span>VIEWPORT QUEUE</span>
+                <span class="text-[#00d2ff]">4 ACTORS ACTIVE</span>
+              </div>
+              <div class="mt-3 flex gap-2">
+                <div class="flex-1 rounded-lg border border-cyan-400/40 bg-cyan-500/10 p-2 text-center text-[10px] text-[#00d2ff]">
+                  <strong>PIPE 01</strong>
+                  <div class="text-[8px] text-white/50">IN SCREEN</div>
+                </div>
+                <div class="flex-1 rounded-lg border border-cyan-400/40 bg-cyan-500/10 p-2 text-center text-[10px] text-[#00d2ff]">
+                  <strong>PIPE 02</strong>
+                  <div class="text-[8px] text-white/50">IN SCREEN</div>
+                </div>
+                <div class="flex-1 rounded-lg border border-emerald-400/40 bg-emerald-500/10 p-2 text-center text-[10px] text-[#00f59b]">
+                  <strong>PIPE 03</strong>
+                  <div class="text-[8px] text-white/50">RECYCLE</div>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center justify-between text-[9px] text-white/50">
+                <span>GC HITCH: 0.0 ms</span>
+                <span class="text-[#00f59b]">✓ ZERO STUTTER</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 3: Deterministic Physics Curve -->
+          <div class="lab-card reveal rounded-2xl p-7 text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-xs font-bold text-amber-400">03 / KINEMATICS</span>
+              <span class="rounded bg-amber-500/20 px-2 py-0.5 font-mono text-[10px] text-amber-400">WEIGHTED ARC</span>
+            </div>
+            <h3 class="mt-4 font-clash text-2xl uppercase text-white">Gravity Curve</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/60">
+              A linear jump curve feels floaty and unresponsive. Our Blueprint applies an upward impulse on keypress with progressive falling gravity and terminal velocity clamp.
+            </p>
+
+            <!-- Curve Visualization -->
+            <div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4">
+              <svg viewBox="0 0 160 80" class="h-full w-full">
+                <!-- Grid Lines -->
+                <line x1="10" y1="70" x2="150" y2="70" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <line x1="10" y1="10" x2="10" y2="70" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <!-- Floaty Line -->
+                <path d="M 10 70 Q 75 10 140 70" fill="none" stroke="rgba(255,255,255,0.25)" stroke-dasharray="3,3" stroke-width="1.5"/>
+                <!-- UE5 Weighted Snappy Curve -->
+                <path d="M 10 70 C 35 15, 60 10, 85 28 C 105 45, 125 65, 140 70" fill="none" stroke="#ffd000" stroke-width="2.5"/>
+              </svg>
+              <div class="absolute bottom-2 left-3 font-mono text-[9px] text-white/50">
+                <span class="text-white/40">-- Floaty Curve</span> | <span class="text-amber-400">― UE5 Snappy Jump</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHAT I LEARNED SECTION -->
+    <section id="learned" class="px-[8vw] py-24 md:py-36">
+      <div class="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[.85fr_1.15fr]">
+        <div>
+          <p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px]">02 / Engineering Insights</p>
+          <h2 id="learnedHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] md:text-[5.5vw]">
+            Small tuning changes matter.
+          </h2>
+        </div>
+        <div id="learnedText" class="space-y-6 lg:pt-8">
+          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+            <h4 class="font-clash text-lg uppercase text-[#00f59b]">01 / Hitbox Forgiveness</h4>
+            <p class="mt-2 text-base leading-relaxed text-white/70">
+              Making collision 15% smaller than the visible sprite prevents frustrating deaths when the player barely skims an edge, preserving momentum and rewarding risk.
+            </p>
+          </div>
+          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+            <h4 class="font-clash text-lg uppercase text-[#00d2ff]">02 / Memory & Actor Recycling</h4>
+            <p class="mt-2 text-base leading-relaxed text-white/70">
+              Reusing old pipe actors instead of repeatedly creating and destroying them prevents garbage collection frame drops, keeping gameplay butter-smooth.
+            </p>
+          </div>
+          <div class="reveal rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-md">
+            <h4 class="font-clash text-lg uppercase text-amber-400">03 / Gravity Snappiness</h4>
+            <p class="mt-2 text-base leading-relaxed text-white/70">
+              Tuning gravity stronger during the downward descent makes the game feel immediate and responsive rather than slow, mushy, or floaty.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="learned" class="bg-[#f0ede6] px-[8vw] py-28 text-black md:py-44">
-      <div class="mx-auto grid max-w-[1120px] gap-12 md:grid-cols-[.85fr_1.15fr]">
-        <div><p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-black/45">02 / What I Learned</p><h2 id="learnedHeading" class="reveal mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[6vw]">Simple rules make deep play.</h2></div>
-        <div id="learnedText" class="space-y-7 md:pt-10"><p class="reveal text-lg leading-[1.8] text-black/70">Pacman taught me that a small set of rules can create a surprisingly rich game. Movement, timing, and enemy personality all need to be readable before they can feel exciting.</p><p class="reveal text-lg leading-[1.8] text-black/70">The most important work happened in the details: buffered turns, fair collision space, and feedback that tells the player why a moment succeeded or failed.</p></div>
+    <!-- GAME FEATURES SECTION -->
+    <section id="features" class="border-t border-white/10 bg-gradient-to-b from-[#070d13] to-[#040608] px-[8vw] py-24 md:py-36">
+      <div class="mx-auto max-w-[1200px]">
+        <p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">03 / Mechanics Breakdown</p>
+        <h2 id="featuresHeading" class="reveal mt-6 max-w-[900px] font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">
+          A tiny loop with instant feedback.
+        </h2>
+        
+        <div id="featuresList" class="mt-16 grid gap-6 md:grid-cols-3"></div>
       </div>
     </section>
 
-    <section id="features" class="flappy-section px-[8vw] py-28 md:py-44">
-      <div class="mx-auto max-w-[1120px]"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">03 / Game Features</p><h2 id="featuresHeading" class="reveal mt-8 max-w-[850px] font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">A maze full of readable pressure.</h2><div id="featuresList" class="mt-20 grid border-t border-white/15 md:grid-cols-3"></div></div>
+    <!-- CHALLENGES SECTION -->
+    <section id="challenges" class="border-t border-white/10 bg-[#030508] px-[8vw] py-24 md:py-36">
+      <div class="mx-auto max-w-[1200px] text-center">
+        <p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-red-400">04 / Problems Solved</p>
+        <h2 id="challengesHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[6vw]">
+          Where the feel needed work.
+        </h2>
+        <p id="challengesIntro" class="reveal mx-auto mt-8 max-w-[700px] text-base leading-relaxed text-white/65 md:text-lg">
+          Building in a heavy modern game engine like Unreal Engine requires intentional friction against default behaviors:
+        </p>
+
+        <div id="challengesList" class="mt-16 grid gap-6 text-left md:grid-cols-3"></div>
+      </div>
     </section>
 
-    <section id="challenges" class="bg-black px-[8vw] py-28 md:py-44"><div class="mx-auto max-w-[1120px] text-center"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-white/40">04 / Challenges</p><h2 id="challengesHeading" class="reveal mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">Where things broke.</h2><p id="challengesIntro" class="reveal mx-auto mt-10 max-w-[680px] text-base leading-[1.8] text-white/60 md:text-lg">The hard part was preserving the sharp feel of the original while building a 3D version with more visual space and more systems running at once.</p><div id="challengesList" class="mt-20 grid gap-5 text-left md:grid-cols-3"></div></div></section>
+    <!-- RICH ASSET GALLERY SECTION -->
+    <section id="gallery" class="overflow-hidden border-t border-white/10 bg-[#060a0f] py-24 md:py-36">
+      <div class="mb-12 px-[8vw]">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p class="font-syne text-[10px] uppercase tracking-[4px] text-[#00d2ff]">05 / Project Renders & Architecture</p>
+            <h2 class="mt-4 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">Inside The Build.</h2>
+          </div>
+          <p class="max-w-[480px] text-sm text-white/55">
+            Drag left or right, or scroll horizontally to inspect Blueprints, wireframe debug collision viewports, and volumetric night lighting.
+          </p>
+        </div>
+      </div>
 
-    <section id="gallery" class="overflow-hidden border-t border-white/10 py-28 md:py-44"><div class="mb-14 px-[8vw]"><p class="font-syne text-[10px] uppercase tracking-[4px] text-white/40">05 / Game Images</p><h2 class="mt-8 font-clash text-[12vw] uppercase leading-[.84] md:text-[7vw]">Inside the arcade.</h2><p class="mt-6 max-w-[620px] text-white/55">Drag left or right, or use the mouse wheel, to explore the project images.</p></div><div id="galleryViewport" class="gallery-viewport overflow-x-auto"><div id="galleryTrack" class="gallery-track flex gap-5 px-[8vw]"></div></div></section>
+      <!-- Drag / Wheel Viewport -->
+      <div id="galleryViewport" class="gallery-viewport overflow-x-auto">
+        <div id="galleryTrack" class="gallery-track flex gap-6 px-[8vw]"></div>
+      </div>
+    </section>
 
-    <section id="result" class="bg-[#f0ede6] px-[6vw] py-28 text-black md:py-44"><div class="mx-auto max-w-[1400px]"><p class="reveal font-syne text-[10px] uppercase tracking-[4px] text-black/45">06 / Final Result</p><div class="mt-10 grid items-center gap-12 lg:grid-cols-[1.15fr_.85fr]"><div class="reveal overflow-hidden rounded-[20px] bg-black"><img id="resultImage" src="../image/pacman.png" alt="Final Pacman result" class="h-[48vh] w-full object-cover md:h-[66vh]"></div><div><h2 id="resultHeading" class="reveal font-clash text-[14vw] uppercase leading-[.82] md:text-[7vw]">Ready to play.</h2><p id="resultText" class="reveal mt-8 max-w-[520px] text-lg leading-[1.8] text-black/65">The final result is a playable 3D Pacman loop with readable ghost behavior, responsive movement, satisfying power moments, and a clear arcade identity.</p><a href="../index.html#projects-showcase" class="reveal mt-10 inline-flex rounded-full bg-black px-7 py-4 font-syne text-[10px] uppercase tracking-[3px] text-white">Back to projects</a></div></div></div></section>
+    <!-- REFERENCES SECTION (YOUTUBE VIDEOS ONLY) -->
+    <section id="result" class="border-t border-white/10 bg-[#05080c] px-[6vw] py-24 md:py-32">
+      <div class="mx-auto max-w-[1380px]">
+        
+        <!-- Header -->
+        <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
+          <div>
+            <p id="resultLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-red-400">
+              06 / VIDEO TUTORIALS & GUIDES
+            </p>
+            <h2 id="resultHeading" class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
+              REFERENCES
+            </h2>
+          </div>
+          <p class="reveal max-w-[480px] text-sm md:text-base text-white/60">
+            Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.
+          </p>
+        </div>
+
+        <!-- YouTube Video Links Grid -->
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          
+          <!-- YouTube Link 1 -->
+          <a href="https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+tutorial" target="_blank" rel="noopener noreferrer"
+             class="yt-ref-card group reveal">
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </div>
+                  <div>
+                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                      <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> YouTube Tutorial
+                    </span>
+                    <div class="font-mono text-[11px] text-white/40">PaperZD & Physics</div>
+                  </div>
+                </div>
+                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                  Open ↗
+                </span>
+              </div>
+
+              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+                Unreal Engine 5: Flappy Bird Blueprint Guide
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/60">
+                Complete walkthrough on PaperZD character blueprints, 2D viewport camera setup, vertical jump velocity impulse, and terminal velocity clamps.
+              </p>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
+              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+                Watch on YouTube &rarr;
+              </span>
+              <span class="font-mono text-[10px] text-white/30">youtube.com</span>
+            </div>
+          </a>
+
+          <!-- YouTube Link 2 -->
+          <a href="https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner" target="_blank" rel="noopener noreferrer"
+             class="yt-ref-card group reveal">
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </div>
+                  <div>
+                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                      <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Performance Guide
+                    </span>
+                    <div class="font-mono text-[11px] text-white/40">Memory & GC</div>
+                  </div>
+                </div>
+                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                  Open ↗
+                </span>
+              </div>
+
+              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+                Actor Object Pooling & Zero GC Lag in UE5
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/60">
+                Architecture teardown on pre-allocating obstacle actor pools and cycling off-screen actors to eliminate garbage collector hitching and preserve 60 FPS.
+              </p>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
+              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+                Watch on YouTube &rarr;
+              </span>
+              <span class="font-mono text-[10px] text-white/30">youtube.com</span>
+            </div>
+          </a>
+
+          <!-- YouTube Link 3 -->
+          <a href="https://www.youtube.com/results?search_query=flappy+bird+collision+hitbox+design+gdc" target="_blank" rel="noopener noreferrer"
+             class="yt-ref-card group reveal">
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </div>
+                  <div>
+                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                      <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Design Analysis
+                    </span>
+                    <div class="font-mono text-[11px] text-white/40">GDC & Game Feel</div>
+                  </div>
+                </div>
+                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                  Open ↗
+                </span>
+              </div>
+
+              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+                Hitbox Forgiveness & Fair Collision Bounds
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-white/60">
+                Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates edge-of-the-seat near misses instead of frustration.
+              </p>
+            </div>
+
+            <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
+              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+                Watch on YouTube &rarr;
+              </span>
+              <span class="font-mono text-[10px] text-white/30">youtube.com</span>
+            </div>
+          </a>
+
+        </div>
+
+        <!-- Return to All Projects Button -->
+        <div class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8">
+          <a href="../index.html#projects-showcase" class="result-back-btn inline-flex items-center gap-2 px-8 py-4 font-syne text-[11px] uppercase tracking-[3px]">
+            <span>&larr; Return to All Projects</span>
+          </a>
+          <span class="font-mono text-xs text-white/40">UNREAL ENGINE 5 ARCHITECTURE STUDY</span>
+        </div>
+
+      </div>
+    </section>
   </main>
 
+  <!-- SCRIPT -->
   <script>
-    const projects={
-      pacman:{title:'PACMAN',subtitle:'A neon maze prototype with grid movement, ghost states, pellets, and classic arcade pressure.',image:'../image/pacman.png',gallery:[['../image/pacman.png','Arcade View'],['../image/flappy-bird.png','Gameplay Reference'],['../image/dungeon.png','Environment Study'],['../image/forest.png','Atmosphere Study']],tags:['Ghost AI','Grid Navigation','Retro Arcade'],overview:'Pacman is a 3D arcade remake built around faithful ghost behaviors, tile-center navigation, pellet consumption, frightened timers, and readable retro feedback.',learnedHeading:'Simple rules make deep play.',learned:['Pacman taught me that a small set of rules can create a surprisingly rich game. Movement, timing, and enemy personality all need to be readable before they can feel exciting.','The most important work happened in the details: buffered turns, fair collision space, and feedback that tells the player why a moment succeeded or failed.'],featuresHeading:'A maze full of readable pressure.',features:[['Ghost AI','Distinct chase, scatter, frightened, and return states give every ghost a role.'],['Grid Navigation','Tile-center movement and corner buffering make turns feel immediate and fair.'],['Arcade Feedback','Pellets, power states, sound cues, and score moments keep the loop alive.']],challengesHeading:'Where things broke.',challengesIntro:'The hard part was preserving the sharp feel of the original while building a 3D version with more visual space and more systems running at once.',challenges:[['Corner Snagging','Queued input and tile-center checks keep turns responsive.'],['Ghost Timing','State timers needed to stay tense without feeling random.'],['Pellet Performance','Instanced items keep a full maze responsive during play.']],resultHeading:'Ready to play.',resultText:'The final result is a playable 3D Pacman loop with readable ghost behavior, responsive movement, satisfying power moments, and a clear arcade identity.'},
-      'flappy-bird':{title:'FLAPPY BIRD',subtitle:'A pixel-style Unreal Engine remake with sharp jump physics, pooled green pipes, and instant arcade restarts.',image:'../image/flappy-bird.png',gallery:[['../image/flappy-bird.png','Full Gameplay Frame'],['../image/flappy-bird.png','Pipe Gap Composition'],['../image/flappy-bird.png','Pixel Skyline Background'],['../image/flappy-bird.png','Score Loop Preview']],tags:['Jump Physics','Object Pooling','Fair Collision'],overview:'This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a scrolling city skyline background, just like the original mobile game.',learnedHeading:'Small tuning changes matter.',learned:['Making the hit box smaller instead of exact size makes the game feel more fair to play.','Reusing old pipes instead of creating new ones stops lag and keeps the game smooth.','Changing gravity and jump force helps the game feel sharp and fun, not slow or floaty.'],featuresHeading:'A tiny loop with instant feedback.',features:[['Tap To Jump','Press a button to make the bird jump, then let gravity pull it back down through the gap.'],['Pooled Pipes','Green pipes spawn with gaps and are reused instead of constantly creating new actors.'],['Score And Restart','The score rises as pipes are passed, while quick restarts keep another attempt close.']],challengesHeading:'Where the feel needed work.',challengesIntro:'The biggest problems were a floaty jump, small frame drops from spawning pipes, and collisions that ended runs too early.',challenges:[['Floaty Jump','Increasing jump force and making gravity stronger while falling made the bird feel sharp instead of soft.'],['Pipe Lag','Object pooling removed the small lag caused by spawning new pipes every two seconds.'],['Unfair Collision','Making the pipe hit box 15% smaller created a fairer, more readable game over.']],resultHeading:'Simple. Sharp. Replayable.',resultText:'The final result is a simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, a score system, and a city skyline that keeps the arcade loop moving.'},
-      'off-roading':{title:'OFF ROADING',subtitle:'A gritty 4x4 prototype focused on suspension, surface friction, and responsive off-road handling.',image:'../image/off-roading.png',tags:['Vehicle Physics','Suspension','Mud Friction'],overview:'A physics-driven vehicle study where traction, weight, suspension travel, and camera feedback work together.'},
-      'mountains-ue':{title:'MOUNTAINS - UE',subtitle:'An alpine landscape prototype exploring streaming, slope materials, volumetric clouds, and traversal scale.',image:'../image/mountains.png',tags:['World Partition','Auto Material','Volumetric Weather'],overview:'A large landscape study built around long sightlines, material transitions, landmarks, and traversal.'}
+    const projects = {
+      pacman: {
+        title: 'PACMAN',
+        subtitle: 'A neon maze prototype with grid movement, ghost states, pellets, and classic arcade pressure.',
+        image: '../image/pacman.png',
+        gallery: [
+          ['../image/pacman.png', 'Arcade Viewport & Ghost Spawns'],
+          ['../image/flappy-bird.png', 'Gameplay Loop Study'],
+          ['../image/dungeon.png', 'Environment & Lighting Study'],
+          ['../image/forest.png', 'Atmosphere & Post-Processing Study']
+        ],
+        tags: ['Ghost AI', 'Grid Navigation', 'Retro Arcade'],
+        overview: 'Pacman is a 3D arcade remake built around faithful ghost behaviors, tile-center navigation, pellet consumption, frightened timers, and readable retro feedback.',
+        learnedHeading: 'Simple rules make deep play.',
+        learned: [
+          'Pacman taught me that a small set of rules can create a surprisingly rich game. Movement, timing, and enemy personality all need to be readable before they can feel exciting.',
+          'The most important work happened in the details: buffered turns, fair collision space, and feedback that tells the player why a moment succeeded or failed.'
+        ],
+        featuresHeading: 'A maze full of readable pressure.',
+        features: [
+          ['Ghost AI', 'Distinct chase, scatter, frightened, and return states give every ghost a unique persona.'],
+          ['Grid Navigation', 'Tile-center movement and corner buffering make 90-degree turns immediate and fair.'],
+          ['Arcade Feedback', 'Pellets, power states, sound cues, and score moments keep the loop alive.']
+        ],
+        challengesHeading: 'Where things broke.',
+        challengesIntro: 'The hard part was preserving the sharp feel of the original while building a 3D version with more visual space and more systems running at once.',
+        challenges: [
+          ['Corner Snagging', 'Queued input and tile-center checks keep turns responsive.'],
+          ['Ghost Timing', 'State timers needed to stay tense without feeling random.'],
+          ['Pellet Performance', 'Instanced items keep a full maze responsive during play.']
+        ],
+        resultHeading: 'Ready to play.',
+        resultText: 'The final result is a playable 3D Pacman loop with readable ghost behavior, responsive movement, satisfying power moments, and a clear arcade identity.'
+      },
+      'flappy-bird': {
+        title: 'FLAPPY BIRD',
+        subtitle: 'An engineered Unreal Engine 5 prototype with deterministic jump kinematics, pooled green pipes, and fair collision box budgeting.',
+        image: '../image/flappy-night.jpg',
+        gallery: [
+          ['../image/flappy-bird.png', 'Classic Arcade Frame & In-Game View'],
+          ['../image/flappy-blueprint.jpg', 'UE5 Blueprint Logic: Jump Impulse & Object Pooling Graph'],
+          ['../image/flappy-hitbox.jpg', 'Wireframe Debug Collision: 85% Fair Capsule Tolerances'],
+          ['../image/flappy-night.jpg', 'Volumetric Dusk Skyline & Cyberpunk Pipe World']
+        ],
+        tags: ['UE5 Blueprints', 'Jump Kinematics', 'Actor Object Pooling', 'Fair Collision Tolerance'],
+        overview: 'This is my Unreal Engine 5 architecture study of Flappy Bird. Rather than a quick toy, it is engineered around production standards: non-linear falling gravity, pre-allocated actor pooling queues, and an inset collision capsule that prevents frustrating boundary clips.',
+        learnedHeading: 'Small tuning changes matter.',
+        learned: [
+          'Making collision 15% smaller than the visible sprite prevents frustrating deaths when skimming an edge, preserving momentum.',
+          'Reusing old pipes instead of creating and destroying them removes garbage collection lag spikes and preserves 60 FPS.',
+          'Increasing downward gravity acceleration while keeping jump impulse snappy gives player control without feeling floaty.'
+        ],
+        featuresHeading: 'A tiny loop with instant feedback.',
+        features: [
+          ['Tap To Jump', 'Precise vertical impulse (-390 px/s) balanced with quadratic gravitational pull (+1180 px/s²).'],
+          ['Pooled Pipes', 'Pre-warmed actor array cycles offscreen seamlessly without garbage collection overhead.'],
+          ['Score & Audio Synthesis', 'Real-time score detection, Web Audio 8-bit sound synthesizers, and instant restarts.']
+        ],
+        challengesHeading: 'Where the feel needed work.',
+        challengesIntro: 'Unreal Engine defaults create floaty characters and garbage collection pauses unless deliberately engineered for high-cadence 2D gameplay.',
+        challenges: [
+          ['Floaty Jump Physics', 'Increased jump impulse and multiplied falling gravity to give the bird a punchy, snappy apex.'],
+          ['Pipe Spawning Hitch', 'Actor object pooling completely removed frame-time spikes caused by actor destruction every 2s.'],
+          ['Unforgiving Collision', 'Reduced capsule bounds by 15% to allow thrilling close shaves through tight pipe openings.']
+        ],
+        resultHeading: 'REFERENCES',
+        resultText: 'Key Unreal Engine 5 technical documentation and video references.'
+      },
+      'off-roading': {
+        title: 'OFF ROADING',
+        subtitle: 'A gritty 4x4 prototype focused on suspension, surface friction, and responsive off-road handling.',
+        image: '../image/off-roading.png',
+        gallery: [
+          ['../image/off-roading.png', 'Suspension & Chassis Flex'],
+          ['../image/mountains.png', 'Terrain Traversal']
+        ],
+        tags: ['Vehicle Physics', 'Suspension', 'Mud Friction'],
+        overview: 'A physics-driven vehicle study where traction, weight, suspension travel, and camera feedback work together.'
+      },
+      'mountains-ue': {
+        title: 'MOUNTAINS - UE',
+        subtitle: 'An alpine landscape prototype exploring streaming, slope materials, volumetric clouds, and traversal scale.',
+        image: '../image/mountains.png',
+        gallery: [
+          ['../image/mountains.png', 'Landscape Panorama'],
+          ['../image/forest.png', 'Foliage Density']
+        ],
+        tags: ['World Partition', 'Auto Material', 'Volumetric Weather'],
+        overview: 'A large landscape study built around long sightlines, material transitions, landmarks, and traversal.'
+      }
     };
-    const slug=new URLSearchParams(location.search).get('project')||'pacman';
-    const project=projects[slug]||projects.pacman;
-    document.body.classList.add(`project-${slug}`);
-    document.title=`${project.title} | Katrine Portfolio`;
-    document.getElementById('projectTitle').textContent=project.title;
-    document.getElementById('projectSubtitle').textContent=project.subtitle;
-    document.getElementById('heroImage').src=project.image;
-    document.getElementById('heroImage').alt=`${project.title} project preview`;
-    document.getElementById('projectTags').innerHTML=project.tags.map(tag=>`<span class="rounded-full border border-white/20 bg-white/5 px-4 py-2 font-syne text-[10px] uppercase tracking-[2px] text-white/75">${tag}</span>`).join('');
-    document.getElementById('overviewText').textContent=project.overview;
-    document.getElementById('aboutHeading').textContent=project.title==='FLAPPY BIRD'?'A faithful arcade remake':'What this build is about';
-    document.getElementById('learnedHeading').textContent=project.learnedHeading;
-    document.getElementById('learnedText').innerHTML=project.learned.map(text=>`<p class="reveal text-lg leading-[1.8] text-black/70">${text}</p>`).join('');
-    document.getElementById('featuresHeading').textContent=project.featuresHeading;
-    document.getElementById('featuresList').innerHTML=project.features.map((feature,index)=>`<article class="reveal border-b border-white/15 py-8 md:border-r md:px-7 ${index===0?'md:first:pl-0':''} ${index===project.features.length-1?'md:last:border-r-0 md:last:pr-0':''}"><span class="font-clash text-5xl text-accent">0${index+1}</span><h3 class="mt-8 text-xl">${feature[0]}</h3><p class="mt-3 text-white/50">${feature[1]}</p></article>`).join('');
-    document.getElementById('challengesHeading').textContent=project.challengesHeading;
-    document.getElementById('challengesIntro').textContent=project.challengesIntro;
-    document.getElementById('challengesList').innerHTML=project.challenges.map((challenge,index)=>`<article class="reveal border-t border-accent pt-5"><span class="font-clash text-4xl text-accent">0${index+1}</span><h3 class="mt-6 font-clash text-2xl uppercase">${challenge[0]}</h3><p class="mt-4 text-white/50">${challenge[1]}</p></article>`).join('');
-    document.getElementById('resultImage').src=project.image;
-    document.getElementById('resultImage').alt=`Final ${project.title} result`;
-    document.getElementById('resultHeading').textContent=project.resultHeading;
-    document.getElementById('resultText').textContent=project.resultText;
-    document.getElementById('galleryTrack').innerHTML=project.gallery.map((item,index)=>`<figure class="gallery-card shrink-0"><img src="${item[0]}" alt="${project.title} ${item[1]}" class="h-[48vh] w-full rounded-[18px] border border-white/10 object-cover md:h-[60vh] gallery-image-${index+1}"><figcaption class="mt-4 font-syne text-[10px] uppercase tracking-[3px] text-white/40">0${index+1} / ${item[1]}</figcaption></figure>`).join('');
 
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')}),{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
-    const viewport=document.getElementById('galleryViewport');
-    let dragging=false,startX=0,startScroll=0;
-    viewport.addEventListener('pointerdown',event=>{dragging=true;startX=event.clientX;startScroll=viewport.scrollLeft;viewport.classList.add('dragging');viewport.setPointerCapture(event.pointerId)});
-    viewport.addEventListener('pointermove',event=>{if(dragging)viewport.scrollLeft=startScroll-(event.clientX-startX)});
-    const stopDragging=()=>{dragging=false;viewport.classList.remove('dragging')};
-    viewport.addEventListener('pointerup',stopDragging);
-    viewport.addEventListener('pointercancel',stopDragging);
-    viewport.addEventListener('wheel',event=>{if(Math.abs(event.deltaY)>Math.abs(event.deltaX)){viewport.scrollLeft+=event.deltaY;event.preventDefault()}},{passive:false});
+    const slug = new URLSearchParams(location.search).get('project') || 'flappy-bird';
+    const project = projects[slug] || projects['flappy-bird'];
+
+    document.body.classList.add(`project-${slug}`);
+    document.title = `${project.title} | Katrine Portfolio`;
+
+    // Populate dynamic text
+    document.getElementById('projectTitle').textContent = project.title;
+    document.getElementById('projectSubtitle').textContent = project.subtitle;
+    document.getElementById('projectTags').innerHTML = project.tags.map(tag => 
+      `<span class="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[2px] text-[#00f59b]">${tag}</span>`
+    ).join('');
+
+    if (project.title === 'FLAPPY BIRD') {
+      document.getElementById('overviewText').innerHTML = 'This is my Unreal Engine 5 architecture study of Flappy Bird. Rather than a quick toy, it is engineered around production standards: non-linear falling gravity, pre-allocated actor pooling queues, and an inset collision capsule that prevents frustrating boundary clips.';
+      document.getElementById('aboutHeading').innerHTML = 'RE-ENGINEERING<br><span class="text-[#00f59b]">THE ARCADE</span>';
+    } else {
+      document.getElementById('overviewText').textContent = project.overview;
+      document.getElementById('aboutHeading').textContent = 'What this build is about';
+    }
+
+    document.getElementById('learnedHeading').textContent = project.learnedHeading || 'Insights from development';
+    
+    // Features populate
+    if (project.features) {
+      document.getElementById('featuresHeading').textContent = project.featuresHeading;
+      document.getElementById('featuresList').innerHTML = project.features.map((feature, index) => `
+        <article class="lab-card reveal rounded-2xl p-7 text-left">
+          <span class="font-mono text-xs font-bold text-[#00f59b]">FEATURE 0${index + 1}</span>
+          <h3 class="mt-4 font-clash text-2xl uppercase text-white">${feature[0]}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/60">${feature[1]}</p>
+        </article>
+      `).join('');
+    }
+
+    // Challenges populate
+    if (project.challenges) {
+      document.getElementById('challengesHeading').textContent = project.challengesHeading;
+      document.getElementById('challengesIntro').textContent = project.challengesIntro;
+      document.getElementById('challengesList').innerHTML = project.challenges.map((challenge, index) => `
+        <article class="lab-card reveal rounded-2xl border-t-2 border-t-[#00f59b] p-7">
+          <span class="font-mono text-xs font-bold text-[#00d2ff]">CHALLENGE 0${index + 1}</span>
+          <h3 class="mt-4 font-clash text-2xl uppercase text-white">${challenge[0]}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-white/60">${challenge[1]}</p>
+        </article>
+      `).join('');
+    }
+
+    // Result / References populate
+    const resultImg = document.getElementById('resultImage');
+    if (resultImg) {
+      resultImg.src = project.image;
+      resultImg.alt = `Final ${project.title} result`;
+    }
+    const resHeading = document.getElementById('resultHeading');
+    if (resHeading && project.title !== 'FLAPPY BIRD') {
+      resHeading.textContent = project.resultHeading || 'Built for feel.';
+    }
+
+    // Gallery populate
+    document.getElementById('galleryTrack').innerHTML = project.gallery.map((item, index) => `
+      <figure class="gallery-card shrink-0">
+        <div class="overflow-hidden rounded-[20px] border border-white/10 bg-[#090e14]">
+          <img src="${item[0]}" alt="${project.title} ${item[1]}" class="h-[44vh] w-full object-cover md:h-[58vh]">
+        </div>
+        <figcaption class="mt-4 flex items-center justify-between font-mono text-[11px] text-white/50">
+          <span class="text-[#00f59b]">${item[1]}</span>
+          <span class="text-white/30">FIG 0${index + 1}</span>
+        </figcaption>
+      </figure>
+    `).join('');
+
+    // Intersection observer for reveal animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Gallery drag & wheel interaction
+    const viewport = document.getElementById('galleryViewport');
+    let dragging = false, startX = 0, startScroll = 0;
+    viewport.addEventListener('pointerdown', e => {
+      dragging = true;
+      startX = e.clientX;
+      startScroll = viewport.scrollLeft;
+      viewport.classList.add('dragging');
+      viewport.setPointerCapture(e.pointerId);
+    });
+    viewport.addEventListener('pointermove', e => {
+      if (dragging) viewport.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    const stopDragging = () => { dragging = false; viewport.classList.remove('dragging'); };
+    viewport.addEventListener('pointerup', stopDragging);
+    viewport.addEventListener('pointercancel', stopDragging);
+    viewport.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        viewport.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
   </script>
 </body>
 </html>
