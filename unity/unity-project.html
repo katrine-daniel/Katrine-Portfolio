@@ -35,25 +35,28 @@
   <style>
     body { overflow-x: hidden; }
     .clip-reveal { clip-path: polygon(12% 0%,100% 0%,100% 86%,90% 100%,0% 100%,0% 14%); }
+    .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
+    .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
   </style>
 </head>
 <body class="bg-bg text-text font-manrope">
   <div id="pageAmbient" class="fixed inset-0 pointer-events-none opacity-90"></div>
 
-  <header class="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-black/25 backdrop-blur-xl">
-    <div class="px-[5vw] py-5 flex items-center justify-between">
-      <a href="./unity.html" class="font-clash text-xl md:text-2xl uppercase tracking-[2px] text-white">← UNITY</a>
-
-      <div class="flex items-center gap-3">
-        <a href="../index.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
-          Back Home
-        </a>
-        <a href="../projects/project.html" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 font-syne text-[11px] uppercase tracking-[2px] text-white/85 transition hover:bg-white/10">
-          Projects
-        </a>
+  <!-- Floating Navigation -->
+  <nav class="site-nav fixed top-0 z-50 w-full px-[14px] py-[14px] md:px-[30px] md:py-[20px]">
+    <div class="nav-inner flex items-center justify-between rounded-full px-5 py-3 md:px-7 md:py-4">
+      <a href="../index.html" class="flex items-center gap-2 font-bold tracking-[2px] text-white no-underline">
+        <span class="inline-block h-2 w-2 rounded-full bg-[#00f59b] shadow-[0_0_8px_#00f59b]"></span>
+        <span>KATRINE.</span>
+      </a>
+      <div class="flex items-center gap-5 text-[11px] md:text-sm">
+        <a href="../index.html#projects-showcase" class="text-white/70 transition hover:text-[#00f59b] no-underline">WORK</a>
+        <a href="../index.html#experience" class="text-white/70 transition hover:text-[#00f59b] no-underline">INFO</a>
+        <a href="../index.html#vault" class="text-white/70 transition hover:text-[#00f59b] no-underline">VAULT</a>
+        <a href="../index.html" class="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-syne text-[10px] uppercase tracking-[2px] text-white transition hover:border-[#00f59b] hover:text-[#00f59b] no-underline">← Back to Portfolio</a>
       </div>
     </div>
-  </header>
+  </nav>
 
   <main class="relative z-10">
     <section class="min-h-screen pt-[110px] md:pt-[130px] px-[3vw] pb-[60px] flex items-end">

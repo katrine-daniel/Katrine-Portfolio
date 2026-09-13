@@ -112,6 +112,9 @@
         }
 
 
+        .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
+        .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
+
         @media (max-width: 1024px) {
             .edu-card, .edu-card:nth-child(even) { flex-direction: column; text-align: center; gap: 20px; }
             #robot-cursor { display: none; }
@@ -124,12 +127,19 @@
 <body class="bg-bg text-text font-manrope">
 
 
-    <nav class="fixed top-0 w-full px-[24px] md:px-[50px] py-[24px] md:py-[30px] flex justify-between z-50" style="mix-blend-mode:difference;">
-        <div class="nav-logo font-bold tracking-[2px]">KATRINE.</div>
-        <div class="text-[12px] md:text-base">
-            <a href="#projects-showcase" class="text-white no-underline mr-5">WORK</a>
-            <a href="#experience" class="text-white no-underline mr-5">INFO</a>
-            <a href="#vault" class="text-white no-underline">VAULT</a>
+    <!-- Floating Navigation -->
+    <nav class="site-nav fixed top-0 z-50 w-full px-[14px] py-[14px] md:px-[30px] md:py-[20px]">
+        <div class="nav-inner flex items-center justify-between rounded-full px-5 py-3 md:px-7 md:py-4">
+            <a href="#" class="flex items-center gap-2 font-bold tracking-[2px] text-white no-underline">
+                <span class="inline-block h-2 w-2 rounded-full bg-[#00f59b] shadow-[0_0_8px_#00f59b]"></span>
+                <span>KATRINE.</span>
+            </a>
+            <div class="flex items-center gap-5 text-[11px] md:text-sm">
+                <a href="#projects-showcase" class="text-white/70 transition hover:text-[#00f59b] no-underline">WORK</a>
+                <a href="#experience" class="text-white/70 transition hover:text-[#00f59b] no-underline">INFO</a>
+                <a href="#vault" class="text-white/70 transition hover:text-[#00f59b] no-underline">VAULT</a>
+                <a href="#projects-showcase" class="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-syne text-[10px] uppercase tracking-[2px] text-white transition hover:border-[#00f59b] hover:text-[#00f59b] no-underline">Explore Portfolio</a>
+            </div>
         </div>
     </nav>
 
