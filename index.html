@@ -111,6 +111,20 @@
             z-index: 99999 !important;
         }
 
+        #games-modal-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        #games-modal-box::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        #games-modal-box::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 9999px;
+        }
+        #games-modal-box::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
 
         .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
         .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
@@ -562,233 +576,206 @@
 
             <div id="view-more-bar" class="mt-12 border-t border-white/10 bg-black/20 px-5 py-10 text-center opacity-0 pointer-events-none transition-all duration-300">
                 <p class="mb-4 font-syne text-[10px] uppercase tracking-[3px] text-white/40">More from the collection</p>
-                <button id="view-more-projects" type="button" class="rounded-full border border-white/25 bg-white/5 px-8 py-4 font-syne text-[11px] uppercase tracking-[3px] text-white transition hover:border-accent hover:bg-accent hover:text-black">View More Projects <span aria-hidden="true">&rarr;</span></button>
+                <button id="view-more-projects" type="button" class="rounded-full bg-[#E0CCBB] px-8 py-3.5 font-syne text-[11px] font-bold uppercase tracking-[2px] text-black shadow-lg transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer">Showing All 8 Projects &darr;</button>
             </div>
         </div>
     </section>
 
-    <!-- ADDITIONAL 4 PROJECTS: STRAIGHT VERTICAL MANUAL SCROLL -->
-    <section id="more-projects-vertical" class="hidden relative z-10 w-full px-[5vw] pt-16 pb-28 border-t border-white/10 bg-[#06080c]">
-        <div class="mx-auto max-w-[1400px]">
-            <div class="mb-14 flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
+    <!-- COLLECTION POPUP MODAL (REMAINING 4 GAMES - STYLED EXACTLY LIKE IMAGE 2 / VAULT CARDS) -->
+    <div id="games-collection-modal" class="fixed inset-0 z-[999999] hidden items-center justify-center p-4 md:p-8 bg-black/85 backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="modal-collection-title">
+        <!-- Backdrop overlay click target to close -->
+        <div id="games-modal-backdrop" class="absolute inset-0 cursor-pointer"></div>
+
+        <!-- Modal Box -->
+        <div id="games-modal-box" class="relative z-10 w-full max-w-[1380px] max-h-[90vh] overflow-y-auto rounded-[24px] md:rounded-[28px] border border-[#222] bg-[#0c0c0c] p-6 md:p-10 shadow-[0_30px_100px_rgba(0,0,0,0.95)] transform transition-all duration-300 scale-95 opacity-0">
+            <!-- Header -->
+            <div class="flex items-start justify-between border-b border-[#222] pb-6 mb-8 gap-4">
                 <div>
-                    <span class="font-syne text-[11px] uppercase tracking-[4px] text-accent">Collection Continuation</span>
-                    <h3 class="mt-3 font-clash text-4xl md:text-6xl uppercase text-white">More Projects</h3>
+                    <span class="font-syne text-[11px] uppercase tracking-[3px] text-accent block mb-2">More From The Collection</span>
+                    <h3 id="modal-collection-title" class="font-clash text-2xl md:text-4xl uppercase text-white tracking-wide">Additional 4 Projects</h3>
+                    <p class="mt-2 text-xs md:text-sm text-[#888] max-w-[560px]">
+                        Select any game prototype below to launch its dedicated playable breakdown, technical case study, and interactive features.
+                    </p>
                 </div>
-                <p class="max-w-[460px] text-sm md:text-base text-white/60">
-                    Scroll down manually to explore all 4 additional playable prototypes, environmental studies, and cross-engine builds.
-                </p>
+                <!-- Close Button -->
+                <button id="close-games-modal" type="button" aria-label="Close modal" class="group flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition-all hover:border-white/40 hover:bg-white/15 hover:text-white hover:scale-105 cursor-pointer">
+                    <svg class="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
 
-            <div class="flex flex-col gap-10 md:gap-14 w-full">
+            <!-- 4 Games Grid Styled Exactly Like Image 2 (.vault-item) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- 05 / DUNGEON -->
-                <a id="project-card-05" href="unreal%20engine/unreal-project.html?project=dungeon"
-                    class="group relative grid min-h-[60vh] md:min-h-[72vh] grid-cols-1 md:grid-cols-[38%_62%] overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1016] shadow-[0_25px_80px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-accent/40">
-                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
-                        <div>
-                            <div class="flex items-start justify-between gap-4">
-                                <span class="font-syne text-sm uppercase tracking-[2px] text-accent">05 / Action RPG</span>
-                                <span class="font-clash text-[64px] md:text-[80px] leading-none text-white/10">05</span>
-                            </div>
-                            <h4 class="mt-4 font-clash text-4xl md:text-5xl uppercase leading-[0.9] text-white">Dungeon</h4>
-                            <p class="mt-5 max-w-[420px] text-sm md:text-base leading-relaxed text-white/75">
-                                A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters.
-                            </p>
+                <a href="unreal%20engine/unreal-project.html?project=dungeon"
+                    class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-accent hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
+                    data-bot-jump>
+                    <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-accent">⚔️</div>
+                    <div>
+                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">05 / ACTION RPG</span>
+                        <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-accent transition-colors">Dungeon</h4>
+                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Unreal Engine 5</div>
+                        <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
+                            A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters.
                         </div>
-
-                        <div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Lumen Lighting</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Combat AI</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">UE5 Blueprint</span>
-                            </div>
-                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white group-hover:text-accent transition">
-                                Open Project <span class="transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 flex items-center justify-center p-4 md:p-8">
-                        <div class="relative h-[320px] md:h-full w-full overflow-hidden rounded-[20px] border border-white/10 bg-black/40">
-                            <img src="image/dungeon.png" alt="Dungeon Preview" class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-accent transition-colors pt-2">
+                            <span>Open Project</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- 06 / FOREST -->
-                <a id="project-card-06" href="unreal%20engine/unreal-project.html?project=forest"
-                    class="group relative grid min-h-[60vh] md:min-h-[72vh] grid-cols-1 md:grid-cols-[38%_62%] overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1016] shadow-[0_25px_80px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-emerald-400/40">
-                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
-                        <div>
-                            <div class="flex items-start justify-between gap-4">
-                                <span class="font-syne text-sm uppercase tracking-[2px] text-emerald-400">06 / Environment</span>
-                                <span class="font-clash text-[64px] md:text-[80px] leading-none text-white/10">06</span>
-                            </div>
-                            <h4 class="mt-4 font-clash text-4xl md:text-5xl uppercase leading-[0.9] text-white">Forest</h4>
-                            <p class="mt-5 max-w-[420px] text-sm md:text-base leading-relaxed text-white/75">
-                                A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement.
-                            </p>
+                <a href="unreal%20engine/unreal-project.html?project=forest"
+                    class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-emerald-400 hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
+                    data-bot-jump>
+                    <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-emerald-400">🌲</div>
+                    <div>
+                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">06 / ENVIRONMENT</span>
+                        <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-emerald-400 transition-colors">Forest</h4>
+                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Unreal Engine 5</div>
+                        <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
+                            A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement.
                         </div>
-
-                        <div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Nanite Foliage</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Volumetric Fog</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Wind Shaders</span>
-                            </div>
-                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white group-hover:text-emerald-400 transition">
-                                Open Project <span class="transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 flex items-center justify-center p-4 md:p-8">
-                        <div class="relative h-[320px] md:h-full w-full overflow-hidden rounded-[20px] border border-white/10 bg-black/40">
-                            <img src="image/forest.png" alt="Forest Preview" class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-emerald-400 transition-colors pt-2">
+                            <span>Open Project</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- 07 / OASIS - UNITY -->
-                <a id="project-card-07" href="unreal%20engine/unreal-project.html?project=oasis-unity"
-                    class="group relative grid min-h-[60vh] md:min-h-[72vh] grid-cols-1 md:grid-cols-[38%_62%] overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1016] shadow-[0_25px_80px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-amber-400/40">
-                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
-                        <div>
-                            <div class="flex items-start justify-between gap-4">
-                                <span class="font-syne text-sm uppercase tracking-[2px] text-amber-400">07 / Cross-Engine</span>
-                                <span class="font-clash text-[64px] md:text-[80px] leading-none text-white/10">07</span>
-                            </div>
-                            <h4 class="mt-4 font-clash text-4xl md:text-5xl uppercase leading-[0.9] text-white">Oasis - Unity</h4>
-                            <p class="mt-5 max-w-[420px] text-sm md:text-base leading-relaxed text-white/75">
-                                A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.
-                            </p>
+                <a href="unreal%20engine/unreal-project.html?project=oasis-unity"
+                    class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-amber-400 hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
+                    data-bot-jump>
+                    <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-amber-400">🏜️</div>
+                    <div>
+                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">07 / CROSS-ENGINE</span>
+                        <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-amber-400 transition-colors">Oasis - Unity</h4>
+                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Unity Technologies</div>
+                        <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
+                            A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.
                         </div>
-
-                        <div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Unity URP</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Sand Shaders</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Desert Biome</span>
-                            </div>
-                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white group-hover:text-amber-400 transition">
-                                Open Project <span class="transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 flex items-center justify-center p-4 md:p-8">
-                        <div class="relative h-[320px] md:h-full w-full overflow-hidden rounded-[20px] border border-white/10 bg-black/40">
-                            <img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80" alt="Oasis Unity Preview" class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-amber-400 transition-colors pt-2">
+                            <span>Open Project</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </div>
                     </div>
                 </a>
 
                 <!-- 08 / TENNIS -->
-                <a id="project-card-08" href="unreal%20engine/unreal-project.html?project=tennis"
-                    class="group relative grid min-h-[60vh] md:min-h-[72vh] grid-cols-1 md:grid-cols-[38%_62%] overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1016] shadow-[0_25px_80px_rgba(0,0,0,0.5)] transition-all duration-500 hover:border-cyan-400/40">
-                    <div class="relative z-10 flex flex-col justify-between p-8 md:p-12">
-                        <div>
-                            <div class="flex items-start justify-between gap-4">
-                                <span class="font-syne text-sm uppercase tracking-[2px] text-cyan-400">08 / Sports Sim</span>
-                                <span class="font-clash text-[64px] md:text-[80px] leading-none text-white/10">08</span>
-                            </div>
-                            <h4 class="mt-4 font-clash text-4xl md:text-5xl uppercase leading-[0.9] text-white">Tennis</h4>
-                            <p class="mt-5 max-w-[420px] text-sm md:text-base leading-relaxed text-white/75">
-                                A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries.
-                            </p>
+                <a href="unreal%20engine/unreal-project.html?project=tennis"
+                    class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-cyan-400 hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
+                    data-bot-jump>
+                    <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-cyan-400">🎾</div>
+                    <div>
+                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">08 / SPORTS SIM</span>
+                        <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-cyan-400 transition-colors">Tennis</h4>
+                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Custom Physics Sim</div>
+                        <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
+                            A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries.
                         </div>
-
-                        <div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Ball Kinematics</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Court Bounds</span>
-                                <span class="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] uppercase tracking-[2px] text-white/85">Elasticity</span>
-                            </div>
-                            <div class="mt-8 inline-flex items-center gap-3 font-syne text-sm uppercase tracking-[2px] text-white group-hover:text-cyan-400 transition">
-                                Open Project <span class="transition-transform duration-300 group-hover:translate-x-2">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative z-10 flex items-center justify-center p-4 md:p-8">
-                        <div class="relative h-[320px] md:h-full w-full overflow-hidden rounded-[20px] border border-white/10 bg-black/40">
-                            <img src="image/tennis.png" alt="Tennis Preview" class="h-full w-full object-cover opacity-85 transition-transform duration-700 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-cyan-400 transition-colors pt-2">
+                            <span>Open Project</span>
+                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
                         </div>
                     </div>
                 </a>
 
             </div>
         </div>
-    </section>
+    </div>
 
     <section id="experience" class="relative z-[2] bg-bg px-[5vw] py-[100px] md:py-[120px]">
         <h2 class="font-clash text-[48px] md:text-[60px] uppercase mb-[60px] border-b border-[#333] pb-5">Career Journey</h2>
-        <div class="career-bento grid grid-cols-1 md:grid-cols-3 gap-5 pb-24">
+        <div class="career-grid grid grid-cols-1 gap-5 pb-24 lg:grid-cols-2">
 
-            <div class="bento-card md:col-span-2 bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Full Time</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300 lg:col-span-2">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Jun 2025 - Present</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">Gameplay Programmer</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Lorem Studios Pvt. Ltd.</div>
+                    <div class="font-clash text-[40px] md:text-[54px] uppercase text-white mb-[20px]">TECHNICAL PROJECTS</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">SGT UNIVERSITY</div>
+                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">ADOBE XD, REACT</div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Dec 2025 | Gurugram, HR</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5">
+                        <li>Digitized manual institutional workflows by developing a recruitment pipeline and a student-focused retail platform, replacing paper-based systems with automated data handling.</li>
+                        <li>Refined both interfaces through focus groups and testing with project stakeholders, reducing administrative processing time by 40% and streamlining student access to essential services.</li>
+                    </ul>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">Prototyping core gameplay systems in Unity.</div>
-            </div>
+            </article>
 
-            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Training</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Present</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">Game Dev Mentor</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Ipsum Academy</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">PRAXIS SERVICES PVT.LTD <span class="text-[#999]">| SOFTWARE DESIGNER</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Jun 2025 - Present | Gurugram, HR</div>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">Guiding interns through jam projects.</div>
-            </div>
+            </article>
 
-            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Freelance</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Nov 2024 - Present</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">3D Environment Artist</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Dolor Interactive</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">ZAALIMA DEVELOPMENT <span class="text-[#999]">| UI/UX TRAINER</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Dec 2025 | Bangalore, KA</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Conducted training sessions to ensure WCAG-compliant, consistent UI/UX design across platforms</li>
+                        <li>Trained 30+ students in UI/UX across platforms, achieving 95% project completion with WCAG compliance</li>
+                    </ul>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">Modular level-art kits in Blender.</div>
-            </div>
+            </article>
 
-            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - Aug 2025</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">UI Systems Intern</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Sit Amet Games</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">APNAA VEHICLE <span class="text-[#999]">| COO</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Nov 2024 - Nov 2025 | Gurugram, HR</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Developed a digital ecosystem for fleet management, integrating 3D assets and automated alerts.</li>
+                        <li>Optimized vehicle service website UX, driving 30% more engagement and securing Startup Innovation recognition at SGT University</li>
+                    </ul>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">HUD & menu flow prototyping.</div>
-            </div>
+            </article>
 
-            <div class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Apr 2025 - May 2025</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">Level Design Intern</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Consectetur Labs</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">ZIDIO DEVELOPMENT <span class="text-[#999]">| DESIGNER INTERN</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Feb 2025 - May 2025 | Remote</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Developed the company’s website and implemented a to-do system to enhance workflow efficiency.</li>
+                        <li>Optimized product delivery by implementing industry standard design systems and high-fidelity prototyping workflows, resulting in a 100% project completion rate and the successful launch of client ready solutions.</li>
+                    </ul>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">Blockout & pacing for a puzzle title.</div>
-            </div>
+            </article>
 
-            <div class="bento-card md:col-span-2 bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
-                <span class="job-tag absolute top-[30px] right-[30px] text-[10px] border border-[#333] px-[10px] py-[5px] rounded-full uppercase">Internship</span>
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
                 <div>
-                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Mar 2025 - May 2025</div>
-                    <h3 class="font-clash text-2xl text-white mb-[5px]">Unreal Blueprint Intern</h3>
-                    <div class="text-sm text-secondary uppercase mb-5 border-b border-[#333] pb-[10px]">Adipiscing Studio</div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">INTERNPE <span class="text-[#999]">| FRONTEND DEVELOPER INTERN</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">Apr 2024 - May 2024 | Remote</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Digitized booking and inventory workflows by developing scalable interfaces with automated scheduling, achieving 100% success in client QA testing.</li>
+                    </ul>
                 </div>
-                <div class="text-sm text-[#aaa] leading-relaxed">Built combat prototypes in Unreal Engine.</div>
-            </div>
+            </article>
+
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">DIGISPACE <span class="text-[#999]">| VFX DESIGNER</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">May 2024 - Aug 2024 | Remote</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Created cinematic walkthroughs and dynamic environments using physics-based rendering (PBR), replacing static presentations with interactive, motion-driven visualizations.</li>
+                        <li>Optimized 3D asset workflows and advanced compositing techniques, resulting in a 25% increase in digital engagement and 95% stakeholder approval across project milestones.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="bento-card bg-[#0f0f0f] border border-white/10 p-[30px] rounded-xl relative flex flex-col justify-between transition-all duration-300">
+                <div>
+                    <div class="font-clash text-2xl md:text-3xl text-white mb-[5px]">CRAFTENZA <span class="text-[#999]">| UI/UX DESIGNER</span></div>
+                    <div class="font-syne text-accent text-xs mb-[10px] uppercase tracking-[1px]">May 2024 - Jun 2024 | Remote</div>
+                    <ul class="text-sm text-[#aaa] leading-relaxed space-y-3 list-disc pl-5 mt-4">
+                        <li>Digitized retail workflows across 18+ e-commerce platforms by engineering centralized data-handling systems, replacing manual stock tracking with automated real-time status notifications.</li>
+                        <li>Optimized user interaction by implementing cognitive design principles and WCAG 2.1 standards, resulting in a 40% increase in conversion engagement and successful product deployments.</li>
+                    </ul>
+                </div>
+            </article>
         </div>
     </section>
 
@@ -799,27 +786,20 @@
             <div class="edu-card flex items-center gap-20">
                 <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2027</div>
                 <div class="edu-info">
-                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">B.Tech Computer Science</h3>
-                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Lorem Ipsum University</h4>
-                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Specializing in game engine architecture. (Pursuing)</p>
-                </div>
-            </div>
-
-            <div class="edu-card flex items-center gap-20">
-                <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2023</div>
-                <div class="edu-info">
-                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">B.Tech First Year</h3>
-                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Dolor Sit University</h4>
-                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Specialized in Interactive Media.</p>
+                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">SHREE GURU GOBIND</h3>
+                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">TRICENTENARY UNIVERSITY - B.Tech in CSE</h4>
+                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Specializing in IOS</p>
+                    <p class="text-[#888] text-sm uppercase tracking-[1px] mt-2">Jul 2027 - Pursuing</p>
                 </div>
             </div>
 
             <div class="edu-card flex items-center gap-20">
                 <div class="edu-year-big font-clash text-[20vw] md:text-[12vw] font-bold leading-none">2022</div>
                 <div class="edu-info">
-                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">Secondary Education</h3>
-                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">Amet Consectetur School</h4>
-                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">12th Science, Math (PCM) & 10th Grade.</p>
+                    <h3 class="font-clash text-3xl md:text-4xl text-white mb-[10px]">GD GOENKA PUBLIC</h3>
+                    <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">SCHOOL, GURGAON - High School Diploma</h4>
+                    <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Completed secondary education</p>
+                    <p class="text-[#888] text-sm uppercase tracking-[1px] mt-2">Jul 2016 - Jul 2022</p>
                 </div>
             </div>
         </div>
@@ -1147,7 +1127,10 @@
 
         const openProjectsButton = document.getElementById('view-more-projects');
         const viewMoreBar = document.getElementById('view-more-bar');
-        const moreProjectsSection = document.getElementById('more-projects-vertical');
+        const collectionModal = document.getElementById('games-collection-modal');
+        const modalBox = document.getElementById('games-modal-box');
+        const closeModalBtn = document.getElementById('close-games-modal');
+        const modalBackdrop = document.getElementById('games-modal-backdrop');
         const lastProjectCard = window.innerWidth >= 1024 ? desktopCards[desktopCards.length - 1] : mobileCards[mobileCards.length - 1];
 
         if (lastProjectCard) {
@@ -1160,18 +1143,59 @@
             viewMoreObserver.observe(lastProjectCard);
         }
 
-        if (openProjectsButton && moreProjectsSection) {
-            openProjectsButton.addEventListener('click', () => {
-                moreProjectsSection.classList.remove('hidden');
-                const targetCard = document.getElementById('project-card-05') || moreProjectsSection;
-                targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                openProjectsButton.innerHTML = 'Showing All 8 Projects <span aria-hidden="true">&darr;</span>';
-                openProjectsButton.classList.add('border-accent', 'bg-accent', 'text-black');
-                if (typeof ScrollTrigger !== 'undefined') {
-                    ScrollTrigger.refresh();
+        function openProjectsModal() {
+            if (!collectionModal) return;
+            collectionModal.classList.remove('hidden', 'pointer-events-none');
+            collectionModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                collectionModal.classList.remove('opacity-0');
+                collectionModal.classList.add('opacity-100');
+                if (modalBox) {
+                    modalBox.classList.remove('scale-95', 'opacity-0');
+                    modalBox.classList.add('scale-100', 'opacity-100');
                 }
             });
         }
+
+        function closeProjectsModal() {
+            if (!collectionModal) return;
+            collectionModal.classList.remove('opacity-100');
+            collectionModal.classList.add('opacity-0');
+            if (modalBox) {
+                modalBox.classList.remove('scale-100', 'opacity-100');
+                modalBox.classList.add('scale-95', 'opacity-0');
+            }
+            setTimeout(() => {
+                collectionModal.classList.remove('flex');
+                collectionModal.classList.add('hidden', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        if (openProjectsButton) {
+            openProjectsButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                openProjectsModal();
+            });
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeProjectsModal();
+            });
+        }
+
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', closeProjectsModal);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && collectionModal && !collectionModal.classList.contains('hidden')) {
+                closeProjectsModal();
+            }
+        });
 
         const magneticBtn = document.querySelector('.magnetic-btn');
 

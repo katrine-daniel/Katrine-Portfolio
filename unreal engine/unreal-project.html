@@ -1099,6 +1099,318 @@
           ['Creating Dynamic Snowfall & Volumetric Weather in UE5', 'Niagara & Weather', 'How to build realistic Niagara blizzard particle systems, volumetric cloud shadows, and surface snow drift shaders.', 'https://www.youtube.com/results?search_query=unreal+engine+5+snowfall+weather+tutorial'],
           ['Nanite Landscape Optimization & Virtual Shadow Maps', 'Optimization & Nanite', 'Deep-dive into optimizing 16km² mountain terrains, virtual shadow map caching, and maintaining smooth 60 FPS frame times.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+landscape+optimization']
         ]
+      },
+      'dungeon': {
+        title: 'DUNGEON',
+        subtitle: 'A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters.',
+        image: '../image/dungeon.png',
+        heroBg: '../image/dungeon.png',
+        kicker: '05 / UNREAL ENGINE 5 · DYNAMIC LIGHTING & MELEE COMBAT',
+        accent: '#c084fc',
+        glow1: '#c084fc',
+        glow2: '#818cf8',
+        aboutLabel: '01 / Architecture Overview',
+        aboutHeading: 'GOTHIC DUNGEON<br><span class="text-[#c084fc]">LUMEN & COMBAT</span>',
+        overview: 'A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters built in Unreal Engine 5.',
+        tags: ['UE5 Lumen', 'Combat AI', 'Dynamic Lighting', 'Socket Sweeps'],
+        gallery: [
+          ['../image/dungeon.png', 'Gothic Vault Chamber & Dynamic Torch Flame'],
+          ['../image/flappy-night.jpg', 'Atmospheric Shadow Falloff & Stone Corridor'],
+          ['../image/forest.png', 'Dungeon Entrance & Exterior Forest Approach'],
+          ['../image/mountains.png', 'Mountain Fortress Dungeon Gateway']
+        ],
+        labHeading: 'Dungeon Combat & Lumen Lab',
+        labSub: 'Investigating real-time torch bounce lighting, physical melee sweep hitboxes, and state-machine patrol AI.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        labPanels: [
+          {
+            num: '01 / LUMEN', badge: 'INDIRECT BOUNCE', color: '#c084fc', title: 'Dynamic Torch Fire',
+            desc: 'Real-time indirect GI bounce brings atmospheric gloom to ancient stone walls with zero light bake stalls.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl animate-pulse">🔥</span>
+              <div class="absolute bottom-2 text-[9px] text-[#c084fc]">LUMEN INDIRECT BOUNCE: ACTIVE</div>
+            </div>`
+          },
+          {
+            num: '02 / COMBAT', badge: 'MELEE SWEEPS', color: '#818cf8', title: 'Socket Sweeps',
+            desc: 'Frame-accurate blade socket traces ensure sword hits register exactly when cutting through enemy meshes.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">⚔️</span>
+              <div class="absolute bottom-2 text-[9px] text-[#818cf8]">CCD SOCKET TRACE: 60 HZ</div>
+            </div>`
+          },
+          {
+            num: '03 / AI', badge: 'BEHAVIOR TREE', color: '#f472b6', title: 'Patrol & Alert',
+            desc: 'AI perception stimuli triggers guard suspicion before transitioning into full engagement state.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">👁️</span>
+              <div class="absolute bottom-2 text-[9px] text-[#f472b6]">PERCEPTION: SIGHT & SOUND</div>
+            </div>`
+          }
+        ],
+        learnedHeading: 'Light defines fear.',
+        learned: [
+          'Dynamic torch illumination creates far deeper immersion than static baked lightmaps in modular dungeons.',
+          'Weapon socket traces provide much cleaner combat feedback than basic overlapping trigger spheres.',
+          'Recast navigation bounds need tailored agent dimensions for tight subterranean archways.'
+        ],
+        featuresHeading: 'Atmospheric gloom and sharp melee response.',
+        features: [
+          ['Lumen Torch Flame Illumination', 'Point lights coupled with Niagara embers calculate real-time indirect bounce off wet stone.'],
+          ['Frame-Accurate Blade Sweeps', 'Continuous socket traces across the weapon edge to catch fast swings without tunneling.'],
+          ['State-Machine Enemy AI', 'Sight and hearing perception transitions guards from relaxed patrol to aggressive pursuit.']
+        ],
+        challengesHeading: 'Balancing indoor lighting with performance.',
+        challengesIntro: 'Interiors with numerous flickering lights can easily lead to ghosting or frame drops in Lumen:',
+        challenges: [
+          ['Torch GI Flickering', 'Tuned Lumen reflection roughness cutoffs to stabilize subtle flame flicker on wet stone.'],
+          ['Missed Collision on Fast Swings', 'Enabled continuous collision detection (CCD) on blade mesh sockets to stop clipping.'],
+          ['AI Stuck on Narrow Doorways', 'Generated custom recast navigation mesh agent radius to fit tight dungeon arches.']
+        ],
+        references: [
+          ['UE5 Lumen Dynamic Lighting & Torches', 'Lighting & Lumen', 'Complete guide on dynamic torch flames and bounce light in interior UE5 spaces.', 'https://www.youtube.com/results?search_query=unreal+engine+5+torch+light+lumen'],
+          ['Melee Combat System in Unreal Engine 5', 'Combat Blueprints', 'Setting up blade trace sweeps, hit reactions, and stamina cost mechanics.', 'https://www.youtube.com/results?search_query=unreal+engine+5+melee+combat+system+tutorial'],
+          ['Enemy AI Behavior Trees & Perception', 'AI & Navigation', 'How to configure UE5 AI Perception components and behavior trees for patrol and combat.', 'https://www.youtube.com/results?search_query=unreal+engine+5+enemy+ai+behavior+tree']
+        ]
+      },
+      'forest': {
+        title: 'FOREST',
+        subtitle: 'A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement.',
+        image: '../image/forest.png',
+        heroBg: '../image/forest.png',
+        kicker: '06 / UNREAL ENGINE 5 · NANITE FOLIAGE & VOLUMETRIC ATMOSPHERE',
+        accent: '#10b981',
+        glow1: '#10b981',
+        glow2: '#34d399',
+        aboutLabel: '01 / Architecture Overview',
+        aboutHeading: 'VERDANT WILDERNESS<br><span class="text-[#10b981]">NANITE & LIGHT</span>',
+        overview: 'A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement built in Unreal Engine 5.',
+        tags: ['Nanite Foliage', 'Volumetric Fog', 'Wind Shaders', 'Subsurface Scattering'],
+        gallery: [
+          ['../image/forest.png', 'Dense Evergreen Canopy & Volumetric God Rays'],
+          ['../image/mountains.png', 'Mountain Timberline Ridge Transition'],
+          ['../image/dungeon.png', 'Overgrown Stone Ruins in Woodland Clearing'],
+          ['../image/flappy-night.jpg', 'Dusk Forest Silhouettes & Wind Sway']
+        ],
+        labHeading: 'Nanite Foliage & Wind Lab',
+        labSub: 'Inspecting micro-polygon mesh streaming, wind deformation shaders, and volumetric light scattering.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        labPanels: [
+          {
+            num: '01 / NANITE', badge: 'HIGH DENSITY', color: '#10b981', title: 'Foliage Streaming',
+            desc: 'Millions of pine needles stream virtualized geometry with zero popping and ultra-smooth frame rates.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">🌲</span>
+              <div class="absolute bottom-2 text-[9px] text-[#10b981]">NANITE FOLIAGE: STREAMING</div>
+            </div>`
+          },
+          {
+            num: '02 / SHADERS', badge: 'WPO WIND', color: '#34d399', title: 'Dynamic Wind Sway',
+            desc: 'World Position Offset math mimics realistic breeze ripples across branches, ferns, and tall grass.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl animate-pulse">🍃</span>
+              <div class="absolute bottom-2 text-[9px] text-[#34d399]">TURBULENCE GUSTS: 4.2 M/S</div>
+            </div>`
+          },
+          {
+            num: '03 / VOLUMETRIC', badge: 'RAYLEIGH', color: '#6ee7b7', title: 'Volumetric Shafts',
+            desc: 'Sun rays pierce through thick treetops producing glowing god-rays with authentic atmospheric scattering.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">☀️</span>
+              <div class="absolute bottom-2 text-[9px] text-[#6ee7b7]">SCATTERING DENSITY: 0.12</div>
+            </div>`
+          }
+        ],
+        learnedHeading: 'Nature requires nuance.',
+        learned: [
+          'Subsurface scattering on foliage leaves turns flat green meshes into warm, translucent living plants.',
+          'Two-tier wind vectors (trunk flex vs leaf shimmer) create natural forest motion without rubbery stretching.',
+          'Nanite foliage streaming drastically lowers draw calls compared to traditional LOD billboard cascades.'
+        ],
+        featuresHeading: 'Living wilderness with high-fidelity optics.',
+        features: [
+          ['Nanite High-Poly Evergreen Trees', 'Preserving bark crevices and pine needles at infinite distance with zero LOD pops.'],
+          ['Volumetric God-Ray Light Shafts', 'Exponential height fog scattering direct sunlight into visible beams through branches.'],
+          ['Procedural Undergrowth Distribution', 'Landscape layer weightmaps automatically seed ferns, mossy rocks, and fallen leaves.']
+        ],
+        challengesHeading: 'Solving foliage overdraw and shadow costs.',
+        challengesIntro: 'Dense foliage is traditionally notorious for crushing GPUs due to overlapping alpha masks:',
+        challenges: [
+          ['Foliage Alpha Mask Overdraw', 'Converted dense branches to solid Nanite geometry to eliminate expensive masked shader overdraw.'],
+          ['Virtual Shadow Map Precision', 'Enabled shadow map geometry caching on static trees to achieve fast 60 FPS performance.'],
+          ['Wind Texture Stretching', 'Clamped World Position Offset oscillation amplitudes based on vertex color height gradients.']
+        ],
+        references: [
+          ['Nanite Foliage & Forest Environments in UE5', 'Nanite & Foliage', 'Streaming millions of foliage polygons with Nanite in UE5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+foliage+tutorial'],
+          ['Volumetric Fog & God Rays in Unreal Engine 5', 'Atmosphere & Light', 'Setting up volumetric sun shafts, exponential height fog, and sky atmosphere.', 'https://www.youtube.com/results?search_query=unreal+engine+5+volumetric+fog+god+rays'],
+          ['Interactive Foliage & Wind Shaders', 'Foliage Shaders', 'Creating responsive grass and tree wind displacement using World Position Offset.', 'https://www.youtube.com/results?search_query=unreal+engine+5+wind+foliage+shader']
+        ]
+      },
+      'oasis-unity': {
+        title: 'OASIS - UNITY',
+        subtitle: 'A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.',
+        image: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80',
+        heroBg: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80',
+        kicker: '07 / UNITY 3D · UNIVERSAL RENDER PIPELINE & DESERT BIOME',
+        accent: '#f59e0b',
+        glow1: '#f59e0b',
+        glow2: '#fbbf24',
+        aboutLabel: '01 / Architecture Overview',
+        aboutHeading: 'SUN-BAKED DUNES<br><span class="text-[#f59e0b]">UNITY URP</span>',
+        overview: 'A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.',
+        tags: ['Unity URP', 'Sand Dune Shaders', 'Heatwave Post-FX', 'Desert Atmosphere'],
+        gallery: [
+          ['https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80', 'Golden Sand Ripples & Sun Haze Horizon'],
+          ['../image/mountains.png', 'Distant Canyons & Arid Mesa Formations'],
+          ['../image/off-roading.png', 'Dune Buggy Wheel Track Depressions'],
+          ['../image/flappy-night.jpg', 'Starry Desert Twilight & Campfire Embers']
+        ],
+        labHeading: 'Desert Shaders & Heatwave Lab',
+        labSub: 'Exploring specular sand sparkles, full-screen heat refraction, and procedural wind-blown dune ripples.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        labPanels: [
+          {
+            num: '01 / SHADERS', badge: 'SPARKLE FX', color: '#f59e0b', title: 'Sand Glitter',
+            desc: 'Custom micro-specular noise sparkles simulate individual quartz crystals catching scorching sunlight.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl animate-pulse">✨</span>
+              <div class="absolute bottom-2 text-[9px] text-[#f59e0b]">QUARTZ SPECULAR: ACTIVE</div>
+            </div>`
+          },
+          {
+            num: '02 / POST-FX', badge: 'REFRACTION', color: '#fbbf24', title: 'Heat Distortion',
+            desc: 'Custom fullscreen post-processing render pass refracts screen pixels to evoke sweltering mirages.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">🏜️</span>
+              <div class="absolute bottom-2 text-[9px] text-[#fbbf24]">HEAT SHIMMER: 1.4 HZ</div>
+            </div>`
+          },
+          {
+            num: '03 / PARTICLES', badge: 'DUST DRIFT', color: '#d97706', title: 'Blowing Sand',
+            desc: 'GPU particle simulation generates low-hanging sand wisps dancing across dune crests.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">💨</span>
+              <div class="absolute bottom-2 text-[9px] text-[#d97706]">DUNE DRIFT: 2000 PARTICLES</div>
+            </div>`
+          }
+        ],
+        learnedHeading: 'Warmth and contrast tell a story.',
+        learned: [
+          'High ambient color temperatures combined with deep blue shadows give desert scenes cinematic depth.',
+          'Custom fullscreen render passes in URP allow flexible heat distortion with minimal frame overhead.',
+          'Normal map panning at shallow glancing angles produces convincing windblown sand surface ripples.'
+        ],
+        featuresHeading: 'Scorching desert atmosphere engineered in URP.',
+        features: [
+          ['Stylized Glittering Sand Shader', 'Shader Graph micro-facets catch directional sunlight for realistic quartz sparkles.'],
+          ['Fullscreen Heat Haze Refraction', 'Custom URP render pass warping background pixels based on scene depth and noise.'],
+          ['Wind-Blown Sand Particle Wisps', 'Niagara-style GPU particle ribbons undulating along curved dune crests.']
+        ],
+        challengesHeading: 'Maintaining crisp stylized visuals under heavy haze.',
+        challengesIntro: 'Extreme heat distortion easily turns game viewports into muddy, unplayable blurs without careful tuning:',
+        challenges: [
+          ['Heat Distortion Blur Overkill', 'Faded distortion intensity near the camera so gameplay controls and UI remain razor-sharp.'],
+          ['Dune Texture Repetition', 'Blended two differing noise frequencies to eliminate visible tiling patterns on massive sand dunes.'],
+          ['High Particle Fill Rate', 'Capped sand particle opacity and bounded billboards to maintain 60 FPS on mobile GPUs.']
+        ],
+        references: [
+          ['Unity URP Desert Biome & Sand Shaders', 'Unity Shaders', 'Creating sparkling sand and dune ripples in Unity Shader Graph.', 'https://www.youtube.com/results?search_query=unity+urp+sand+shader+graph'],
+          ['Heat Distortion Post-Processing in Unity', 'Post-Processing', 'Building fullscreen heatwave distortion effects using Custom Post-Processing Passes.', 'https://www.youtube.com/results?search_query=unity+heat+distortion+post+processing'],
+          ['Stylized Environmental Lighting in Unity', 'Lighting & Atmosphere', 'Atmospheric fog, color grading, and sun lighting in Unity Universal Render Pipeline.', 'https://www.youtube.com/results?search_query=unity+urp+stylized+lighting+tutorial']
+        ]
+      },
+      'tennis': {
+        title: 'TENNIS',
+        subtitle: 'A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries.',
+        image: '../image/tennis.png',
+        heroBg: '../image/tennis.png',
+        kicker: '08 / PHYSICS ENGINE · BALL KINEMATICS & COURT BOUNCE',
+        accent: '#06b6d4',
+        glow1: '#06b6d4',
+        glow2: '#22d3ee',
+        aboutLabel: '01 / Architecture Overview',
+        aboutHeading: 'COURT KINEMATICS<br><span class="text-[#06b6d4]">BALL & RACKET</span>',
+        overview: 'A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries built in custom physics.',
+        tags: ['Ball Kinematics', 'Restitution', 'Racket Trajectory', 'Interactive Court'],
+        gallery: [
+          ['../image/tennis.png', 'Ball Trajectory Arc & Court Baseline Collision'],
+          ['../image/flappy-night.jpg', 'Stadium Floodlight Reflection & Ball Motion Blur'],
+          ['../image/mountains.png', 'Outdoor Alpine Court Setting & Net Physics'],
+          ['../image/off-roading.png', 'Slow-Motion Impact Deformation Debug Frame']
+        ],
+        labHeading: 'Ball Kinematics & Restitution Lab',
+        labSub: 'Inspecting topspin Magnus drag, coefficient of restitution upon clay/grass, and contact point angling.',
+        featuresLabel: '02 / Mechanics Breakdown',
+        challengesLabel: '03 / Problems Solved',
+        learnedLabel: '04 / Engineering Insights',
+        finalResultLabel: '05 / Video Tutorials & Guides',
+        finalResultHeading: 'REFERENCES',
+        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        labPanels: [
+          {
+            num: '01 / ELASTICITY', badge: 'RESTITUTION', color: '#06b6d4', title: 'Court Restitution',
+            desc: 'Coefficient of restitution calculates accurate energy dampening across clay, grass, and hard court surfaces.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl animate-bounce">🎾</span>
+              <div class="absolute bottom-2 text-[9px] text-[#06b6d4]">RESTITUTION COEFFICIENT: 0.73</div>
+            </div>`
+          },
+          {
+            num: '02 / MAGNUS', badge: 'TOPSPIN', color: '#22d3ee', title: 'Magnus Effect',
+            desc: 'Angular velocity generates aerodynamical downward pressure, pulling high-velocity shots safely into play.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">🌀</span>
+              <div class="absolute bottom-2 text-[9px] text-[#22d3ee]">SPIN RATE: 2400 RPM</div>
+            </div>`
+          },
+          {
+            num: '03 / TRAJECTORY', badge: 'HIT VECTOR', color: '#67e8f9', title: 'Racket Contact',
+            desc: 'Racket sweet-spot offset, swing timing, and swing speed map into sharp three-dimensional return angles.',
+            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
+              <span class="text-3xl">🏸</span>
+              <div class="absolute bottom-2 text-[9px] text-[#67e8f9]">RETURN VELOCITY: 128 KM/H</div>
+            </div>`
+          }
+        ],
+        learnedHeading: 'Physics makes timing feel sublime.',
+        learned: [
+          'Calculating true Magnus effect aerodynamics transforms arcade ping-pong into convincing tennis play.',
+          'Sub-frame trajectory integration prevents fast-moving small spheres from tunneling through court lines.',
+          'Audio pitch shifting based on impact velocity provides critical tactile feedback for sweet-spot hits.'
+        ],
+        featuresHeading: 'Simulating high-speed court physics in real-time.',
+        features: [
+          ['Aerodynamic Ball Flight Model', 'Simulating drag, gravity, and Magnus force spin curves for authentic slice and topspin.'],
+          ['Surface Restitution Dynamics', 'Tuned bounce elasticity and friction coefficients for clay, grass, and hard courts.'],
+          ['Dynamic Racket Impact Solver', 'Calculating outgoing angle and velocity based on sweet spot position and stroke timing.']
+        ],
+        challengesHeading: 'Tackling tunneling at 150 km/h ball speeds.',
+        challengesIntro: 'Small balls travelling at high velocity routinely skip geometry unless physics are sub-stepped:',
+        challenges: [
+          ['Ball Phase-Through at High Speeds', 'Implemented swept sphere raycast collision with sub-stepped substep tick rates.'],
+          ['Jittery Trajectory Arcs', 'Applied Runge-Kutta 4th order numerical integration to guarantee buttery-smooth curves.'],
+          ['Unfair Net Cords', 'Added micro-capsule friction on net tape to realistically deflect ball trajectories downwards.']
+        ],
+        references: [
+          ['Simulating Tennis Ball Aerodynamics & Bounce Physics', 'Ball Kinematics', 'Implementing Magnus effect topspin, slice, and court coefficient of restitution in game engines.', 'https://www.youtube.com/results?search_query=game+engine+tennis+ball+physics+magnus+effect'],
+          ['Racket Collision & Trajectory Calculations', 'Gameplay Math', 'Calculating realistic shot return angle based on swing velocity, sweet spot contact, and racket pitch.', 'https://www.youtube.com/results?search_query=tennis+racket+physics+collision+simulation'],
+          ['Real-Time Sports Physics Tuning & Court Audio', 'Sports Game Feel', 'Achieving accurate ball velocity drag and crisp spatial audio for court boundary impacts.', 'https://www.youtube.com/results?search_query=sports+game+physics+simulation+tutorial']
+        ]
       }
     };
 
@@ -1116,6 +1428,10 @@
     let tagBorder = 'border-emerald-400/20 bg-emerald-500/10 text-[#00f59b]';
     if (slug === 'off-roading') tagBorder = 'border-orange-500/30 bg-orange-500/10 text-[#f97316]';
     if (slug === 'mountains-ue') tagBorder = 'border-sky-400/30 bg-sky-500/10 text-[#38bdf8]';
+    if (slug === 'dungeon') tagBorder = 'border-purple-400/30 bg-purple-500/10 text-[#c084fc]';
+    if (slug === 'forest') tagBorder = 'border-emerald-400/30 bg-emerald-500/10 text-[#10b981]';
+    if (slug === 'oasis-unity') tagBorder = 'border-amber-400/30 bg-amber-500/10 text-[#f59e0b]';
+    if (slug === 'tennis') tagBorder = 'border-cyan-400/30 bg-cyan-500/10 text-[#06b6d4]';
 
     document.getElementById('projectTags').innerHTML = project.tags.map(tag => 
       `<span class="rounded-full border ${tagBorder} px-4 py-1.5 font-mono text-[10px] uppercase tracking-[2px]">${tag}</span>`
