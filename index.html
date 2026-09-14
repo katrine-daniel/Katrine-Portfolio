@@ -61,6 +61,7 @@
 
     <style>
         * { cursor: none; }
+        a, button, input, textarea, select { cursor: none !important; }
         body { overflow-x: hidden; }
 
 
@@ -88,8 +89,10 @@
             position: fixed;
             top: 0; left: 0;
             width: 42px; height: 42px;
+            display: block;
+            opacity: 1;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 2147483647;
             filter: drop-shadow(0 0 6px rgba(224,204,187,0.6));
         }
 
@@ -106,10 +109,6 @@
             transform: translateY(110%);
         }
 
-        .view-more-front {
-            position: fixed !important;
-            z-index: 99999 !important;
-        }
 
         #games-modal-box::-webkit-scrollbar {
             width: 6px;
@@ -129,7 +128,7 @@
         .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
         .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
 
-        @media (max-width: 1024px) {
+        @media (pointer: coarse) {
             .edu-card, .edu-card:nth-child(even) { flex-direction: column; text-align: center; gap: 20px; }
             #robot-cursor { display: none; }
             * { cursor: auto !important; }
@@ -574,15 +573,15 @@
                 </a>
             </div>
 
-            <div id="view-more-bar" class="mt-12 border-t border-white/10 bg-black/20 px-5 py-10 text-center opacity-0 pointer-events-none transition-all duration-300">
+            <div id="view-more-bar" class="mt-12 border-t border-white/10 bg-black/20 px-5 py-10 text-center opacity-100 pointer-events-auto transition-all duration-300">
                 <p class="mb-4 font-syne text-[10px] uppercase tracking-[3px] text-white/40">More from the collection</p>
-                <button id="view-more-projects" type="button" class="rounded-full bg-[#E0CCBB] px-8 py-3.5 font-syne text-[11px] font-bold uppercase tracking-[2px] text-black shadow-lg transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer">Showing All 8 Projects &darr;</button>
+                <button id="view-more-projects" type="button" class="rounded-full bg-[#E0CCBB] px-8 py-3.5 font-syne text-[11px] font-bold uppercase tracking-[2px] text-black shadow-lg transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer">Showing All 4 Projects</button>
             </div>
         </div>
     </section>
 
     <!-- COLLECTION POPUP MODAL (REMAINING 4 GAMES - STYLED EXACTLY LIKE IMAGE 2 / VAULT CARDS) -->
-    <div id="games-collection-modal" class="fixed inset-0 z-[999999] hidden items-center justify-center p-4 md:p-8 bg-black/85 backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="modal-collection-title">
+    <div id="games-collection-modal" class="fixed inset-0 z-[99999] hidden items-center justify-center p-4 md:p-8 bg-black/85 backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="modal-collection-title">
         <!-- Backdrop overlay click target to close -->
         <div id="games-modal-backdrop" class="absolute inset-0 cursor-pointer"></div>
 
@@ -800,37 +799,6 @@
                     <h4 class="font-syne text-accent mb-5 text-lg tracking-[1px]">SCHOOL, GURGAON - High School Diploma</h4>
                     <p class="text-[#888] max-w-[500px] text-lg leading-relaxed">Completed secondary education</p>
                     <p class="text-[#888] text-sm uppercase tracking-[1px] mt-2">Jul 2016 - Jul 2022</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="relative z-[2] bg-[#090909] px-[5vw] py-[100px] md:py-[120px] border-y border-white/5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-white/10 bg-[#111] p-8 md:p-10">
-                <p class="text-accent uppercase font-syne tracking-[2px] text-xs mb-4">Current Focus</p>
-                <h3 class="font-clash text-3xl md:text-4xl uppercase mb-4 text-white">Building fast,<br>learning faster.</h3>
-                <p class="text-[#999] max-w-[520px]">Lorem ipsum dolor sit amet — right now I’m focusing on rapid gameplay prototyping, cleaner UI systems, and stronger visual storytelling across both engine and design workflows.</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-[#111] p-8 md:p-10">
-                <p class="text-accent uppercase font-syne tracking-[2px] text-xs mb-4">Process</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="border border-white/10 rounded-xl p-5">
-                        <span class="font-clash text-3xl text-accent">01</span>
-                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Idea</p>
-                    </div>
-                    <div class="border border-white/10 rounded-xl p-5">
-                        <span class="font-clash text-3xl text-accent">02</span>
-                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Prototype</p>
-                    </div>
-                    <div class="border border-white/10 rounded-xl p-5">
-                        <span class="font-clash text-3xl text-accent">03</span>
-                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Playtest</p>
-                    </div>
-                    <div class="border border-white/10 rounded-xl p-5">
-                        <span class="font-clash text-3xl text-accent">04</span>
-                        <p class="text-white mt-3 text-sm uppercase tracking-[2px]">Polish</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1107,10 +1075,10 @@
         });
 
         const vaultTrack = document.querySelector('.vault-section-trigger');
-        const vaultInner = vaultTrack.querySelector('.vault-track');
-        const vaultItems = vaultInner.querySelectorAll('.vault-item');
+        const vaultInner = vaultTrack ? vaultTrack.querySelector('.vault-track') : null;
+        const vaultItems = vaultInner ? vaultInner.querySelectorAll('.vault-item') : [];
 
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth > 1024 && vaultTrack && vaultInner) {
             const vaultScrollTween = gsap.to(vaultInner, {
                 x: () => -(vaultInner.scrollWidth - window.innerWidth),
                 ease: "none",
@@ -1131,17 +1099,14 @@
         const modalBox = document.getElementById('games-modal-box');
         const closeModalBtn = document.getElementById('close-games-modal');
         const modalBackdrop = document.getElementById('games-modal-backdrop');
-        const lastProjectCard = window.innerWidth >= 1024 ? desktopCards[desktopCards.length - 1] : mobileCards[mobileCards.length - 1];
 
-        if (lastProjectCard) {
-            const viewMoreObserver = new IntersectionObserver(([entry]) => {
-                if (!entry.isIntersecting) return;
-                viewMoreBar.classList.remove('opacity-0', 'pointer-events-none');
-                viewMoreBar.classList.add('view-more-front', 'bottom-6', 'left-1/2', 'w-max', 'max-w-[calc(100vw-2rem)]', '-translate-x-1/2', 'rounded-2xl', 'border-white/15', 'bg-black/90', 'px-5', 'py-4', 'shadow-2xl', 'backdrop-blur-md');
-                viewMoreObserver.disconnect();
-            }, { threshold: 0.35 });
-            viewMoreObserver.observe(lastProjectCard);
+        function revealViewMoreButton() {
+            if (!viewMoreBar) return;
+            viewMoreBar.classList.remove('opacity-0', 'pointer-events-none');
+            viewMoreBar.classList.add('opacity-100', 'pointer-events-auto');
         }
+
+        revealViewMoreButton();
 
         function openProjectsModal() {
             if (!collectionModal) return;
