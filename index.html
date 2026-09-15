@@ -215,7 +215,7 @@
                 </p>
             </div>
 
-            <div id="projects-overlap-desktop" class="relative hidden h-[480vh] lg:block">
+            <div id="projects-overlap-desktop" class="relative hidden min-h-screen lg:block">
                 <div class="sticky top-0 flex h-screen items-center">
                     <div class="relative h-[78vh] w-full [perspective:1800px]">
 
@@ -363,7 +363,7 @@
                                         <span class="font-syne text-sm uppercase tracking-[2px] text-sky-300">04 / Open World</span>
                                         <span class="font-clash text-[90px] leading-none text-white/10">04</span>
                                     </div>
-                                    <h3 class="mt-4 font-clash text-[4.5vw] uppercase leading-[0.9] text-white">Mountains - UE</h3>
+                                    <h3 class="mt-4 font-clash text-[4.5vw] uppercase leading-[0.9] text-white">Mountains</h3>
                                     <p class="mt-5 max-w-[420px] text-lg leading-relaxed text-white/80">An alpine landscape prototype exploring streaming, slope materials, volumetric clouds, and traversal scale.</p>
                                 </div>
                                 <div>
@@ -538,7 +538,7 @@
                                 <span class="font-syne text-sm uppercase tracking-[2px] text-sky-300">04 / Open World</span>
                                 <span class="font-clash text-[64px] leading-none text-white/10 md:text-[90px]">04</span>
                             </div>
-                            <h3 class="mt-4 font-clash text-[16vw] uppercase leading-[0.9] text-white md:text-[5vw]">Mountains - UE</h3>
+                            <h3 class="mt-4 font-clash text-[16vw] uppercase leading-[0.9] text-white md:text-[5vw]">Mountains</h3>
                             <p class="mt-5 max-w-[420px] text-sm leading-relaxed text-white/80 md:text-lg">
                                 An alpine landscape prototype exploring streaming, slope materials, volumetric clouds, and traversal scale.
                             </p>
@@ -570,9 +570,9 @@
                 </a>
             </div>
 
-            <div id="view-more-bar" class="mt-12 border-t border-white/10 bg-black/20 px-5 py-10 text-center opacity-100 pointer-events-auto transition-all duration-300">
+            <div id="view-more-bar" class="relative z-50 mt-12 border-t border-white/10 bg-black/20 px-5 py-10 text-center opacity-100 pointer-events-auto transition-all duration-300">
                 <p class="mb-4 font-syne text-[10px] uppercase tracking-[3px] text-white/40">More from the collection</p>
-                <button id="view-more-projects" type="button" class="rounded-full bg-[#E0CCBB] px-8 py-3.5 font-syne text-[11px] font-bold uppercase tracking-[2px] text-black shadow-lg transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer">Showing All 4 Projects</button>
+                <button id="view-more-projects" type="button" class="relative z-50 rounded-full bg-[#E0CCBB] px-8 py-3.5 font-syne text-[11px] font-bold uppercase tracking-[2px] text-black shadow-lg transition-all hover:bg-white hover:scale-105 active:scale-95 cursor-pointer">Showing All 4 Projects</button>
             </div>
         </div>
     </section>
@@ -642,36 +642,17 @@
                     </div>
                 </a>
 
-                <!-- 07 / OASIS - UNITY -->
-                <a href="unreal%20engine/unreal-project.html?project=oasis-unity"
-                    class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-amber-400 hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
-                    data-bot-jump>
-                    <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-amber-400">🏜️</div>
-                    <div>
-                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">07 / CROSS-ENGINE</span>
-                        <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-amber-400 transition-colors">Oasis - Unity</h4>
-                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Unity Technologies</div>
-                        <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
-                            A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.
-                        </div>
-                        <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-amber-400 transition-colors pt-2">
-                            <span>Open Project</span>
-                            <span class="transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
-                        </div>
-                    </div>
-                </a>
-
                 <!-- 08 / TENNIS -->
                 <a href="unreal%20engine/unreal-project.html?project=tennis"
                     class="vault-item group min-h-[460px] bg-[#0f0f0f] border border-[#222] p-8 rounded-2xl flex flex-col justify-between relative transition-all duration-[400ms] hover:border-cyan-400 hover:bg-[#121212] hover:-translate-y-1.5 no-underline shadow-lg"
                     data-bot-jump>
                     <div class="v-icon text-6xl md:text-7xl mb-8 text-[#444] transition-colors duration-300 group-hover:text-cyan-400">🎾</div>
                     <div>
-                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">08 / SPORTS SIM</span>
+                        <span class="v-date font-syne text-xs text-secondary mb-4 block tracking-[2px] uppercase">08 / UE5 BLUEPRINT 2D GAME</span>
                         <h4 class="v-title font-clash text-2xl md:text-3xl text-white leading-[1.1] mb-3 group-hover:text-cyan-400 transition-colors">Tennis</h4>
-                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">Custom Physics Sim</div>
+                        <div class="v-issuer text-xs md:text-sm text-[#666] uppercase tracking-[1px] font-syne">2D Court Rally & Scoring</div>
                         <div class="v-desc text-xs md:text-sm text-[#999] mt-6 leading-relaxed border-t border-[#222] pt-6">
-                            A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries.
+                            A 2D tennis game built in Unreal Engine 5.8 with Blueprints only. Top-down court, you vs CPU, ball rally, net collision, and authentic tennis scoring.
                         </div>
                         <div class="mt-6 flex items-center justify-between font-syne text-xs uppercase tracking-[2px] text-white/60 group-hover:text-cyan-400 transition-colors pt-2">
                             <span>Open Project</span>
@@ -909,57 +890,77 @@
         };
 
         if (window.innerWidth >= 1024 && desktopCards.length) {
-            gsap.set(desktopCards, {
-                yPercent: (i) => i === 0 ? 0 : 105,
-                scale: (i) => i === 0 ? 1 : 0.96,
-                rotateX: (i) => i === 0 ? 0 : -8,
-                opacity: (i) => i === 0 ? 1 : 1,
-                transformOrigin: "center center"
+            // Natural hierarchical z-index for each card
+            desktopCards.forEach((card, i) => {
+                gsap.set(card, {
+                    yPercent: i === 0 ? 0 : 105,
+                    scale: i === 0 ? 1 : 0.96,
+                    rotateX: i === 0 ? 0 : -6,
+                    opacity: 1,
+                    zIndex: (i + 1) * 10,
+                    transformOrigin: "center center"
+                });
             });
 
             setTheme(desktopCards[0]);
 
+            const stepDuration = 1.0;
             const cardCount = desktopCards.length;
-            const totalScroll = cardCount * 1500;
+            const totalScroll = (cardCount - 1) * 1100;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#projects-overlap-desktop",
                     start: "top top",
                     end: "+=" + totalScroll,
-                    scrub: 1.2,
+                    scrub: 1,
                     pin: "#projects-overlap-desktop .sticky",
-                    anticipatePin: 1
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        const activeIdx = Math.min(
+                            cardCount - 1,
+                            Math.floor(self.progress * (cardCount - 1) + 0.5)
+                        );
+                        setTheme(desktopCards[activeIdx]);
+                    }
                 }
             });
 
-            desktopCards.forEach((card, index) => {
-                if (index === 0) return;
+            for (let i = 1; i < cardCount; i++) {
+                const pos = (i - 1) * stepDuration;
+                const currentCard = desktopCards[i];
+                const prevCard = desktopCards[i - 1];
 
-                const pos = (index - 1) * 1.2;
-
-                // Slide current card up into view
-                tl.to(card, {
+                // 1. Current card slides up over the deck identically to 1 & 2
+                tl.to(currentCard, {
                     yPercent: 0,
                     scale: 1,
                     rotateX: 0,
-                    duration: 1.2,
-                    ease: "power2.out",
-                    onStart: () => setTheme(card),
-                    onReverseStart: () => setTheme(desktopCards[index - 1]),
-                    onReverseComplete: () => setTheme(desktopCards[index - 1])
-                }, pos);
-
-                // Push previous card slightly back
-                tl.to(desktopCards[index - 1], {
-                    scale: 0.93,
-                    yPercent: -5,
-                    rotateX: 5,
-                    opacity: 0.75,
-                    duration: 1.2,
+                    duration: stepDuration,
                     ease: "power2.out"
                 }, pos);
-            });
+
+                // 2. Immediately preceding card recedes slightly into the background deck
+                tl.to(prevCard, {
+                    scale: 0.93,
+                    yPercent: -5,
+                    rotateX: 4,
+                    opacity: 0.7,
+                    duration: stepDuration,
+                    ease: "power2.out"
+                }, pos);
+
+                // 3. Any earlier cards recede further and fade out smoothly
+                for (let j = 0; j < i - 1; j++) {
+                    tl.to(desktopCards[j], {
+                        scale: 0.86,
+                        yPercent: -10,
+                        opacity: 0.2,
+                        duration: stepDuration,
+                        ease: "power2.out"
+                    }, pos);
+                }
+            }
         } else if (mobileCards.length) {
             setTheme(mobileCards[0]);
 

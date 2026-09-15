@@ -98,6 +98,54 @@
       padding-bottom: 2.5rem;
     }
 
+    .project-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 4, 7, 0.2) 0%, rgba(2, 4, 7, 0.52) 62%, rgba(2, 4, 7, 0.8) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body.project-mountains-ue .project-hero {
+      background: #040b13;
+    }
+
+    body.project-mountains-ue .project-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(125, 211, 252, 0.26), transparent 24%),
+        radial-gradient(circle at 75% 16%, rgba(224, 242, 254, 0.18), transparent 30%),
+        linear-gradient(180deg, rgba(2, 6, 12, 0.2), rgba(2, 6, 12, 0.7));
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-backdrop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(1.1) brightness(0.8) contrast(1.08);
+      transform: scale(1.04);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Arcade Screen Frame */
     .arcade-cabinet {
       background: linear-gradient(180deg, #101921 0%, #080d12 100%);
@@ -516,7 +564,10 @@
 
     <!-- HERO SECTION -->
     <section class="project-hero px-[5vw] pb-8 pt-24 md:pt-28 md:pb-10">
-      <div class="mx-auto max-w-[1500px] text-center">
+      <div class="hero-backdrop">
+        <img id="heroBgImg" src="../image/flappy-night.jpg" alt="Project backdrop" />
+      </div>
+      <div class="hero-content mx-auto max-w-[1500px] text-center">
 
         <!-- Kicker Badge -->
         <div id="heroKickerWrap"
@@ -1281,7 +1332,7 @@
         ]
       },
       'mountains-ue': {
-        title: 'MOUNTAINS - UE',
+        title: 'MOUNTAINS',
         subtitle: 'A monumental alpine landscape study in Unreal Engine 5 utilizing World Partition, Nanite geometric streaming, slope-angle procedural materials, and dynamic volumetric snowfall weather.',
         image: '../image/mountains.png',
         heroBg: '../image/mountains.png',
@@ -1292,8 +1343,8 @@
         aboutLabel: 'About the Project',
         aboutHeading: 'About the Project',
         wantedToLearnHeading: 'What I Wanted to Learn',
-        wantedToLearn: 'I wanted to learn how to build huge 16km² landscapes using Unreal Engine 5 World Partition, how to create automatic snow shaders for steep cliffs, and how to simulate dynamic snowfall weather.',
-        overview: 'Mountains is a large-scale alpine environment study in Unreal Engine 5 utilizing World Partition, Nanite geometric streaming, slope-angle procedural landscape materials, and dynamic volumetric snowfall weather systems.',
+        wantedToLearn: 'Sculpt and paint terrain, use Landmass Blueprint brushes, add water, and create atmosphere with fog, sky, and sunlight.',
+        overview: 'A snow mountain valley I made in Unreal Engine 5.8 using Blueprints only. It has a landscape, lake, snow, and lighting. It is a walkable scene, not a full game.',
         tags: ['World Partition', 'Volumetric Snow Weather', 'Nanite Landscape', 'Dynamic Snow Drift'],
         gallery: [
           ['../image/mountains.png', '16km² Alpine Peak Panorama with Volumetric Snow'],
@@ -1354,19 +1405,21 @@
           }
         ],
         learned: [
-          'Volumetric fog and exponential height falloff are essential for communicating monumental alpine scale and atmospheric depth.',
-          'Slope-based procedural shader blending automatically transitions sheer granite cliffs into powdery snow banks without manual vertex painting.',
-          'Continuous falling snow particles with wind drift and camera-relative velocity give the alpine landscape living, breathing physical presence.'
+          'Shape the terrain first, then add paint and fog.',
+          'Water only works when the basin is carved correctly.',
+          'One map can create two moods by changing the sky and fog instead of rebuilding the whole level.'
         ],
         features: [
-          ['Dynamic Snowfall & Blizzards', 'Real-time multi-layered snowfall simulation with wind turbulence, surface accumulation, and snowflake drift.'],
-          ['Nanite 16km² Alpine Terrain', 'Micro-polygon virtualized geometry streaming delivering millimeter-level rock detail with zero LOD pop-in.'],
-          ['Volumetric Snow Clouds & Sun Shafts', 'Heterogeneous volume clouds with realistic light scattering, rim frost, and dramatic sunset mountain silhouettes.']
+          ['Sculpted Peaks & Lake Basin', 'Built the mountain shapes and carved a lower basin for the lake.'],
+          ['Snow & Rock Paint', 'Painted snow and rock materials across the landscape.'],
+          ['Water Body Reflections', 'Added a water body with reflections in the valley.'],
+          ['Two Lighting Moods', 'Used the same map for clear-day and foggy lighting.']
         ],
         challenges: [
-          ['Volumetric Weather Fill-Rate', 'Downsampled heavy snowfall particle lighting to quarter-res with temporal reconstruction for zero FPS drop.'],
-          ['Far-Distance Shadow Precision', 'Configured Virtual Shadow Maps with directional light clipmap caching for razor-sharp peak shadows 10 km away.'],
-          ['Triplanar Texture Stretching', 'Blended triplanar world-space projection with slope masks to eliminate texture distortion on sheer vertical cliffs.']
+          ['Mushy Hills', 'Noise brushes made the hills look soft and unclear, so I reshaped the terrain with cleaner forms.'],
+          ['Water Height', 'The water sat too high or too low, so I adjusted the basin and water height together.'],
+          ['Patchy Snow Paint', 'Snow either covered everything or looked patchy, so I balanced the landscape layers.'],
+          ['Fog & Exposure', 'Fog hid the mountains and auto-exposure made the sun on the lake too bright, so I tuned both settings.']
         ],
         references: [
           ['Unreal Engine 5 World Partition & Large Scale Landscapes', 'World Partition Guide', 'These guides helped me understand World Partition and how to stream large landscape maps in Unreal Engine 5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+world+partition+landscape+tutorial'],
@@ -1376,27 +1429,27 @@
       },
       'dungeon': {
         title: 'DUNGEON',
-        subtitle: 'A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters.',
+        subtitle: 'A first-person dungeon walkthrough I started in Unity, with stone rooms, wooden doors, lantern light, and a layout ready for escape-room puzzles and treasure hunting.',
         image: '../image/dungeon.png',
         heroBg: '../image/dungeon.png',
-        kicker: '05 / UNREAL ENGINE 5 · DYNAMIC LIGHTING & MELEE COMBAT',
+        kicker: '05 / UNITY · FIRST-PERSON DUNGEON WALKTHROUGH',
         accent: '#c084fc',
         glow1: '#c084fc',
         glow2: '#818cf8',
         aboutLabel: 'About the Project',
         aboutHeading: 'About the Project',
         wantedToLearnHeading: 'What I Wanted to Learn',
-        wantedToLearn: 'I wanted to learn how real-time Lumen lighting works with flickering torches in enclosed spaces, how to build responsive melee sword collision, and how to program guard patrol AI.',
-        overview: 'A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters built in Unreal Engine 5.',
-        tags: ['UE5 Lumen', 'Combat AI', 'Dynamic Lighting', 'Socket Sweeps'],
+        wantedToLearn: 'I wanted to learn how to build modular interiors with Prefabs, first-person movement, mood lighting, and how an escape-room or treasure loop could sit on top of a real map instead of an empty grey box.',
+        overview: 'A first-person dungeon I started in Unity. It has stone rooms, wooden doors, lantern light, and a walkable layout. The escape-room puzzles and treasure loop are still pending.',
+        tags: ['Unity', 'C# Controller', 'Prefabs', 'First-Person Walk'],
         gallery: [
           ['../image/dungeon.png', 'Gothic Vault Chamber & Dynamic Torch Flame'],
           ['../image/flappy-night.jpg', 'Atmospheric Shadow Falloff & Stone Corridor'],
           ['../image/forest.png', 'Dungeon Entrance & Exterior Forest Approach'],
           ['../image/mountains.png', 'Mountain Fortress Dungeon Gateway']
         ],
-        labHeading: 'Dungeon Combat & Lumen Lab',
-        labSub: 'Investigating real-time torch bounce lighting, physical melee sweep hitboxes, and state-machine patrol AI.',
+        labHeading: 'Dungeon Layout & Lighting Lab',
+        labSub: 'Blocking modular rooms, reusing Prefabs, tuning lantern light, and testing first-person movement through the map.',
         featuresLabel: '02 / Key Mechanics',
         featuresHeading: 'Game Features',
         challengesLabel: '03 / PROBLEMS SOLVED',
@@ -1406,77 +1459,83 @@
         learnedHeading: 'What I Learned',
         finalResultLabel: '05 / PROJECT CONCLUSION',
         finalResultHeading: 'Final Result',
-        finalResult: 'A moody gothic dungeon prototype featuring real-time Lumen torch bounce lighting, frame-accurate melee sword combat, and patrolling enemy AI with sight and sound detection.',
+        finalResult: 'A walkable Unity dungeon scene with connected rooms, reusable Prefabs, first-person movement, lantern lighting, and a layout ready for puzzles, keys, clues, and treasure.',
         labPanels: [
           {
-            num: '01 / LUMEN', badge: 'INDIRECT BOUNCE', color: '#c084fc', title: 'Dynamic Torch Fire',
-            desc: 'Real-time indirect GI bounce brings atmospheric gloom to ancient stone walls with zero light bake stalls.',
+            num: '01 / LAYOUT', badge: 'MODULAR ROOMS', color: '#c084fc', title: 'Room Blocking',
+            desc: 'The rooms were blocked in the Scene view using a grid, making it easier to plan the hall, kitchen, bedrooms, stairs, and storage areas.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl animate-pulse">🔥</span>
-              <div class="absolute bottom-2 text-[9px] text-[#c084fc]">LUMEN INDIRECT BOUNCE: ACTIVE</div>
+              <span class="text-3xl">▦</span>
+              <div class="absolute bottom-2 text-[9px] text-[#c084fc]">GRID-BLOCKED DUNGEON PLAN</div>
             </div>`
           },
           {
-            num: '02 / COMBAT', badge: 'MELEE SWEEPS', color: '#818cf8', title: 'Socket Sweeps',
-            desc: 'Frame-accurate blade socket traces ensure sword hits register exactly when cutting through enemy meshes.',
+            num: '02 / PREFABS', badge: 'REUSABLE PARTS', color: '#818cf8', title: 'Prefab Rooms',
+            desc: 'Walls, doors, and props were reused as Prefabs so rooms could be duplicated, rearranged, and edited without rebuilding every piece.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl">⚔️</span>
-              <div class="absolute bottom-2 text-[9px] text-[#818cf8]">CCD SOCKET TRACE: 60 HZ</div>
+              <span class="text-3xl">▣</span>
+              <div class="absolute bottom-2 text-[9px] text-[#818cf8]">DUPLICATE · ARRANGE · EDIT</div>
             </div>`
           },
           {
-            num: '03 / AI', badge: 'BEHAVIOR TREE', color: '#f472b6', title: 'Patrol & Alert',
-            desc: 'AI perception stimuli triggers guard suspicion before transitioning into full engagement state.',
+            num: '03 / MOVEMENT', badge: 'C# CONTROLLER', color: '#f472b6', title: 'First-Person Walk',
+            desc: 'A C# character controller with a capsule collider lets the player walk through the dungeon and check the scale of the rooms.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl">👁️</span>
-              <div class="absolute bottom-2 text-[9px] text-[#f472b6]">PERCEPTION: SIGHT & SOUND</div>
+              <span class="text-3xl">◯</span>
+              <div class="absolute bottom-2 text-[9px] text-[#f472b6]">CAPSULE COLLIDER: ACTIVE</div>
             </div>`
           }
         ],
         learned: [
-          'Dynamic torch illumination creates far deeper immersion than static baked lightmaps in modular dungeons.',
-          'Weapon socket traces provide much cleaner combat feedback than basic overlapping trigger spheres.',
-          'Recast navigation bounds need tailored agent dimensions for tight subterranean archways.'
+          'Block the space before writing puzzle code.',
+          'Prefabs keep a dungeon editable and easy to rearrange.',
+          'Lighting sells the mood more than adding extra props.',
+          'A level without a loop is just a scene. The next step is keys, one puzzle, and a treasure to find.'
         ],
         features: [
-          ['Lumen Torch Flame Illumination', 'Point lights coupled with Niagara embers calculate real-time indirect bounce off wet stone.'],
-          ['Frame-Accurate Blade Sweeps', 'Continuous socket traces across the weapon edge to catch fast swings without tunneling.'],
-          ['State-Machine Enemy AI', 'Sight and hearing perception transitions guards from relaxed patrol to aggressive pursuit.']
+          ['Multi-Room Dungeon', 'Hall, kitchen, bedrooms, stairs, and storage areas make up the walkable layout.'],
+          ['Wooden Double Doors', 'Large wooden double doors create the main entrance.'],
+          ['Stone Floors & Lanterns', 'Hex stone flooring, lanterns, and dark interiors establish the dungeon mood.'],
+          ['First-Person Walk', 'A C# controller and capsule collider let the player walk through the scene.'],
+          ['Prefab Rooms', 'Reusable room pieces make it possible to duplicate and rearrange the layout.'],
+          ['Still To Build', 'Locked doors, keys, clues, puzzles, treasure, and win/lose UI are not done yet.']
         ],
         challenges: [
-          ['Torch GI Flickering', 'Tuned Lumen reflection roughness cutoffs to stabilize subtle flame flicker on wet stone.'],
-          ['Missed Collision on Fast Swings', 'Enabled continuous collision detection (CCD) on blade mesh sockets to stop clipping.'],
-          ['AI Stuck on Narrow Doorways', 'Generated custom recast navigation mesh agent radius to fit tight dungeon arches.']
+          ['Rooms Did Not Connect', 'Rooms did not line up until I snapped them to the grid.'],
+          ['Wrong Scale', 'The door size did not match the player height, so I adjusted the scale around the character controller.'],
+          ['Too Many Unique Meshes', 'There were too many one-off meshes, so I reused Prefabs for walls, doors, and props.'],
+          ['Lighting Balance', 'The lighting was either pitch black or blown out, so I balanced the lanterns and overall scene lighting.'],
+          ['No Gameplay Loop Yet', 'I built the map first and left the systems for later, so it currently plays like a walkthrough instead of a complete game.']
         ],
         references: [
-          ['UE5 Lumen Dynamic Lighting & Torches', 'Lighting & Lumen', 'These tutorials helped me learn how to configure Lumen indirect lighting and torch flame effects in dark rooms.', 'https://www.youtube.com/results?search_query=unreal+engine+5+torch+light+lumen'],
-          ['Melee Combat System in Unreal Engine 5', 'Combat Blueprints', 'This helped me set up weapon collision traces and hit reactions so sword attacks connect accurately.', 'https://www.youtube.com/results?search_query=unreal+engine+5+melee+combat+system+tutorial'],
-          ['Enemy AI Behavior Trees & Perception', 'AI & Navigation', 'This helped me build AI perception and behavior trees so enemies patrol and chase the player on sight.', 'https://www.youtube.com/results?search_query=unreal+engine+5+enemy+ai+behavior+tree']
+          ['Unity First-Person Controller', 'C# Movement', 'This helped me understand capsule-based first-person movement and how to walk through the dungeon scene.', 'https://www.youtube.com/results?search_query=unity+c%23+first+person+controller+capsule'],
+          ['Unity Prefab Workflow', 'Modular Level Design', 'This helped me reuse rooms, doors, walls, and props while building the dungeon layout.', 'https://www.youtube.com/results?search_query=unity+prefab+modular+level+design'],
+          ['Unity Lighting for Dungeons', 'Mood Lighting', 'This helped me balance lantern light, dark interiors, and atmosphere in the dungeon.', 'https://www.youtube.com/results?search_query=unity+dungeon+lighting+lantern+ tutorial']
         ]
       },
       'forest': {
         title: 'FOREST',
-        subtitle: 'A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement.',
+        subtitle: 'A walkable forest environment I made in Unreal Engine 5.8 using Blueprints only, with hills, pines, rocks, grass, and a shoreline. It is an outdoor scene, not a full game.',
         image: '../image/forest.png',
         heroBg: '../image/forest.png',
-        kicker: '06 / UNREAL ENGINE 5 · NANITE FOLIAGE & VOLUMETRIC ATMOSPHERE',
+        kicker: '06 / UNREAL ENGINE 5.8 · FOREST ENVIRONMENT',
         accent: '#10b981',
         glow1: '#10b981',
         glow2: '#34d399',
         aboutLabel: 'About the Project',
         aboutHeading: 'About the Project',
         wantedToLearnHeading: 'What I Wanted to Learn',
-        wantedToLearn: 'I wanted to learn how to render dense forests with Nanite foliage, how to create realistic wind movement shaders for trees and grass, and how to set up atmospheric volumetric sun god-rays.',
-        overview: 'A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement built in Unreal Engine 5.',
-        tags: ['Nanite Foliage', 'Volumetric Fog', 'Wind Shaders', 'Subsurface Scattering'],
+        wantedToLearn: 'Landscape sculpt and paint, foliage density, a shoreline that sits in the terrain, and how Blender assets come into an Unreal map.',
+        overview: 'A forest environment I made in Unreal Engine 5.8 using Blueprints only. It is a walkable outdoor scene with hills, pines, rocks, grass, and a shoreline, not a full game.',
+        tags: ['Landscape', 'Foliage Density', 'Blender Kit', 'Shoreline'],
         gallery: [
           ['../image/forest.png', 'Dense Evergreen Canopy & Volumetric God Rays'],
           ['../image/mountains.png', 'Mountain Timberline Ridge Transition'],
           ['../image/dungeon.png', 'Overgrown Stone Ruins in Woodland Clearing'],
           ['../image/flappy-night.jpg', 'Dusk Forest Silhouettes & Wind Sway']
         ],
-        labHeading: 'Nanite Foliage & Wind Lab',
-        labSub: 'Inspecting micro-polygon mesh streaming, wind deformation shaders, and volumetric light scattering.',
+        labHeading: 'Forest Environment Lab',
+        labSub: 'Building the landscape first, then adding foliage, Blender assets, shoreline detail, sky, and clouds.',
         featuresLabel: '02 / Key Mechanics',
         featuresHeading: 'Game Features',
         challengesLabel: '03 / PROBLEMS SOLVED',
@@ -1486,132 +1545,58 @@
         learnedHeading: 'What I Learned',
         finalResultLabel: '05 / PROJECT CONCLUSION',
         finalResultHeading: 'Final Result',
-        finalResult: 'A dense, living alpine forest environment built with millions of Nanite polygons, natural wind tree sway, and cinematic volumetric sun rays piercing the forest canopy.',
+        finalResult: 'A walkable Unreal Engine forest scene with sculpted hills, painted terrain, pine trees, rocks, grass, a shoreline, Blender-made assets, and ridgeline clouds.',
         labPanels: [
           {
-            num: '01 / NANITE', badge: 'HIGH DENSITY', color: '#10b981', title: 'Foliage Streaming',
-            desc: 'Millions of pine needles stream virtualized geometry with zero popping and ultra-smooth frame rates.',
+            num: '01 / LANDSCAPE', badge: 'SCULPT + PAINT', color: '#10b981', title: 'Terrain First',
+            desc: 'The Landscape was sculpted and painted before foliage was placed, giving the hills, water edge, and ground materials a clear base.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
               <span class="text-3xl">🌲</span>
-              <div class="absolute bottom-2 text-[9px] text-[#10b981]">NANITE FOLIAGE: STREAMING</div>
+              <div class="absolute bottom-2 text-[9px] text-[#10b981]">LANDSCAPE: SCULPT + PAINT</div>
             </div>`
           },
           {
-            num: '02 / SHADERS', badge: 'WPO WIND', color: '#34d399', title: 'Dynamic Wind Sway',
-            desc: 'World Position Offset math mimics realistic breeze ripples across branches, ferns, and tall grass.',
+            num: '02 / FOLIAGE', badge: 'DENSITY PASS', color: '#34d399', title: 'Forest Scatter',
+            desc: 'Pines, rocks, and grass were scattered across the terrain with enough density to sell the forest without overwhelming performance.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
               <span class="text-3xl animate-pulse">🍃</span>
-              <div class="absolute bottom-2 text-[9px] text-[#34d399]">TURBULENCE GUSTS: 4.2 M/S</div>
+              <div class="absolute bottom-2 text-[9px] text-[#34d399]">FOLIAGE DENSITY: TUNED</div>
             </div>`
           },
           {
-            num: '03 / VOLUMETRIC', badge: 'RAYLEIGH', color: '#6ee7b7', title: 'Volumetric Shafts',
-            desc: 'Sun rays pierce through thick treetops producing glowing god-rays with authentic atmospheric scattering.',
+            num: '03 / BLENDER', badge: 'MODULAR KIT', color: '#6ee7b7', title: 'Asset Transfer',
+            desc: 'A small Blender kit of trees, cliff rock, grass, materials, and modular tree tiles was built and then used inside the Unreal map.',
             visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
               <span class="text-3xl">☀️</span>
-              <div class="absolute bottom-2 text-[9px] text-[#6ee7b7]">SCATTERING DENSITY: 0.12</div>
+              <div class="absolute bottom-2 text-[9px] text-[#6ee7b7]">BLENDER KIT: IN MAP</div>
             </div>`
           }
         ],
         learned: [
-          'Subsurface scattering on foliage leaves turns flat green meshes into warm, translucent living plants.',
-          'Two-tier wind vectors (trunk flex vs leaf shimmer) create natural forest motion without rubbery stretching.',
-          'Nanite foliage streaming drastically lowers draw calls compared to traditional LOD billboard cascades.'
+          'Build the land first, then paint it, then place the trees.',
+          'A consistent Blender kit saves time and keeps the environment visually connected.',
+          'Density sells a forest more than adding extra meshes.',
+          'Water only works when the shore is carved first.'
         ],
         features: [
-          ['Nanite High-Poly Evergreen Trees', 'Preserving bark crevices and pine needles at infinite distance with zero LOD pops.'],
-          ['Volumetric God-Ray Light Shafts', 'Exponential height fog scattering direct sunlight into visible beams through branches.'],
-          ['Procedural Undergrowth Distribution', 'Landscape layer weightmaps automatically seed ferns, mossy rocks, and fallen leaves.']
+          ['Rolling Hills & Water Edge', 'Sculpted hills and a shoreline shape the outdoor scene.'],
+          ['Grass, Dirt & Rock Paint', 'Painted ground layers across the Landscape.'],
+          ['Pine Forest & Rock Scatter', 'Placed pine trees, rocks, and grass with controlled foliage density.'],
+          ['Blender Environment Kit', 'Built trees, cliff rock, grass, and materials in Blender for use in Unreal.'],
+          ['Tree Tiles', 'Created modular pine, autumn, and snow tree tiles.'],
+          ['Sky & Ridge Clouds', 'Added sky and clouds along the ridgeline.']
         ],
         challenges: [
-          ['Foliage Alpha Mask Overdraw', 'Converted dense branches to solid Nanite geometry to eliminate expensive masked shader overdraw.'],
-          ['Virtual Shadow Map Precision', 'Enabled shadow map geometry caching on static trees to achieve fast 60 FPS performance.'],
-          ['Wind Texture Stretching', 'Clamped World Position Offset oscillation amplitudes based on vertex color height gradients.']
+          ['Bare Terrain', 'The empty terrain looked like a heightmap, so I used paint, foliage, rocks, and grass to give it a lived-in shape.'],
+          ['Fake Grid-Placed Trees', 'Trees placed in obvious rows looked artificial, so I varied their placement and density.'],
+          ['Mismatched Tree Tiles', 'The snow and autumn tiles did not match the main pine look, so I adjusted the kit for a more consistent style.'],
+          ['Water Ate the Shore', 'The water sat too high and covered the shoreline, so I carved the shore into the terrain first.'],
+          ['Foliage Performance', 'Too much foliage hurt the frame rate, so I reduced density and kept the important areas full.']
         ],
         references: [
           ['Nanite Foliage & Forest Environments in UE5', 'Nanite & Foliage', 'These videos helped me learn how to use Nanite on high-polygon trees and forest vegetation.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+foliage+tutorial'],
           ['Volumetric Fog & God Rays in Unreal Engine 5', 'Atmosphere & Light', 'This helped me set up exponential height fog and volumetric light shafts through tree branches.', 'https://www.youtube.com/results?search_query=unreal+engine+5+volumetric+fog+god+rays'],
           ['Interactive Foliage & Wind Shaders', 'Foliage Shaders', 'This helped me write responsive wind shaders using World Position Offset so foliage sways naturally.', 'https://www.youtube.com/results?search_query=unreal+engine+5+wind+foliage+shader']
-        ]
-      },
-      'oasis-unity': {
-        title: 'OASIS - UNITY',
-        subtitle: 'A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.',
-        image: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80',
-        heroBg: 'https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80',
-        kicker: '07 / UNITY 3D · UNIVERSAL RENDER PIPELINE & DESERT BIOME',
-        accent: '#f59e0b',
-        glow1: '#f59e0b',
-        glow2: '#fbbf24',
-        aboutLabel: 'About the Project',
-        aboutHeading: 'About the Project',
-        wantedToLearnHeading: 'What I Wanted to Learn',
-        wantedToLearn: 'I wanted to learn how to create stylized environment shaders in Unity URP, implement custom fullscreen heatwave distortion post-processing passes, and build realistic windblown sand particles.',
-        overview: 'A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.',
-        tags: ['Unity URP', 'Sand Dune Shaders', 'Heatwave Post-FX', 'Desert Atmosphere'],
-        gallery: [
-          ['https://images.unsplash.com/photo-1547234935-80c7145ec969?w=1200&q=80', 'Golden Sand Ripples & Sun Haze Horizon'],
-          ['../image/mountains.png', 'Distant Canyons & Arid Mesa Formations'],
-          ['../image/off-roading.png', 'Dune Buggy Wheel Track Depressions'],
-          ['../image/flappy-night.jpg', 'Starry Desert Twilight & Campfire Embers']
-        ],
-        labHeading: 'Desert Shaders & Heatwave Lab',
-        labSub: 'Exploring specular sand sparkles, full-screen heat refraction, and procedural wind-blown dune ripples.',
-        featuresLabel: '02 / Key Mechanics',
-        featuresHeading: 'Game Features',
-        challengesLabel: '03 / PROBLEMS SOLVED',
-        challengesHeading: 'Problems I Faced',
-        challengesIntro: '',
-        learnedLabel: '04 / KEY TAKEAWAYS',
-        learnedHeading: 'What I Learned',
-        finalResultLabel: '05 / PROJECT CONCLUSION',
-        finalResultHeading: 'Final Result',
-        finalResult: 'A stylized desert biome prototype running at 60 FPS in Unity URP, featuring sparkling sand shaders, heatwave post-processing mirages, and ambient blowing sand particles.',
-        labPanels: [
-          {
-            num: '01 / SHADERS', badge: 'SPARKLE FX', color: '#f59e0b', title: 'Sand Glitter',
-            desc: 'Custom micro-specular noise sparkles simulate individual quartz crystals catching scorching sunlight.',
-            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl animate-pulse">✨</span>
-              <div class="absolute bottom-2 text-[9px] text-[#f59e0b]">QUARTZ SPECULAR: ACTIVE</div>
-            </div>`
-          },
-          {
-            num: '02 / POST-FX', badge: 'REFRACTION', color: '#fbbf24', title: 'Heat Distortion',
-            desc: 'Custom fullscreen post-processing render pass refracts screen pixels to evoke sweltering mirages.',
-            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl">🏜️</span>
-              <div class="absolute bottom-2 text-[9px] text-[#fbbf24]">HEAT SHIMMER: 1.4 HZ</div>
-            </div>`
-          },
-          {
-            num: '03 / PARTICLES', badge: 'DUST DRIFT', color: '#d97706', title: 'Blowing Sand',
-            desc: 'GPU particle simulation generates low-hanging sand wisps dancing across dune crests.',
-            visual: `<div class="relative mt-6 flex h-40 items-center justify-center rounded-xl border border-white/10 bg-black/60 p-4 font-mono text-center">
-              <span class="text-3xl">💨</span>
-              <div class="absolute bottom-2 text-[9px] text-[#d97706]">DUNE DRIFT: 2000 PARTICLES</div>
-            </div>`
-          }
-        ],
-        learned: [
-          'High ambient color temperatures combined with deep blue shadows give desert scenes cinematic depth.',
-          'Custom fullscreen render passes in URP allow flexible heat distortion with minimal frame overhead.',
-          'Normal map panning at shallow glancing angles produces convincing windblown sand surface ripples.'
-        ],
-        features: [
-          ['Stylized Glittering Sand Shader', 'Shader Graph micro-facets catch directional sunlight for realistic quartz sparkles.'],
-          ['Fullscreen Heat Haze Refraction', 'Custom URP render pass warping background pixels based on scene depth and noise.'],
-          ['Wind-Blown Sand Particle Wisps', 'Niagara-style GPU particle ribbons undulating along curved dune crests.']
-        ],
-        challenges: [
-          ['Heat Distortion Blur Overkill', 'Faded distortion intensity near the camera so gameplay controls and UI remain razor-sharp.'],
-          ['Dune Texture Repetition', 'Blended two differing noise frequencies to eliminate visible tiling patterns on massive sand dunes.'],
-          ['High Particle Fill Rate', 'Capped sand particle opacity and bounded billboards to maintain 60 FPS on mobile GPUs.']
-        ],
-        references: [
-          ['Unity URP Desert Biome & Sand Shaders', 'Unity Shaders', 'These videos helped me learn how to create sparkling sand and dune ripple shaders in Unity Shader Graph.', 'https://www.youtube.com/results?search_query=unity+urp+sand+shader+graph'],
-          ['Heat Distortion Post-Processing in Unity', 'Post-Processing', 'This helped me build fullscreen heatwave distortion effects using custom post-processing render passes.', 'https://www.youtube.com/results?search_query=unity+heat+distortion+post+processing'],
-          ['Stylized Environmental Lighting in Unity', 'Lighting & Atmosphere', 'This taught me how to set up atmospheric fog, warm color grading, and directional sun lighting in Unity URP.', 'https://www.youtube.com/results?search_query=unity+urp+stylized+lighting+tutorial']
         ]
       },
       'tennis': {
@@ -1813,7 +1798,6 @@
     if (slug === 'mountains-ue') tagBorder = 'border-sky-400/30 bg-sky-500/10 text-[#38bdf8]';
     if (slug === 'dungeon') tagBorder = 'border-purple-400/30 bg-purple-500/10 text-[#c084fc]';
     if (slug === 'forest') tagBorder = 'border-emerald-400/30 bg-emerald-500/10 text-[#10b981]';
-    if (slug === 'oasis-unity') tagBorder = 'border-amber-400/30 bg-amber-500/10 text-[#f59e0b]';
     if (slug === 'tennis') tagBorder = 'border-cyan-400/30 bg-cyan-500/10 text-[#06b6d4]';
 
     document.getElementById('projectTags').innerHTML = project.tags.map(tag =>
@@ -1840,7 +1824,6 @@
       else if (slug === 'mountains-ue') monitorCaption.textContent = '16km² Nanite Alpine Landscape';
       else if (slug === 'dungeon') monitorCaption.textContent = 'Lumen Dynamic Lighting & Melee Combat';
       else if (slug === 'forest') monitorCaption.textContent = 'Nanite Foliage & Volumetric God Rays';
-      else if (slug === 'oasis-unity') monitorCaption.textContent = 'URP Sand Shaders & Heat Distortion';
       else if (slug === 'tennis') monitorCaption.textContent = 'Ball Kinematics & Court Restitution';
       else monitorCaption.textContent = project.title + ' Runtime Preview';
     }
@@ -2064,14 +2047,21 @@
       const canvas = document.getElementById('snowfallCanvas');
       if (!canvas) return;
       canvas.style.display = 'block';
+      canvas.style.position = 'fixed';
+      canvas.style.inset = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.zIndex = '0';
       const ctx = canvas.getContext('2d');
       let width = canvas.width = window.innerWidth;
       let height = canvas.height = window.innerHeight;
 
-      window.addEventListener('resize', () => {
+      const resetCanvas = () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
-      });
+      };
+
+      window.addEventListener('resize', resetCanvas);
 
       const flakesCount = 180;
       const flakes = [];
