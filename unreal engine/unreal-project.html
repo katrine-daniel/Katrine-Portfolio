@@ -356,6 +356,17 @@
   </nav>
 
   <main>
+    <div id="gameModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 backdrop-blur-sm px-5">
+      <div class="relative w-full max-w-[1100px] rounded-2xl border border-white/10 bg-[#05070b] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
+        <button id="closeGameModal" class="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#00f59b]/40 bg-[#07110d] text-lg text-[#00f59b] shadow-[0_0_18px_rgba(0,245,155,0.18)] transition hover:scale-105">×</button>
+        <div class="overflow-hidden rounded-xl border border-white/10 bg-black">
+          <video id="gameModalVideo" class="block h-auto max-h-[78vh] w-full object-contain" controls autoplay playsinline>
+            <source src="../image/flappy bird final game.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+
     <!-- HERO SECTION -->
     <section class="project-hero px-[5vw] pb-8 pt-24 md:pt-28 md:pb-10">
       <div class="mx-auto max-w-[1500px] text-center">
@@ -415,7 +426,7 @@
 
           <!-- Right Column: Featured Video -->
           <div class="space-y-5 lg:pl-4">
-            <a href="#result" class="reveal group block mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40 hover:shadow-[0_0_28px_rgba(0,245,155,0.18)] no-underline">
+            <button id="openGameModal" type="button" class="reveal group block mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 text-left shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40 hover:shadow-[0_0_28px_rgba(0,245,155,0.18)]">
               <div class="relative mx-auto h-[420px] w-full max-w-[500px] overflow-hidden rounded-xl">
                 <video id="aboutFeaturedVideo" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted loop playsinline>
                   <source src="../image/flappy bird final game.mp4" type="video/mp4" />
@@ -440,7 +451,7 @@
                 <strong class="text-sm font-semibold text-white">Classic Pixel Visuals & Kinematics</strong>
                 <span class="text-[11px] font-mono text-white/45">FIG 01 · CORE ARCHITECTURE</span>
               </div>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -656,6 +667,32 @@
 
   <!-- SCRIPT -->
   <script>
+    const gameModal = document.getElementById('gameModal');
+    const openGameModal = document.getElementById('openGameModal');
+    const closeGameModal = document.getElementById('closeGameModal');
+    const gameModalVideo = document.getElementById('gameModalVideo');
+
+    openGameModal?.addEventListener('click', () => {
+      gameModal.classList.remove('hidden');
+      gameModal.classList.add('flex');
+      gameModalVideo.currentTime = 0;
+      gameModalVideo.play();
+    });
+
+    closeGameModal?.addEventListener('click', () => {
+      gameModal.classList.add('hidden');
+      gameModal.classList.remove('flex');
+      gameModalVideo.pause();
+    });
+
+    gameModal?.addEventListener('click', (event) => {
+      if (event.target === gameModal) {
+        gameModal.classList.add('hidden');
+        gameModal.classList.remove('flex');
+        gameModalVideo.pause();
+      }
+    });
+
     const projects = {
       'flappy-bird': {
         title: 'FLAPPY BIRD',
