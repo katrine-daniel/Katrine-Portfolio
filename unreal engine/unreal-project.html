@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flappy Bird | Unreal Engine 5 Architecture | Katrine Portfolio</title>
   <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -28,18 +31,29 @@
     };
   </script>
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: #050505; overflow-x: hidden; color: #f1f5f9; }
-    
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #050505;
+      overflow-x: hidden;
+      color: #f1f5f9;
+    }
+
     /* Dedicated Flappy Bird Cyber-Dark Atmosphere */
     body.project-flappy-bird {
       background: #040608;
-      background-image: 
+      background-image:
         radial-gradient(circle at 82% 8%, rgba(0, 245, 155, 0.14), transparent 32rem),
         radial-gradient(circle at 14% 35%, rgba(0, 210, 255, 0.12), transparent 30rem),
         radial-gradient(circle at 50% 80%, rgba(255, 208, 0, 0.05), transparent 36rem);
     }
+
     body.project-flappy-bird::before {
       content: "";
       position: fixed;
@@ -47,18 +61,34 @@
       pointer-events: none;
       z-index: -1;
       opacity: 0.18;
-      background-image: 
+      background-image:
         linear-gradient(rgba(0, 245, 155, 0.18) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 245, 155, 0.18) 1px, transparent 1px);
       background-size: 64px 64px;
       mask-image: linear-gradient(to bottom, black 20%, transparent 90%);
     }
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .reveal.visible { opacity: 1; transform: none; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-    .site-nav { background: linear-gradient(180deg, rgba(4,6,8,.85), rgba(4,6,8,0)); }
-    .nav-inner { border: 1px solid rgba(255,255,255,.12); background: rgba(8,14,20,.65); box-shadow: 0 12px 40px rgba(0,0,0,.45); backdrop-filter: blur(20px); }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .site-nav {
+      background: linear-gradient(180deg, rgba(4, 6, 8, .85), rgba(4, 6, 8, 0));
+    }
+
+    .nav-inner {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(8, 14, 20, .65);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .45);
+      backdrop-filter: blur(20px);
+    }
 
     .project-hero {
       position: relative;
@@ -72,19 +102,24 @@
     .arcade-cabinet {
       background: linear-gradient(180deg, #101921 0%, #080d12 100%);
       border: 1px solid rgba(0, 245, 155, 0.28);
-      box-shadow: 0 0 50px rgba(0, 245, 155, 0.12), 0 30px 90px rgba(0,0,0,0.85);
+      box-shadow: 0 0 50px rgba(0, 245, 155, 0.12), 0 30px 90px rgba(0, 0, 0, 0.85);
     }
+
     .arcade-screen {
       position: relative;
       background: #020305;
-      box-shadow: inset 0 0 35px rgba(0,0,0,0.85);
+      box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.85);
       overflow: hidden;
     }
+
     .arcade-screen.crt-enabled::after {
       content: " ";
       display: block;
       position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.38) 50%);
       background-size: 100% 4px;
       z-index: 20;
@@ -96,42 +131,73 @@
     body.project-flappy-bird #learned {
       background: #070c12;
       color: #f1f5f9;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
+
     body.project-flappy-bird #learned p {
-      color: rgba(255,255,255,0.72);
+      color: rgba(255, 255, 255, 0.72);
     }
+
     body.project-flappy-bird #learned h2,
     body.project-flappy-bird #learned #learnedHeading {
       color: #ffffff;
     }
+
     body.project-flappy-bird #learned #learnedLabel {
       color: #00f59b;
+    }
+
+    #challengesList,
+    #learnedText {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    #challengesList>article,
+    #learnedText>div {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 1.1rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    #challengesList>article {
+      border-top-width: 2px;
     }
 
     body.project-flappy-bird #result {
       background: #05080c;
       color: #f1f5f9;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
+
     body.project-flappy-bird #result p {
-      color: rgba(255,255,255,0.72);
+      color: rgba(255, 255, 255, 0.72);
     }
+
     body.project-flappy-bird #result h2,
     body.project-flappy-bird #result #resultHeading {
       color: #ffffff;
     }
+
     body.project-flappy-bird #result #resultLabel {
       color: #00d2ff;
     }
+
     body.project-flappy-bird #result .result-back-btn {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.06);
       color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 9999px;
       transition: all 0.3s ease;
     }
+
     body.project-flappy-bird #result .result-back-btn:hover {
       background: rgba(0, 245, 155, 0.15);
       border-color: rgba(0, 245, 155, 0.5);
@@ -151,6 +217,7 @@
       justify-content: space-between;
       text-decoration: none;
     }
+
     .yt-ref-card:hover {
       border-color: rgba(239, 68, 68, 0.5);
       background: rgba(18, 25, 36, 0.85);
@@ -163,49 +230,143 @@
       width: min(76vw, 860px);
       transition: transform 0.4s ease;
     }
+
     .gallery-card:hover {
       transform: translateY(-4px);
     }
+
     .gallery-card img {
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
     }
+
     .gallery-card:hover img {
       transform: scale(1.025);
       filter: saturate(1.12) brightness(1.05);
     }
-    .gallery-viewport { cursor: grab; scrollbar-width: none; }
-    .gallery-viewport::-webkit-scrollbar { display: none; }
-    .gallery-viewport.dragging { cursor: grabbing; }
+
+    .gallery-viewport {
+      cursor: grab;
+      scrollbar-width: none;
+    }
+
+    .gallery-viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-viewport.dragging {
+      cursor: grabbing;
+    }
 
     /* Interactive Physics Lab Cards */
     .lab-card {
-      background: rgba(11, 18, 26, 0.6);
+      background: linear-gradient(135deg, rgba(14, 22, 32, 0.75) 0%, rgba(6, 10, 16, 0.88) 100%);
       border: 1px solid rgba(255, 255, 255, 0.09);
-      backdrop-filter: blur(16px);
-      transition: all 0.3s ease;
+      backdrop-filter: blur(18px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .lab-card:hover {
-      border-color: rgba(0, 245, 155, 0.35);
-      box-shadow: 0 12px 35px rgba(0, 245, 155, 0.08);
+      border-color: rgba(0, 245, 155, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 245, 155, 0.12);
+    }
+
+    /* Enhanced Problem & Insight Cards */
+    .challenge-card {
+      background: linear-gradient(135deg, rgba(14, 22, 32, 0.75) 0%, rgba(6, 10, 16, 0.88) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .challenge-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00f59b, transparent);
+      opacity: 0.65;
+      transition: opacity 0.35s ease;
+    }
+
+    .challenge-card:hover {
+      border-color: rgba(0, 245, 155, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 28px rgba(0, 245, 155, 0.14);
+    }
+
+    .challenge-card:hover::before {
+      opacity: 1;
+    }
+
+    .takeaway-card {
+      background: linear-gradient(135deg, rgba(12, 20, 30, 0.65) 0%, rgba(5, 8, 14, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .takeaway-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, #00f59b, transparent);
+      opacity: 0.5;
+      transition: opacity 0.35s ease;
+    }
+
+    .takeaway-card:hover {
+      border-color: rgba(0, 210, 255, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 28px rgba(0, 210, 255, 0.12);
+    }
+
+    .takeaway-card:hover::before {
+      opacity: 1;
     }
 
     /* Custom Cursors & Animations */
-    body.custom-cursor-active, 
+    body.custom-cursor-active,
     body.custom-cursor-active * {
       cursor: none !important;
     }
+
     @keyframes wingFlap {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(-35deg) translateY(-2px); }
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(-35deg) translateY(-2px);
+      }
     }
+
     .bird-flapping .bird-wing {
       animation: wingFlap 0.14s ease-in-out infinite alternate;
     }
+
     @keyframes snowflakeSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
     .snowflake-spin {
       animation: snowflakeSpin 14s linear infinite;
     }
@@ -215,20 +376,25 @@
       background: #0d0804;
       border-color: rgba(249, 115, 22, 0.15);
     }
+
     body.project-off-roading #learned #learnedLabel {
       color: #f97316;
     }
+
     body.project-off-roading .lab-card:hover {
       border-color: rgba(249, 115, 22, 0.45);
       box-shadow: 0 12px 35px rgba(249, 115, 22, 0.12);
     }
+
     body.project-off-roading #result {
       background: #080503;
       border-top: 1px solid rgba(249, 115, 22, 0.15);
     }
+
     body.project-off-roading #result #resultLabel {
       color: #f97316;
     }
+
     body.project-off-roading #result .result-back-btn:hover {
       background: rgba(249, 115, 22, 0.15);
       border-color: rgba(249, 115, 22, 0.5);
@@ -241,20 +407,25 @@
       background: #030810;
       border-color: rgba(56, 189, 248, 0.15);
     }
+
     body.project-mountains-ue #learned #learnedLabel {
       color: #38bdf8;
     }
+
     body.project-mountains-ue .lab-card:hover {
       border-color: rgba(56, 189, 248, 0.45);
       box-shadow: 0 12px 35px rgba(56, 189, 248, 0.12);
     }
+
     body.project-mountains-ue #result {
       background: #02050b;
       border-top: 1px solid rgba(56, 189, 248, 0.15);
     }
+
     body.project-mountains-ue #result #resultLabel {
       color: #38bdf8;
     }
+
     body.project-mountains-ue #result .result-back-btn:hover {
       background: rgba(56, 189, 248, 0.15);
       border-color: rgba(56, 189, 248, 0.5);
@@ -264,12 +435,25 @@
 
     /* Flappy Canvas HUD Pulse */
     @keyframes pulseGlow {
-      0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
+
+      0%,
+      100% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.03);
+      }
     }
-    .pulse-glow { animation: pulseGlow 2.4s infinite ease-in-out; }
+
+    .pulse-glow {
+      animation: pulseGlow 2.4s infinite ease-in-out;
+    }
   </style>
 </head>
+
 <body class="bg-[#050505] font-manrope text-white">
 
   <!-- Real-time Snowfall Background Canvas for Mountains -->
@@ -279,61 +463,65 @@
   <canvas id="cursorParticleCanvas" class="pointer-events-none fixed inset-0 z-[99998]"></canvas>
 
   <!-- Dynamic Theme Cursor (Bird / Car / Snowflake) -->
-  <div id="themeCursor" class="pointer-events-none fixed z-[99999] will-change-transform" style="display: none; transform: translate3d(-50%, -50%, 0);">
-    
+  <div id="themeCursor" class="pointer-events-none fixed z-[99999] will-change-transform"
+    style="display: none; transform: translate3d(-50%, -50%, 0);">
+
     <!-- 01 / Flappy Bird Cursor (Bird & Pipe Theme) -->
-    <div id="birdCursorWrap" style="display: none; width: 44px; height: 36px; filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.7)) drop-shadow(0 4px 10px rgba(0,0,0,0.8));">
+    <div id="birdCursorWrap"
+      style="display: none; width: 44px; height: 36px; filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.7)) drop-shadow(0 4px 10px rgba(0,0,0,0.8));">
       <svg width="44" height="36" viewBox="0 0 44 36" fill="none">
-        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#FFD000" stroke="#000000" stroke-width="2.5"/>
-        <ellipse cx="18" cy="22" rx="11" ry="8" fill="#FFF085"/>
-        <ellipse cx="26" cy="12" rx="6" ry="7" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
-        <ellipse cx="28" cy="12" rx="2.5" ry="3.5" fill="#000000"/>
-        <circle cx="27" cy="10" r="1" fill="#FFFFFF"/>
-        <path d="M30 16 H41 C43 16 43 20 41 21 H30 Z" fill="#FF5E00" stroke="#000000" stroke-width="2"/>
-        <path d="M28 20 H39 C41 20 41 24 39 25 H28 Z" fill="#FF7B29" stroke="#000000" stroke-width="2"/>
+        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#FFD000" stroke="#000000" stroke-width="2.5" />
+        <ellipse cx="18" cy="22" rx="11" ry="8" fill="#FFF085" />
+        <ellipse cx="26" cy="12" rx="6" ry="7" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+        <ellipse cx="28" cy="12" rx="2.5" ry="3.5" fill="#000000" />
+        <circle cx="27" cy="10" r="1" fill="#FFFFFF" />
+        <path d="M30 16 H41 C43 16 43 20 41 21 H30 Z" fill="#FF5E00" stroke="#000000" stroke-width="2" />
+        <path d="M28 20 H39 C41 20 41 24 39 25 H28 Z" fill="#FF7B29" stroke="#000000" stroke-width="2" />
         <g class="bird-wing" style="transform-origin: 12px 17px;">
-          <ellipse cx="12" cy="17" rx="8" ry="5" fill="#FFFFFF" stroke="#000000" stroke-width="2"/>
-          <path d="M6 18 Q12 14 18 18" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+          <ellipse cx="12" cy="17" rx="8" ry="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+          <path d="M6 18 Q12 14 18 18" stroke="#CBD5E1" stroke-width="1.5" fill="none" />
         </g>
       </svg>
     </div>
 
     <!-- 02 / Off-Roading Car Cursor (Rugged 4x4 Truck) -->
-    <div id="carCursorWrap" style="display: none; width: 46px; height: 32px; filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.75)) drop-shadow(0 6px 12px rgba(0,0,0,0.85));">
+    <div id="carCursorWrap"
+      style="display: none; width: 46px; height: 32px; filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.75)) drop-shadow(0 6px 12px rgba(0,0,0,0.85));">
       <svg width="46" height="32" viewBox="0 0 46 32" fill="none">
-        <rect x="4" y="2" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5"/>
-        <rect x="33" y="2" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5"/>
-        <rect x="4" y="24" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5"/>
-        <rect x="33" y="24" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5"/>
-        <rect x="7" y="5" width="32" height="22" rx="4.5" fill="#EA580C" stroke="#7C2D12" stroke-width="2"/>
-        <rect x="9" y="7" width="28" height="18" rx="3.5" fill="#F97316"/>
-        <path d="M26 8 L33 10 L33 22 L26 24 Z" fill="#38BDF8" opacity="0.9"/>
-        <rect x="13" y="9" width="11" height="14" rx="2" fill="#27272A" stroke="#09090B" stroke-width="1"/>
-        <rect x="25" y="10" width="2" height="12" rx="1" fill="#FEF08A"/>
-        <circle cx="40" cy="9" r="2" fill="#FEF08A"/>
-        <circle cx="40" cy="23" r="2" fill="#FEF08A"/>
-        <rect x="2" y="11" width="5" height="10" rx="2" fill="#18181B" stroke="#09090B"/>
+        <rect x="4" y="2" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5" />
+        <rect x="33" y="2" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5" />
+        <rect x="4" y="24" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5" />
+        <rect x="33" y="24" width="9" height="6" rx="2" fill="#18181B" stroke="#09090B" stroke-width="1.5" />
+        <rect x="7" y="5" width="32" height="22" rx="4.5" fill="#EA580C" stroke="#7C2D12" stroke-width="2" />
+        <rect x="9" y="7" width="28" height="18" rx="3.5" fill="#F97316" />
+        <path d="M26 8 L33 10 L33 22 L26 24 Z" fill="#38BDF8" opacity="0.9" />
+        <rect x="13" y="9" width="11" height="14" rx="2" fill="#27272A" stroke="#09090B" stroke-width="1" />
+        <rect x="25" y="10" width="2" height="12" rx="1" fill="#FEF08A" />
+        <circle cx="40" cy="9" r="2" fill="#FEF08A" />
+        <circle cx="40" cy="23" r="2" fill="#FEF08A" />
+        <rect x="2" y="11" width="5" height="10" rx="2" fill="#18181B" stroke="#09090B" />
       </svg>
     </div>
 
     <!-- 03 / Mountains Snowflake Cursor (Ice Crystal) -->
-    <div id="snowCursorWrap" style="display: none; width: 44px; height: 44px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.9)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));">
+    <div id="snowCursorWrap"
+      style="display: none; width: 44px; height: 44px; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.9)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));">
       <svg width="44" height="44" viewBox="0 0 44 44" fill="none" class="snowflake-spin">
         <g stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
-          <line x1="22" y1="4" x2="22" y2="40"/>
-          <line x1="6.4" y1="13" x2="37.6" y2="31"/>
-          <line x1="6.4" y1="31" x2="37.6" y2="13"/>
+          <line x1="22" y1="4" x2="22" y2="40" />
+          <line x1="6.4" y1="13" x2="37.6" y2="31" />
+          <line x1="6.4" y1="31" x2="37.6" y2="13" />
         </g>
         <g stroke="#67E8F9" stroke-width="1.6" stroke-linecap="round" fill="none">
-          <path d="M19 10 L22 13 L25 10"/>
-          <path d="M19 34 L22 31 L25 34"/>
-          <path d="M11 18 L14 17 L13 14"/>
-          <path d="M33 26 L30 27 L31 30"/>
-          <path d="M13 30 L14 27 L11 26"/>
-          <path d="M31 14 L30 17 L33 18"/>
+          <path d="M19 10 L22 13 L25 10" />
+          <path d="M19 34 L22 31 L25 34" />
+          <path d="M11 18 L14 17 L13 14" />
+          <path d="M33 26 L30 27 L31 30" />
+          <path d="M13 30 L14 27 L11 26" />
+          <path d="M31 14 L30 17 L33 18" />
         </g>
-        <circle cx="22" cy="22" r="3.5" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5"/>
-        <circle cx="22" cy="22" r="1.5" fill="#FFFFFF"/>
+        <circle cx="22" cy="22" r="3.5" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5" />
+        <circle cx="22" cy="22" r="1.5" fill="#FFFFFF" />
       </svg>
     </div>
 
@@ -347,20 +535,27 @@
         <span>KATRINE.</span>
       </a>
       <div class="flex items-center gap-5 text-[11px] md:text-sm">
-        <a href="../index.html#projects-showcase" class="text-white/70 transition hover:text-[#00f59b] no-underline">WORK</a>
+        <a href="../index.html#projects-showcase"
+          class="text-white/70 transition hover:text-[#00f59b] no-underline">WORK</a>
         <a href="../index.html#experience" class="text-white/70 transition hover:text-[#00f59b] no-underline">INFO</a>
         <a href="../index.html#vault" class="text-white/70 transition hover:text-[#00f59b] no-underline">VAULT</a>
-        <a href="../index.html" class="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-syne text-[10px] uppercase tracking-[2px] text-white transition hover:border-[#00f59b] hover:text-[#00f59b] no-underline">← Back to Portfolio</a>
+        <a href="../index.html"
+          class="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-syne text-[10px] uppercase tracking-[2px] text-white transition hover:border-[#00f59b] hover:text-[#00f59b] no-underline">←
+          Back to Portfolio</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <div id="gameModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 backdrop-blur-sm px-5">
-      <div class="relative w-full max-w-[1100px] rounded-2xl border border-white/10 bg-[#05070b] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
-        <button id="closeGameModal" class="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#00f59b]/40 bg-[#07110d] text-lg text-[#00f59b] shadow-[0_0_18px_rgba(0,245,155,0.18)] transition hover:scale-105">×</button>
+    <div id="gameModal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 backdrop-blur-sm px-5">
+      <div
+        class="relative w-full max-w-[1100px] rounded-2xl border border-white/10 bg-[#05070b] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.8)]">
+        <button id="closeGameModal"
+          class="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#00f59b]/40 bg-[#07110d] text-lg text-[#00f59b] shadow-[0_0_18px_rgba(0,245,155,0.18)] transition hover:scale-105">×</button>
         <div class="overflow-hidden rounded-xl border border-white/10 bg-black">
-          <video id="gameModalVideo" class="block h-auto max-h-[78vh] w-full object-contain" controls autoplay playsinline>
+          <video id="gameModalVideo" class="block h-auto max-h-[78vh] w-full object-contain" controls autoplay
+            playsinline>
             <source src="../image/flappy bird final game.mp4" type="video/mp4" />
           </video>
         </div>
@@ -370,21 +565,26 @@
     <!-- HERO SECTION -->
     <section class="project-hero px-[5vw] pb-8 pt-24 md:pt-28 md:pb-10">
       <div class="mx-auto max-w-[1500px] text-center">
-        
+
         <!-- Kicker Badge -->
-        <div id="heroKickerWrap" class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-950/45 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(0,245,155,0.15)]">
+        <div id="heroKickerWrap"
+          class="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-950/45 px-4 py-1.5 backdrop-blur-md shadow-[0_0_20px_rgba(0,245,155,0.15)]">
           <span id="heroKickerDot" class="inline-block h-1.5 w-1.5 animate-ping rounded-full bg-[#00f59b]"></span>
-          <p id="heroKicker" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b]">02 / UNREAL ENGINE 5 · BLUEPRINT & PHYSICS LAB</p>
+          <p id="heroKicker" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b]">02 / UNREAL ENGINE 5
+            · BLUEPRINT & PHYSICS LAB</p>
         </div>
 
         <!-- Main Title -->
-        <h1 id="projectTitle" class="mt-4 font-clash text-[14vw] uppercase leading-[.82] tracking-tight md:text-[8.5vw] bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(0,245,155,0.25)]">
+        <h1 id="projectTitle"
+          class="mt-4 font-clash text-[14vw] uppercase leading-[.82] tracking-tight md:text-[8.5vw] bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent drop-shadow-[0_0_50px_rgba(0,245,155,0.25)]">
           FLAPPY BIRD
         </h1>
 
         <!-- Subtitle -->
-        <p id="projectSubtitle" class="mx-auto mt-4 max-w-[800px] text-base leading-relaxed text-white/80 md:text-xl font-normal drop-shadow-md">
-          An engineered Unreal Engine 5 prototype featuring deterministic jump impulse physics, pooled pipe actors with zero garbage collection hitching, and fair collision box budgeting.
+        <p id="projectSubtitle"
+          class="mx-auto mt-4 max-w-[800px] text-base leading-relaxed text-white/80 md:text-xl font-normal drop-shadow-md">
+          An engineered Unreal Engine 5 prototype featuring deterministic jump impulse physics, pooled pipe actors with
+          zero garbage collection hitching, and fair collision box budgeting.
         </p>
 
         <!-- Dynamic Tags -->
@@ -399,52 +599,71 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="border-t border-white/10 bg-[#05070b] px-[5vw] py-20 md:py-28">
       <div class="mx-auto max-w-[1380px]">
-        <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">About the Project</p>
+        <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">About the
+          Project</p>
 
         <div class="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_1.2fr]">
           <!-- Left Column: Heading + Description -->
           <div class="space-y-7 lg:pt-3">
-            <h2 id="aboutHeading" class="reveal font-clash text-4xl sm:text-5xl md:text-6xl lg:text-[62px] uppercase leading-[0.98] tracking-tight text-white">
+            <h2 id="aboutHeading"
+              class="reveal font-clash text-4xl sm:text-5xl md:text-6xl lg:text-[62px] uppercase leading-[0.98] tracking-tight text-white">
               About the Project
             </h2>
 
-            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.6] tracking-tight text-white/90">
-              This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a city skyline background, just like the original mobile game.
+            <p id="overviewText"
+              class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.6] tracking-tight text-white/90">
+              This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird,
+              green pipes, and a city skyline background, just like the original mobile game.
             </p>
 
-            <div id="wantedToLearnWrap" class="reveal rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-md">
+            <div id="wantedToLearnWrap"
+              class="reveal rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-md">
               <div class="flex items-center justify-between">
-                <span id="wantedToLearnBadge" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b] font-semibold">02 / Goals</span>
-                <span id="wantedToLearnPill" class="rounded px-2.5 py-0.5 font-mono text-[10px] bg-emerald-500/20 text-[#00f59b] border border-emerald-500/30">LEARNING OBJECTIVE</span>
+                <span id="wantedToLearnBadge"
+                  class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b] font-semibold">02 / Goals</span>
+                <span id="wantedToLearnPill"
+                  class="rounded px-2.5 py-0.5 font-mono text-[10px] bg-emerald-500/20 text-[#00f59b] border border-emerald-500/30">LEARNING
+                  OBJECTIVE</span>
               </div>
-              <h3 id="wantedToLearnHeading" class="mt-4 font-clash text-2xl uppercase tracking-tight text-white">What I Wanted to Learn</h3>
+              <h3 id="wantedToLearnHeading" class="mt-4 font-clash text-2xl uppercase tracking-tight text-white">What I
+                Wanted to Learn</h3>
               <p id="wantedToLearnDesc" class="mt-3 text-base sm:text-lg leading-[1.8] text-white/75">
-                I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to make a simple 2D-style arcade game feel fun to play.
+                I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to
+                make a simple 2D-style arcade game feel fun to play.
               </p>
             </div>
           </div>
 
           <!-- Right Column: Featured Video -->
           <div class="space-y-5 lg:pl-4">
-            <button id="openGameModal" type="button" class="reveal group block mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 text-left shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40 hover:shadow-[0_0_28px_rgba(0,245,155,0.18)]">
+            <button id="openGameModal" type="button"
+              class="reveal group block mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 text-left shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40 hover:shadow-[0_0_28px_rgba(0,245,155,0.18)]">
               <div class="relative mx-auto h-[420px] w-full max-w-[500px] overflow-hidden rounded-xl">
-                <video id="aboutFeaturedVideo" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted loop playsinline>
+                <video id="aboutFeaturedVideo"
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay
+                  muted loop playsinline>
                   <source src="../image/flappy bird final game.mp4" type="video/mp4" />
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
 
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div class="inline-flex items-center gap-2 rounded-full border border-[#00f59b]/50 bg-[#06130f]/85 px-4 py-2 text-[10px] font-syne uppercase tracking-[3px] text-[#00f59b] shadow-[0_0_20px_rgba(0,245,155,0.18)] backdrop-blur-sm">
+                <div
+                  class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                  <div
+                    class="inline-flex items-center gap-2 rounded-full border border-[#00f59b]/70 bg-[#0a1d18]/95 px-5 py-3 text-[10px] font-syne uppercase tracking-[3px] text-[#dffef6] shadow-[0_0_24px_rgba(0,245,155,0.35),0_0_48px_rgba(0,245,155,0.18)] backdrop-blur-sm ring-1 ring-[#00f59b]/40">
+                    <span
+                      class="inline-block h-2 w-2 rounded-full bg-[#00f59b] shadow-[0_0_12px_rgba(0,245,155,0.9)]"></span>
                     <span>Click to view the full game</span>
                   </div>
                 </div>
 
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 rounded-md bg-black/75 px-2.5 py-1 font-mono text-[10px] font-semibold text-[#00f59b] backdrop-blur-md border border-emerald-500/30">
+                  <span
+                    class="inline-flex items-center gap-1.5 rounded-md bg-black/75 px-2.5 py-1 font-mono text-[10px] font-semibold text-[#00f59b] backdrop-blur-md border border-emerald-500/30">
                     <span class="h-1.5 w-1.5 rounded-full bg-[#00f59b] shadow-[0_0_6px_#00f59b]"></span>
                     UE5.4 BLUEPRINT ENGINE
                   </span>
-                  <span class="font-mono text-[10px] text-white/60 bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">60 FPS · FAIR COLLISION</span>
+                  <span class="font-mono text-[10px] text-white/60 bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">60
+                    FPS · FAIR COLLISION</span>
                 </div>
               </div>
               <div class="mt-3 flex items-center justify-between px-1">
@@ -458,41 +677,59 @@
     </section>
 
     <!-- GAME FEATURES SECTION -->
-    <section id="features" class="border-t border-white/10 bg-gradient-to-b from-[#070d13] to-[#040608] px-[8vw] py-24 md:py-36">
-      <div class="mx-auto max-w-[1200px]">
-        <p id="featuresLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">02 / Key Mechanics</p>
-        <h2 id="featuresHeading" class="reveal mt-6 max-w-[900px] font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">
+    <section id="features"
+      class="border-t border-white/10 bg-gradient-to-b from-[#070d13] to-[#040608] px-[6vw] py-24 md:py-32">
+      <div class="mx-auto max-w-[1400px]">
+        <p id="featuresLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">02 / Key
+          Mechanics</p>
+        <h2 id="featuresHeading"
+          class="reveal mt-4 max-w-[900px] font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
           Game Features
         </h2>
-        
-        <div id="featuresList" class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <div id="featuresList" class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </section>
 
-    <!-- PROBLEMS I FACED (CHALLENGES) SECTION -->
-    <section id="challenges" class="border-t border-white/10 bg-[#030508] px-[8vw] py-24 md:py-36">
-      <div class="mx-auto max-w-[1200px] text-center">
-        <p id="challengesLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-red-400">03 / Problems Solved</p>
-        <h2 id="challengesHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[6vw]">
-          Problems I Faced
-        </h2>
-        <p id="challengesIntro" class="reveal mx-auto mt-8 max-w-[700px] text-base leading-relaxed text-white/65 md:text-lg" style="display: none;">
-        </p>
 
-        <div id="challengesList" class="mt-16 grid gap-6 text-left md:grid-cols-3"></div>
-      </div>
-    </section>
+    <!-- PROBLEMS I FACED + WHAT I LEARNED (SHARED BALANCED SECTION) -->
+    <section id="insights" class="border-t border-white/10 bg-[#030508] px-[6vw] py-24 md:py-32">
+      <div class="mx-auto grid max-w-[1400px] gap-10 lg:grid-cols-2 lg:gap-14 items-start">
 
-    <!-- WHAT I LEARNED SECTION -->
-    <section id="learned" class="border-t border-white/10 bg-[#05070a] px-[8vw] py-24 md:py-36">
-      <div class="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[.85fr_1.15fr]">
-        <div>
-          <p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">04 / Key Takeaways</p>
-          <h2 id="learnedHeading" class="reveal mt-6 font-clash text-[11vw] uppercase leading-[.88] md:text-[5.5vw]">
-            What I Learned
-          </h2>
+        <!-- Left: Problems Solved -->
+        <div class="space-y-6">
+          <div class="border-b border-white/10 pb-6">
+            <p id="challengesLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-red-400">03 /
+              Problems Solved</p>
+            <h2 id="challengesHeading"
+              class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
+              Problems I Faced
+            </h2>
+            <p id="challengesIntro" class="reveal mt-3 max-w-[600px] text-sm md:text-base leading-relaxed text-white/60"
+              style="display: none;">
+            </p>
+          </div>
+
+          <div id="challengesList" class="mt-8 grid gap-5 text-left grid-cols-1"></div>
         </div>
-        <div id="learnedText" class="space-y-6 lg:pt-8"></div>
+
+        <!-- Right: Key Takeaways -->
+        <div class="space-y-6 lg:pl-4">
+          <div class="border-b border-white/10 pb-6">
+            <p id="learnedLabel" class="reveal font-syne text-[10px] uppercase tracking-[4px] text-[#00f59b]">04 / Key
+              Takeaways</p>
+            <h2 id="learnedHeading"
+              class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
+              What I Learned
+            </h2>
+            <p class="reveal mt-3 text-sm md:text-base leading-relaxed text-white/60">
+              Core engineering principles and Blueprint rules unlocked during development.
+            </p>
+          </div>
+
+          <div id="learnedText" class="mt-8 grid gap-5 text-left grid-cols-1"></div>
+        </div>
+
       </div>
     </section>
 
@@ -501,11 +738,14 @@
       <div class="mb-12 px-[8vw]">
         <div class="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p class="font-syne text-[10px] uppercase tracking-[4px] text-[#00d2ff]">05 / Project Renders & Architecture</p>
-            <h2 class="mt-4 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">Inside The Build.</h2>
+            <p class="font-syne text-[10px] uppercase tracking-[4px] text-[#00d2ff]">05 / Project Renders & Architecture
+            </p>
+            <h2 class="mt-4 font-clash text-[11vw] uppercase leading-[.88] text-white md:text-[5.5vw]">Inside The Build.
+            </h2>
           </div>
           <p class="max-w-[480px] text-sm text-white/55">
-            Drag left or right, or scroll horizontally to inspect Blueprints, wireframe debug collision viewports, and volumetric night lighting.
+            Drag left or right, or scroll horizontally to inspect Blueprints, wireframe debug collision viewports, and
+            volumetric night lighting.
           </p>
         </div>
       </div>
@@ -519,58 +759,69 @@
     <!-- REFERENCES SECTION (YOUTUBE VIDEOS ONLY) -->
     <section id="result" class="border-t border-white/10 bg-[#05080c] px-[6vw] py-24 md:py-32">
       <div class="mx-auto max-w-[1380px]">
-        
+
         <!-- Header -->
         <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/10 pb-8">
           <div>
             <p id="resultLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-red-400">
               05 / OUTCOME & REFERENCES
             </p>
-            <h2 id="resultHeading" class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
+            <h2 id="resultHeading"
+              class="reveal mt-3 font-clash text-4xl sm:text-5xl md:text-6xl uppercase tracking-tight text-white">
               FINAL RESULT
             </h2>
           </div>
           <div class="max-w-[580px]">
             <p id="resultDesc" class="reveal text-base md:text-lg text-white/85 leading-relaxed font-normal">
-              A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a score system, just like the original game.
+              A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a
+              score system, just like the original game.
             </p>
           </div>
         </div>
 
         <!-- YouTube Video Links Grid -->
         <div id="referencesGrid" class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          
+
           <!-- YouTube Link 1 -->
-          <a href="https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+tutorial" target="_blank" rel="noopener noreferrer"
-             class="yt-ref-card group reveal">
+          <a href="https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+tutorial" target="_blank"
+            rel="noopener noreferrer" class="yt-ref-card group reveal">
             <div>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
-                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  <div
+                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
                   </div>
                   <div>
-                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                    <span
+                      class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
                       <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> YouTube Tutorial
                     </span>
                     <div class="font-mono text-[11px] text-white/40">PaperZD & Physics</div>
                   </div>
                 </div>
-                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
                   Open ↗
                 </span>
               </div>
 
-              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+              <h3
+                class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
                 Unreal Engine 5: Flappy Bird Blueprint Guide
               </h3>
               <p class="mt-3 text-sm leading-relaxed text-white/60">
-                Complete walkthrough on PaperZD character blueprints, 2D viewport camera setup, vertical jump velocity impulse, and terminal velocity clamps.
+                Complete walkthrough on PaperZD character blueprints, 2D viewport camera setup, vertical jump velocity
+                impulse, and terminal velocity clamps.
               </p>
             </div>
 
             <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
-              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+              <span
+                class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
                 Watch on YouTube &rarr;
               </span>
               <span class="font-mono text-[10px] text-white/30">youtube.com</span>
@@ -578,36 +829,45 @@
           </a>
 
           <!-- YouTube Link 2 -->
-          <a href="https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner" target="_blank" rel="noopener noreferrer"
-             class="yt-ref-card group reveal">
+          <a href="https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner" target="_blank"
+            rel="noopener noreferrer" class="yt-ref-card group reveal">
             <div>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
-                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  <div
+                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
                   </div>
                   <div>
-                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                    <span
+                      class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
                       <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Performance Guide
                     </span>
                     <div class="font-mono text-[11px] text-white/40">Memory & GC</div>
                   </div>
                 </div>
-                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
                   Open ↗
                 </span>
               </div>
 
-              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+              <h3
+                class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
                 Actor Object Pooling & Zero GC Lag in UE5
               </h3>
               <p class="mt-3 text-sm leading-relaxed text-white/60">
-                Architecture teardown on pre-allocating obstacle actor pools and cycling off-screen actors to eliminate garbage collector hitching and preserve 60 FPS.
+                Architecture teardown on pre-allocating obstacle actor pools and cycling off-screen actors to eliminate
+                garbage collector hitching and preserve 60 FPS.
               </p>
             </div>
 
             <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
-              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+              <span
+                class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
                 Watch on YouTube &rarr;
               </span>
               <span class="font-mono text-[10px] text-white/30">youtube.com</span>
@@ -615,36 +875,45 @@
           </a>
 
           <!-- YouTube Link 3 -->
-          <a href="https://www.youtube.com/results?search_query=flappy+bird+collision+hitbox+design+gdc" target="_blank" rel="noopener noreferrer"
-             class="yt-ref-card group reveal">
+          <a href="https://www.youtube.com/results?search_query=flappy+bird+collision+hitbox+design+gdc" target="_blank"
+            rel="noopener noreferrer" class="yt-ref-card group reveal">
             <div>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
-                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  <div
+                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/15 text-red-500 border border-red-500/30 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
                   </div>
                   <div>
-                    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
+                    <span
+                      class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[1.5px] text-red-400 font-semibold">
                       <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Design Analysis
                     </span>
                     <div class="font-mono text-[11px] text-white/40">GDC & Game Feel</div>
                   </div>
                 </div>
-                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-white/50 group-hover:text-white group-hover:border-red-500/30">
                   Open ↗
                 </span>
               </div>
 
-              <h3 class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
+              <h3
+                class="mt-6 font-clash text-xl uppercase tracking-tight text-white transition-colors duration-300 group-hover:text-red-400">
                 Hitbox Forgiveness & Fair Collision Bounds
               </h3>
               <p class="mt-3 text-sm leading-relaxed text-white/60">
-                Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates edge-of-the-seat near misses instead of frustration.
+                Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates
+                edge-of-the-seat near misses instead of frustration.
               </p>
             </div>
 
             <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-4">
-              <span class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
+              <span
+                class="font-mono text-xs font-semibold text-red-400 transition-transform duration-300 group-hover:translate-x-1">
                 Watch on YouTube &rarr;
               </span>
               <span class="font-mono text-[10px] text-white/30">youtube.com</span>
@@ -655,7 +924,8 @@
 
         <!-- Return to All Projects Button -->
         <div class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8">
-          <a href="../index.html#projects-showcase" class="result-back-btn inline-flex items-center gap-2 px-8 py-4 font-syne text-[11px] uppercase tracking-[3px]">
+          <a href="../index.html#projects-showcase"
+            class="result-back-btn inline-flex items-center gap-2 px-8 py-4 font-syne text-[11px] uppercase tracking-[3px]">
             <span>&larr; Return to All Projects</span>
           </a>
           <span class="font-mono text-xs text-white/40">UNREAL ENGINE 5 ARCHITECTURE STUDY</span>
@@ -712,8 +982,10 @@
         gallery: [
           ['../image/flappy-bird.png', 'Classic Arcade Frame & In-Game View'],
           ['../image/flappy-blueprint.jpg', 'UE5 Blueprint Logic: Jump Impulse & Object Pooling Graph'],
-          ['../image/flappy-hitbox.jpg', 'Wireframe Debug Collision: 85% Fair Capsule Tolerances'],
-          ['../image/flappy-night.jpg', 'Volumetric Dusk Skyline & Cyberpunk Pipe World']
+          ['../image/fb_background.png', 'Background'],
+          ['../image/fb_base.png', 'Base'],
+          ['../image/fb_bird.png', 'Flappy Bird'],
+          ['../image/Failed_ FB.png', 'Restart Game']
         ],
         labHeading: 'UE5 Systems & Blueprint Lab',
         labSub: 'Explore the core architectural mechanics designed to elevate feel and performance beyond generic clones.',
@@ -770,28 +1042,28 @@
           'Scrolling city background for a moving, arcade feel',
           'Game restarts quickly so you can try again'
         ],
-        challengesLabel: '03 / Problems Solved',
+        challengesLabel: '03 / PROBLEMS SOLVED',
         challengesHeading: 'Problems I Faced',
         challengesIntro: '',
         challenges: [
-          ['Floaty jump (Day 2)', "The bird's jump felt too soft, not sharp. I fixed it by increasing jump force and making gravity stronger while falling."],
-          ['Lag from new pipes (Day 3)', "New pipes were spawning every 2 seconds, causing small lag. I fixed it by reusing old pipes instead of making new ones (object pooling)."],
-          ['Unfair collision (Day 4)', "The pipe's hit box was too big, so the game ended too early. I made the hit box 15% smaller for a fairer feel."]
+          ['Floaty jump', "The bird's jump felt too soft, not sharp. I fixed it by increasing jump force and making gravity stronger while falling."],
+          ['Lag from new pipes', "New pipes were spawning every 2 seconds, causing small lag. I fixed it by reusing old pipes instead of making new ones (object pooling)."],
+          ['Unfair collision', "The pipe's hit box was too big, so the game ended too early. I made the hit box 15% smaller for a fairer feel."]
         ],
-        learnedLabel: '04 / Key Takeaways',
+        learnedLabel: '04 / KEY TAKEAWAYS',
         learnedHeading: 'What I Learned',
         learned: [
-          'Making the hit box smaller instead of exact size makes the game feel more fair to play.',
+          'Changing gravity and jump force helps the game feel sharp and fun, not slow or floaty.',
           'Reusing old pipes instead of creating new ones stops lag and keeps the game smooth.',
-          'Changing gravity and jump force helps the game feel sharp and fun, not slow or floaty.'
+          'Making the hit box smaller instead of exact size makes the game feel more fair to play.'
         ],
-        finalResultLabel: '05 / Project Conclusion',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
         finalResultHeading: 'Final Result',
         finalResult: 'A simple, working Flappy Bird clone built in Unreal Engine, with jump physics, scrolling pipes, and a score system, just like the original game.',
         references: [
-          ['Unreal Engine 5: Flappy Bird Blueprint Guide', 'PaperZD & Physics', 'Complete walkthrough on PaperZD character blueprints, 2D viewport camera setup, vertical jump velocity impulse, and terminal velocity clamps.', 'https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+tutorial'],
-          ['Actor Object Pooling & Zero GC Lag in UE5', 'Memory & GC', 'Architecture teardown on pre-allocating obstacle actor pools and cycling off-screen actors to eliminate garbage collector hitching and preserve 60 FPS.', 'https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner'],
-          ['Hitbox Forgiveness & Fair Collision Bounds', 'GDC & Game Feel', 'Deep-dive into player perception vs pixel collision boundaries: why shrinking hitboxes by 15% creates edge-of-the-seat near misses instead of frustration.', 'https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+collision+hitbox+design+gdc']
+          ['Unreal Engine 5: Flappy Bird Blueprint Guide', 'PaperZD & Physics', 'These videos helped me understand jump physics, character setup, and pipe movement in Unreal Engine.', 'https://youtu.be/xCcHCO23hR4?si=82SDlMei4nV3zb8C'],
+          ['Actor Object Pooling & Zero GC Lag in UE5', 'Memory & GC', 'This helped me learn how to reuse pipes so the game runs smooth without lag.', 'https://www.youtube.com/results?search_query=unreal+engine+object+pooling+spawner'],
+          ['Hitbox Forgiveness & Fair Collision Bounds', 'GDC & Game Feel', 'This helped me adjust hitboxes so the game feels fair and not too hard.', 'https://www.youtube.com/results?search_query=unreal+engine+5+flappy+bird+collision+hitbox+design+gdc']
         ]
       },
       'off-roading': {
@@ -803,8 +1075,10 @@
         accent: '#f97316',
         glow1: '#f97316',
         glow2: '#eab308',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'ENGINEERING<br><span class="text-[#f97316]">ALL-TERRAIN GRIP</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how vehicle suspension physics work in Unreal Engine 5 Chaos, how tire friction handles mud and rocks, and how to make a 4x4 off-road vehicle feel heavy and fun to drive.',
         overview: 'Off-Roading is an Unreal Engine 5 vehicle dynamics study engineered with the Chaos Physics solver. It focuses on independent multi-link suspension kinematics, progressive damper curves, mud tire friction, and dynamic differential torque distribution across brutal rock and mud terrains.',
         tags: ['UE5 Chaos Physics', '4-Link Suspension', 'Mud Friction Model', 'Differential Torque'],
         gallery: [
@@ -815,12 +1089,16 @@
         ],
         labHeading: 'Chaos Vehicle Dynamics Lab',
         labSub: 'Inspecting spring compression curves, dynamic Pacejka friction slip, and locked differential power transfer.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A fully working off-road vehicle physics prototype built in Unreal Engine 5, featuring independent suspension travel, mud friction simulation, and responsive rock climbing.',
         labPanels: [
           {
             num: '01 / SUSPENSION', badge: 'PROGRESSIVE DAMPER', color: '#f97316', title: 'Multi-Link Flex',
@@ -859,29 +1137,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Weight transfer dictates traction.',
         learned: [
           'Progressive spring damping prevents violent rollbacks when ascending 45-degree rock ledges, keeping tires glued to uneven surfaces.',
           'Simulating dynamic mud drag rather than simple surface friction creates the visceral feeling of plowing through deep, resisting ruts.',
           'Separating chassis visual roll from the underlying collision body preserves responsive steering input even during violent suspension compressions.'
         ],
-        featuresHeading: 'Chaos physics built for brutal terrain.',
         features: [
           ['Independent 4-Link Suspension', 'Each wheel calculates per-frame travel, bump-stop compression, and rebound damping over rocky heightmaps.'],
           ['Dynamic Mud & Slip Friction', 'Pacejka tire friction model tuned for mud ruts, loose gravel slippage, and locked differential torque.'],
           ['Interactive Tire Particle System', 'Dynamic mud splatter, gravel ejection velocities, and deformable tire tracks stamped in real-time.']
         ],
-        challengesHeading: 'Where vehicle physics fought back.',
-        challengesIntro: 'Stock vehicle physics in game engines often behave like frictionless soap bars on slopes or jitter violently over bumpy geometry without custom damping:',
         challenges: [
           ['Low-Speed Slope Sliding', 'Implemented micro-static friction locks on tire contacts to stop unnatural sliding when parked on steep inclines.'],
           ['Suspension Jitter over Rocks', 'Sub-stepped physics tick rate to 120 Hz to ensure continuous raycast collision without wheel phase-through.'],
           ['Center of Mass Inversion', 'Lowered vehicle inertia tensor to prevent sudden unrealistic rollovers during fast high-angle counter-steering.']
         ],
         references: [
-          ['UE5 Chaos Vehicle Rigging & Suspension Setup', 'Chaos Physics & Setup', 'Complete tutorial detailing skeletal mesh vehicle rigging, wheel setups, and spring-damper tuning in Unreal Engine 5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+chaos+vehicle+tutorial'],
-          ['Simulating Mud & Tire Friction in Unreal Engine 5', 'Terrain & Mud Physics', 'Technical deep-dive on physical materials, Pacejka slip-angle calculation, and deformable mud track surface stamping.', 'https://www.youtube.com/results?search_query=unreal+engine+5+mud+physics+terrain'],
-          ['Advanced Vehicle Physics & Differential Tuning', 'Torque & Stability', 'How to set up differential locking, center of mass offsets, and anti-roll bars to achieve authentic heavy 4x4 vehicle handling.', 'https://www.youtube.com/results?search_query=unreal+engine+vehicle+physics+tuning']
+          ['UE5 Chaos Vehicle Rigging & Suspension Setup', 'Chaos Physics & Setup', 'These tutorials helped me learn how to rig vehicle wheels and set up Chaos suspension in Unreal Engine 5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+chaos+vehicle+tutorial'],
+          ['Simulating Mud & Tire Friction in Unreal Engine 5', 'Terrain & Mud Physics', 'This helped me understand physical materials and how to simulate tire traction in mud and dirt.', 'https://www.youtube.com/results?search_query=unreal+engine+5+mud+physics+terrain'],
+          ['Advanced Vehicle Physics & Differential Tuning', 'Torque & Stability', 'This helped me tune center of mass, differential locking, and prevent vehicles from flipping over on steep hills.', 'https://www.youtube.com/results?search_query=unreal+engine+vehicle+physics+tuning']
         ]
       },
       'mountains-ue': {
@@ -893,8 +1167,10 @@
         accent: '#38bdf8',
         glow1: '#38bdf8',
         glow2: '#e0f2fe',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'PROCEDURAL<br><span class="text-[#38bdf8]">ALPINE MAJESTY</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how to build huge 16km² landscapes using Unreal Engine 5 World Partition, how to create automatic snow shaders for steep cliffs, and how to simulate dynamic snowfall weather.',
         overview: 'Mountains is a large-scale alpine environment study in Unreal Engine 5 utilizing World Partition, Nanite geometric streaming, slope-angle procedural landscape materials, and dynamic volumetric snowfall weather systems.',
         tags: ['World Partition', 'Volumetric Snow Weather', 'Nanite Landscape', 'Dynamic Snow Drift'],
         gallery: [
@@ -905,12 +1181,16 @@
         ],
         labHeading: 'Alpine World & Weather Lab',
         labSub: 'Exploring procedural snow accumulation, real-time wind particle drift, and 16km² Nanite terrain streaming.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A massive 16km² alpine mountain environment running smoothly at 60 FPS in UE5, complete with dynamic snowfall particles, volumetric clouds, and procedural snow materials.',
         labPanels: [
           {
             num: '01 / WEATHER', badge: 'VOLUMETRIC BLIZZARD', color: '#38bdf8', title: 'Snowfall Physics',
@@ -951,29 +1231,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Atmosphere defines scale.',
         learned: [
           'Volumetric fog and exponential height falloff are essential for communicating monumental alpine scale and atmospheric depth.',
           'Slope-based procedural shader blending automatically transitions sheer granite cliffs into powdery snow banks without manual vertex painting.',
           'Continuous falling snow particles with wind drift and camera-relative velocity give the alpine landscape living, breathing physical presence.'
         ],
-        featuresHeading: 'Infinite vista with zero streaming hitches.',
         features: [
           ['Dynamic Snowfall & Blizzards', 'Real-time multi-layered snowfall simulation with wind turbulence, surface accumulation, and snowflake drift.'],
           ['Nanite 16km² Alpine Terrain', 'Micro-polygon virtualized geometry streaming delivering millimeter-level rock detail with zero LOD pop-in.'],
           ['Volumetric Snow Clouds & Sun Shafts', 'Heterogeneous volume clouds with realistic light scattering, rim frost, and dramatic sunset mountain silhouettes.']
         ],
-        challengesHeading: 'Handling extreme vistas at 60 FPS.',
-        challengesIntro: 'Massive mountain ranges with dense volumetric fog and heavy particle weather easily crush GPU fill rates without deliberate optimization:',
         challenges: [
           ['Volumetric Weather Fill-Rate', 'Downsampled heavy snowfall particle lighting to quarter-res with temporal reconstruction for zero FPS drop.'],
           ['Far-Distance Shadow Precision', 'Configured Virtual Shadow Maps with directional light clipmap caching for razor-sharp peak shadows 10 km away.'],
           ['Triplanar Texture Stretching', 'Blended triplanar world-space projection with slope masks to eliminate texture distortion on sheer vertical cliffs.']
         ],
         references: [
-          ['Unreal Engine 5 World Partition & Large Scale Landscapes', 'World Partition Guide', 'Full walkthrough covering World Partition HLODs, Nanite landscape streaming, and large-world coordinate setups.', 'https://www.youtube.com/results?search_query=unreal+engine+5+world+partition+landscape+tutorial'],
-          ['Creating Dynamic Snowfall & Volumetric Weather in UE5', 'Niagara & Weather', 'How to build realistic Niagara blizzard particle systems, volumetric cloud shadows, and surface snow drift shaders.', 'https://www.youtube.com/results?search_query=unreal+engine+5+snowfall+weather+tutorial'],
-          ['Nanite Landscape Optimization & Virtual Shadow Maps', 'Optimization & Nanite', 'Deep-dive into optimizing 16km² mountain terrains, virtual shadow map caching, and maintaining smooth 60 FPS frame times.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+landscape+optimization']
+          ['Unreal Engine 5 World Partition & Large Scale Landscapes', 'World Partition Guide', 'These guides helped me understand World Partition and how to stream large landscape maps in Unreal Engine 5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+world+partition+landscape+tutorial'],
+          ['Creating Dynamic Snowfall & Volumetric Weather in UE5', 'Niagara & Weather', 'This helped me create dynamic Niagara snow particle systems and volumetric cloud lighting.', 'https://www.youtube.com/results?search_query=unreal+engine+5+snowfall+weather+tutorial'],
+          ['Nanite Landscape Optimization & Virtual Shadow Maps', 'Optimization & Nanite', 'This helped me optimize landscape draw calls and virtual shadow maps to keep frame rates smooth.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+landscape+optimization']
         ]
       },
       'dungeon': {
@@ -985,8 +1261,10 @@
         accent: '#c084fc',
         glow1: '#c084fc',
         glow2: '#818cf8',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'GOTHIC DUNGEON<br><span class="text-[#c084fc]">LUMEN & COMBAT</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how real-time Lumen lighting works with flickering torches in enclosed spaces, how to build responsive melee sword collision, and how to program guard patrol AI.',
         overview: 'A dark gothic dungeon prototype exploring dynamic torch lighting, stone architecture, and melee combat encounters built in Unreal Engine 5.',
         tags: ['UE5 Lumen', 'Combat AI', 'Dynamic Lighting', 'Socket Sweeps'],
         gallery: [
@@ -997,12 +1275,16 @@
         ],
         labHeading: 'Dungeon Combat & Lumen Lab',
         labSub: 'Investigating real-time torch bounce lighting, physical melee sweep hitboxes, and state-machine patrol AI.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A moody gothic dungeon prototype featuring real-time Lumen torch bounce lighting, frame-accurate melee sword combat, and patrolling enemy AI with sight and sound detection.',
         labPanels: [
           {
             num: '01 / LUMEN', badge: 'INDIRECT BOUNCE', color: '#c084fc', title: 'Dynamic Torch Fire',
@@ -1029,29 +1311,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Light defines fear.',
         learned: [
           'Dynamic torch illumination creates far deeper immersion than static baked lightmaps in modular dungeons.',
           'Weapon socket traces provide much cleaner combat feedback than basic overlapping trigger spheres.',
           'Recast navigation bounds need tailored agent dimensions for tight subterranean archways.'
         ],
-        featuresHeading: 'Atmospheric gloom and sharp melee response.',
         features: [
           ['Lumen Torch Flame Illumination', 'Point lights coupled with Niagara embers calculate real-time indirect bounce off wet stone.'],
           ['Frame-Accurate Blade Sweeps', 'Continuous socket traces across the weapon edge to catch fast swings without tunneling.'],
           ['State-Machine Enemy AI', 'Sight and hearing perception transitions guards from relaxed patrol to aggressive pursuit.']
         ],
-        challengesHeading: 'Balancing indoor lighting with performance.',
-        challengesIntro: 'Interiors with numerous flickering lights can easily lead to ghosting or frame drops in Lumen:',
         challenges: [
           ['Torch GI Flickering', 'Tuned Lumen reflection roughness cutoffs to stabilize subtle flame flicker on wet stone.'],
           ['Missed Collision on Fast Swings', 'Enabled continuous collision detection (CCD) on blade mesh sockets to stop clipping.'],
           ['AI Stuck on Narrow Doorways', 'Generated custom recast navigation mesh agent radius to fit tight dungeon arches.']
         ],
         references: [
-          ['UE5 Lumen Dynamic Lighting & Torches', 'Lighting & Lumen', 'Complete guide on dynamic torch flames and bounce light in interior UE5 spaces.', 'https://www.youtube.com/results?search_query=unreal+engine+5+torch+light+lumen'],
-          ['Melee Combat System in Unreal Engine 5', 'Combat Blueprints', 'Setting up blade trace sweeps, hit reactions, and stamina cost mechanics.', 'https://www.youtube.com/results?search_query=unreal+engine+5+melee+combat+system+tutorial'],
-          ['Enemy AI Behavior Trees & Perception', 'AI & Navigation', 'How to configure UE5 AI Perception components and behavior trees for patrol and combat.', 'https://www.youtube.com/results?search_query=unreal+engine+5+enemy+ai+behavior+tree']
+          ['UE5 Lumen Dynamic Lighting & Torches', 'Lighting & Lumen', 'These tutorials helped me learn how to configure Lumen indirect lighting and torch flame effects in dark rooms.', 'https://www.youtube.com/results?search_query=unreal+engine+5+torch+light+lumen'],
+          ['Melee Combat System in Unreal Engine 5', 'Combat Blueprints', 'This helped me set up weapon collision traces and hit reactions so sword attacks connect accurately.', 'https://www.youtube.com/results?search_query=unreal+engine+5+melee+combat+system+tutorial'],
+          ['Enemy AI Behavior Trees & Perception', 'AI & Navigation', 'This helped me build AI perception and behavior trees so enemies patrol and chase the player on sight.', 'https://www.youtube.com/results?search_query=unreal+engine+5+enemy+ai+behavior+tree']
         ]
       },
       'forest': {
@@ -1063,8 +1341,10 @@
         accent: '#10b981',
         glow1: '#10b981',
         glow2: '#34d399',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'VERDANT WILDERNESS<br><span class="text-[#10b981]">NANITE & LIGHT</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how to render dense forests with Nanite foliage, how to create realistic wind movement shaders for trees and grass, and how to set up atmospheric volumetric sun god-rays.',
         overview: 'A dense alpine wilderness environment exploring Nanite foliage streaming, volumetric sun shafts, and procedural rock placement built in Unreal Engine 5.',
         tags: ['Nanite Foliage', 'Volumetric Fog', 'Wind Shaders', 'Subsurface Scattering'],
         gallery: [
@@ -1075,12 +1355,16 @@
         ],
         labHeading: 'Nanite Foliage & Wind Lab',
         labSub: 'Inspecting micro-polygon mesh streaming, wind deformation shaders, and volumetric light scattering.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A dense, living alpine forest environment built with millions of Nanite polygons, natural wind tree sway, and cinematic volumetric sun rays piercing the forest canopy.',
         labPanels: [
           {
             num: '01 / NANITE', badge: 'HIGH DENSITY', color: '#10b981', title: 'Foliage Streaming',
@@ -1107,29 +1391,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Nature requires nuance.',
         learned: [
           'Subsurface scattering on foliage leaves turns flat green meshes into warm, translucent living plants.',
           'Two-tier wind vectors (trunk flex vs leaf shimmer) create natural forest motion without rubbery stretching.',
           'Nanite foliage streaming drastically lowers draw calls compared to traditional LOD billboard cascades.'
         ],
-        featuresHeading: 'Living wilderness with high-fidelity optics.',
         features: [
           ['Nanite High-Poly Evergreen Trees', 'Preserving bark crevices and pine needles at infinite distance with zero LOD pops.'],
           ['Volumetric God-Ray Light Shafts', 'Exponential height fog scattering direct sunlight into visible beams through branches.'],
           ['Procedural Undergrowth Distribution', 'Landscape layer weightmaps automatically seed ferns, mossy rocks, and fallen leaves.']
         ],
-        challengesHeading: 'Solving foliage overdraw and shadow costs.',
-        challengesIntro: 'Dense foliage is traditionally notorious for crushing GPUs due to overlapping alpha masks:',
         challenges: [
           ['Foliage Alpha Mask Overdraw', 'Converted dense branches to solid Nanite geometry to eliminate expensive masked shader overdraw.'],
           ['Virtual Shadow Map Precision', 'Enabled shadow map geometry caching on static trees to achieve fast 60 FPS performance.'],
           ['Wind Texture Stretching', 'Clamped World Position Offset oscillation amplitudes based on vertex color height gradients.']
         ],
         references: [
-          ['Nanite Foliage & Forest Environments in UE5', 'Nanite & Foliage', 'Streaming millions of foliage polygons with Nanite in UE5.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+foliage+tutorial'],
-          ['Volumetric Fog & God Rays in Unreal Engine 5', 'Atmosphere & Light', 'Setting up volumetric sun shafts, exponential height fog, and sky atmosphere.', 'https://www.youtube.com/results?search_query=unreal+engine+5+volumetric+fog+god+rays'],
-          ['Interactive Foliage & Wind Shaders', 'Foliage Shaders', 'Creating responsive grass and tree wind displacement using World Position Offset.', 'https://www.youtube.com/results?search_query=unreal+engine+5+wind+foliage+shader']
+          ['Nanite Foliage & Forest Environments in UE5', 'Nanite & Foliage', 'These videos helped me learn how to use Nanite on high-polygon trees and forest vegetation.', 'https://www.youtube.com/results?search_query=unreal+engine+5+nanite+foliage+tutorial'],
+          ['Volumetric Fog & God Rays in Unreal Engine 5', 'Atmosphere & Light', 'This helped me set up exponential height fog and volumetric light shafts through tree branches.', 'https://www.youtube.com/results?search_query=unreal+engine+5+volumetric+fog+god+rays'],
+          ['Interactive Foliage & Wind Shaders', 'Foliage Shaders', 'This helped me write responsive wind shaders using World Position Offset so foliage sways naturally.', 'https://www.youtube.com/results?search_query=unreal+engine+5+wind+foliage+shader']
         ]
       },
       'oasis-unity': {
@@ -1141,8 +1421,10 @@
         accent: '#f59e0b',
         glow1: '#f59e0b',
         glow2: '#fbbf24',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'SUN-BAKED DUNES<br><span class="text-[#f59e0b]">UNITY URP</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how to create stylized environment shaders in Unity URP, implement custom fullscreen heatwave distortion post-processing passes, and build realistic windblown sand particles.',
         overview: 'A stylized desert biome prototype built in Unity, featuring heatwave post-processing, shifting dunes, and ambient audio.',
         tags: ['Unity URP', 'Sand Dune Shaders', 'Heatwave Post-FX', 'Desert Atmosphere'],
         gallery: [
@@ -1153,12 +1435,16 @@
         ],
         labHeading: 'Desert Shaders & Heatwave Lab',
         labSub: 'Exploring specular sand sparkles, full-screen heat refraction, and procedural wind-blown dune ripples.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A stylized desert biome prototype running at 60 FPS in Unity URP, featuring sparkling sand shaders, heatwave post-processing mirages, and ambient blowing sand particles.',
         labPanels: [
           {
             num: '01 / SHADERS', badge: 'SPARKLE FX', color: '#f59e0b', title: 'Sand Glitter',
@@ -1185,29 +1471,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Warmth and contrast tell a story.',
         learned: [
           'High ambient color temperatures combined with deep blue shadows give desert scenes cinematic depth.',
           'Custom fullscreen render passes in URP allow flexible heat distortion with minimal frame overhead.',
           'Normal map panning at shallow glancing angles produces convincing windblown sand surface ripples.'
         ],
-        featuresHeading: 'Scorching desert atmosphere engineered in URP.',
         features: [
           ['Stylized Glittering Sand Shader', 'Shader Graph micro-facets catch directional sunlight for realistic quartz sparkles.'],
           ['Fullscreen Heat Haze Refraction', 'Custom URP render pass warping background pixels based on scene depth and noise.'],
           ['Wind-Blown Sand Particle Wisps', 'Niagara-style GPU particle ribbons undulating along curved dune crests.']
         ],
-        challengesHeading: 'Maintaining crisp stylized visuals under heavy haze.',
-        challengesIntro: 'Extreme heat distortion easily turns game viewports into muddy, unplayable blurs without careful tuning:',
         challenges: [
           ['Heat Distortion Blur Overkill', 'Faded distortion intensity near the camera so gameplay controls and UI remain razor-sharp.'],
           ['Dune Texture Repetition', 'Blended two differing noise frequencies to eliminate visible tiling patterns on massive sand dunes.'],
           ['High Particle Fill Rate', 'Capped sand particle opacity and bounded billboards to maintain 60 FPS on mobile GPUs.']
         ],
         references: [
-          ['Unity URP Desert Biome & Sand Shaders', 'Unity Shaders', 'Creating sparkling sand and dune ripples in Unity Shader Graph.', 'https://www.youtube.com/results?search_query=unity+urp+sand+shader+graph'],
-          ['Heat Distortion Post-Processing in Unity', 'Post-Processing', 'Building fullscreen heatwave distortion effects using Custom Post-Processing Passes.', 'https://www.youtube.com/results?search_query=unity+heat+distortion+post+processing'],
-          ['Stylized Environmental Lighting in Unity', 'Lighting & Atmosphere', 'Atmospheric fog, color grading, and sun lighting in Unity Universal Render Pipeline.', 'https://www.youtube.com/results?search_query=unity+urp+stylized+lighting+tutorial']
+          ['Unity URP Desert Biome & Sand Shaders', 'Unity Shaders', 'These videos helped me learn how to create sparkling sand and dune ripple shaders in Unity Shader Graph.', 'https://www.youtube.com/results?search_query=unity+urp+sand+shader+graph'],
+          ['Heat Distortion Post-Processing in Unity', 'Post-Processing', 'This helped me build fullscreen heatwave distortion effects using custom post-processing render passes.', 'https://www.youtube.com/results?search_query=unity+heat+distortion+post+processing'],
+          ['Stylized Environmental Lighting in Unity', 'Lighting & Atmosphere', 'This taught me how to set up atmospheric fog, warm color grading, and directional sun lighting in Unity URP.', 'https://www.youtube.com/results?search_query=unity+urp+stylized+lighting+tutorial']
         ]
       },
       'tennis': {
@@ -1219,8 +1501,10 @@
         accent: '#06b6d4',
         glow1: '#06b6d4',
         glow2: '#22d3ee',
-        aboutLabel: '01 / Architecture Overview',
-        aboutHeading: 'COURT KINEMATICS<br><span class="text-[#06b6d4]">BALL & RACKET</span>',
+        aboutLabel: 'About the Project',
+        aboutHeading: 'About the Project',
+        wantedToLearnHeading: 'What I Wanted to Learn',
+        wantedToLearn: 'I wanted to learn how to simulate real-time sports ball physics, calculate aerodynamic Magnus spin forces for topspin and slice, and handle high-speed racket-ball collision response without phase-through.',
         overview: 'A court physics simulation featuring realistic ball bounce elasticity, racket trajectory angling, and interactive court boundaries built in custom physics.',
         tags: ['Ball Kinematics', 'Restitution', 'Racket Trajectory', 'Interactive Court'],
         gallery: [
@@ -1231,12 +1515,16 @@
         ],
         labHeading: 'Ball Kinematics & Restitution Lab',
         labSub: 'Inspecting topspin Magnus drag, coefficient of restitution upon clay/grass, and contact point angling.',
-        featuresLabel: '02 / Mechanics Breakdown',
-        challengesLabel: '03 / Problems Solved',
-        learnedLabel: '04 / Engineering Insights',
-        finalResultLabel: '05 / Video Tutorials & Guides',
-        finalResultHeading: 'REFERENCES',
-        finalResult: 'Curated YouTube video tutorials, Blueprint architecture walkthroughs, and game design references used while developing this project.',
+        featuresLabel: '02 / Key Mechanics',
+        featuresHeading: 'Game Features',
+        challengesLabel: '03 / PROBLEMS SOLVED',
+        challengesHeading: 'Problems I Faced',
+        challengesIntro: '',
+        learnedLabel: '04 / KEY TAKEAWAYS',
+        learnedHeading: 'What I Learned',
+        finalResultLabel: '05 / PROJECT CONCLUSION',
+        finalResultHeading: 'Final Result',
+        finalResult: 'A fully responsive tennis physics simulation with authentic aerodynamic topspin drag, variable court surface bounce elasticity, and sweet-spot racket collision modeling.',
         labPanels: [
           {
             num: '01 / ELASTICITY', badge: 'RESTITUTION', color: '#06b6d4', title: 'Court Restitution',
@@ -1263,29 +1551,25 @@
             </div>`
           }
         ],
-        learnedHeading: 'Physics makes timing feel sublime.',
         learned: [
           'Calculating true Magnus effect aerodynamics transforms arcade ping-pong into convincing tennis play.',
           'Sub-frame trajectory integration prevents fast-moving small spheres from tunneling through court lines.',
           'Audio pitch shifting based on impact velocity provides critical tactile feedback for sweet-spot hits.'
         ],
-        featuresHeading: 'Simulating high-speed court physics in real-time.',
         features: [
           ['Aerodynamic Ball Flight Model', 'Simulating drag, gravity, and Magnus force spin curves for authentic slice and topspin.'],
           ['Surface Restitution Dynamics', 'Tuned bounce elasticity and friction coefficients for clay, grass, and hard courts.'],
           ['Dynamic Racket Impact Solver', 'Calculating outgoing angle and velocity based on sweet spot position and stroke timing.']
         ],
-        challengesHeading: 'Tackling tunneling at 150 km/h ball speeds.',
-        challengesIntro: 'Small balls travelling at high velocity routinely skip geometry unless physics are sub-stepped:',
         challenges: [
           ['Ball Phase-Through at High Speeds', 'Implemented swept sphere raycast collision with sub-stepped substep tick rates.'],
           ['Jittery Trajectory Arcs', 'Applied Runge-Kutta 4th order numerical integration to guarantee buttery-smooth curves.'],
           ['Unfair Net Cords', 'Added micro-capsule friction on net tape to realistically deflect ball trajectories downwards.']
         ],
         references: [
-          ['Simulating Tennis Ball Aerodynamics & Bounce Physics', 'Ball Kinematics', 'Implementing Magnus effect topspin, slice, and court coefficient of restitution in game engines.', 'https://www.youtube.com/results?search_query=game+engine+tennis+ball+physics+magnus+effect'],
-          ['Racket Collision & Trajectory Calculations', 'Gameplay Math', 'Calculating realistic shot return angle based on swing velocity, sweet spot contact, and racket pitch.', 'https://www.youtube.com/results?search_query=tennis+racket+physics+collision+simulation'],
-          ['Real-Time Sports Physics Tuning & Court Audio', 'Sports Game Feel', 'Achieving accurate ball velocity drag and crisp spatial audio for court boundary impacts.', 'https://www.youtube.com/results?search_query=sports+game+physics+simulation+tutorial']
+          ['Simulating Tennis Ball Aerodynamics & Bounce Physics', 'Ball Kinematics', 'These tutorials helped me learn how to implement Magnus effect topspin, slice, and court coefficient of restitution in game engines.', 'https://www.youtube.com/results?search_query=game+engine+tennis+ball+physics+magnus+effect'],
+          ['Racket Collision & Trajectory Calculations', 'Gameplay Math', 'This helped me calculate realistic shot return angles based on swing velocity, sweet spot contact, and racket pitch.', 'https://www.youtube.com/results?search_query=tennis+racket+physics+collision+simulation'],
+          ['Real-Time Sports Physics Tuning & Court Audio', 'Sports Game Feel', 'This guided me on how to achieve accurate ball velocity drag and crisp spatial audio for court boundary impacts.', 'https://www.youtube.com/results?search_query=sports+game+physics+simulation+tutorial']
         ]
       }
     };
@@ -1299,7 +1583,7 @@
     // Populate dynamic text & accents
     document.getElementById('projectTitle').textContent = project.title;
     document.getElementById('projectSubtitle').textContent = project.subtitle;
-    
+
     // Tag pill styling according to project colors
     let tagBorder = 'border-emerald-400/20 bg-emerald-500/10 text-[#00f59b]';
     if (slug === 'off-roading') tagBorder = 'border-orange-500/30 bg-orange-500/10 text-[#f97316]';
@@ -1309,7 +1593,7 @@
     if (slug === 'oasis-unity') tagBorder = 'border-amber-400/30 bg-amber-500/10 text-[#f59e0b]';
     if (slug === 'tennis') tagBorder = 'border-cyan-400/30 bg-cyan-500/10 text-[#06b6d4]';
 
-    document.getElementById('projectTags').innerHTML = project.tags.map(tag => 
+    document.getElementById('projectTags').innerHTML = project.tags.map(tag =>
       `<span class="rounded-full border ${tagBorder} px-4 py-1.5 font-mono text-[10px] uppercase tracking-[2px]">${tag}</span>`
     ).join('');
 
@@ -1413,10 +1697,12 @@
     }
     if (project.challenges) {
       document.getElementById('challengesList').innerHTML = project.challenges.map((challenge, index) => `
-        <article class="lab-card reveal rounded-2xl border-t-2 p-7" style="border-top-color: ${project.accent || '#00f59b'}">
-          <span class="font-mono text-xs font-bold text-white/50">PROBLEM 0${index + 1}</span>
-          <h3 class="mt-4 font-clash text-2xl uppercase text-white">${challenge[0]}</h3>
-          <p class="mt-3 text-sm leading-relaxed text-white/60">${challenge[1]}</p>
+        <article class="reveal" style="border-top-color: ${project.accent || '#00f59b'};">
+          <div>
+            <span class="font-mono text-xs font-bold text-white/50">PROBLEM 0${index + 1}</span>
+            <h3 class="mt-4 font-clash text-2xl uppercase text-white">${challenge[0]}</h3>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-white/60">${challenge[1]}</p>
         </article>
       `).join('');
     }
@@ -1777,4 +2063,5 @@
     initThemeCursor(slug);
   </script>
 </body>
+
 </html>
