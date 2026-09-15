@@ -390,20 +390,44 @@
       <div class="mx-auto max-w-[1380px]">
         <p id="aboutLabel" class="reveal font-syne text-[11px] uppercase tracking-[4px] text-[#00f59b]">About the Project</p>
 
-        <div class="mt-8 grid items-start gap-12 lg:grid-cols-12">
-          <!-- Left Column: Heading + Featured Image Showcase Card -->
-          <div class="lg:col-span-6 space-y-7">
+        <div class="mt-8 grid items-start gap-10 lg:grid-cols-[1.1fr_1.2fr]">
+          <!-- Left Column: Heading + Description -->
+          <div class="space-y-7 lg:pt-3">
             <h2 id="aboutHeading" class="reveal font-clash text-4xl sm:text-5xl md:text-6xl lg:text-[62px] uppercase leading-[0.98] tracking-tight text-white">
               About the Project
             </h2>
 
-            <!-- Featured Showcase Video Card -->
-            <div class="reveal group relative overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40">
-              <div class="relative h-60 sm:h-72 w-full overflow-hidden rounded-xl bg-black">
-                <video id="aboutFeaturedVideo" class="h-full w-[10000px] object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted loop playsinline>
+            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.6] tracking-tight text-white/90">
+              This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a city skyline background, just like the original mobile game.
+            </p>
+
+            <div id="wantedToLearnWrap" class="reveal rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-md">
+              <div class="flex items-center justify-between">
+                <span id="wantedToLearnBadge" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b] font-semibold">02 / Goals</span>
+                <span id="wantedToLearnPill" class="rounded px-2.5 py-0.5 font-mono text-[10px] bg-emerald-500/20 text-[#00f59b] border border-emerald-500/30">LEARNING OBJECTIVE</span>
+              </div>
+              <h3 id="wantedToLearnHeading" class="mt-4 font-clash text-2xl uppercase tracking-tight text-white">What I Wanted to Learn</h3>
+              <p id="wantedToLearnDesc" class="mt-3 text-base sm:text-lg leading-[1.8] text-white/75">
+                I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to make a simple 2D-style arcade game feel fun to play.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right Column: Featured Video -->
+          <div class="space-y-5 lg:pl-4">
+            <a href="#result" class="reveal group block mx-auto w-full max-w-[540px] overflow-hidden rounded-2xl border border-white/15 bg-[#0b1219] p-3 shadow-[0_20px_50px_rgba(0,0,0,0.55)] transition-all duration-300 hover:border-[#00f59b]/40 hover:shadow-[0_0_28px_rgba(0,245,155,0.18)] no-underline">
+              <div class="relative mx-auto h-[420px] w-full max-w-[500px] overflow-hidden rounded-xl">
+                <video id="aboutFeaturedVideo" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" autoplay muted loop playsinline>
                   <source src="../image/flappy bird final game.mp4" type="video/mp4" />
                 </video>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div class="inline-flex items-center gap-2 rounded-full border border-[#00f59b]/50 bg-[#06130f]/85 px-4 py-2 text-[10px] font-syne uppercase tracking-[3px] text-[#00f59b] shadow-[0_0_20px_rgba(0,245,155,0.18)] backdrop-blur-sm">
+                    <span>Click to view the full game</span>
+                  </div>
+                </div>
+
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                   <span class="inline-flex items-center gap-1.5 rounded-md bg-black/75 px-2.5 py-1 font-mono text-[10px] font-semibold text-[#00f59b] backdrop-blur-md border border-emerald-500/30">
                     <span class="h-1.5 w-1.5 rounded-full bg-[#00f59b] shadow-[0_0_6px_#00f59b]"></span>
@@ -416,26 +440,7 @@
                 <strong class="text-sm font-semibold text-white">Classic Pixel Visuals & Kinematics</strong>
                 <span class="text-[11px] font-mono text-white/45">FIG 01 · CORE ARCHITECTURE</span>
               </div>
-            </div>
-          </div>
-
-          <!-- Right Column: Rich Description & What I Wanted to Learn -->
-          <div class="lg:col-span-6 space-y-6 pt-2 lg:pt-4">
-            <p id="overviewText" class="reveal text-[20px] sm:text-[22px] md:text-[24px] font-normal leading-[1.6] tracking-tight text-white/90">
-              This is my own remake of the classic Flappy Bird game, made in Unreal Engine. It has a pixel-style bird, green pipes, and a city skyline background, just like the original mobile game.
-            </p>
-
-            <!-- What I Wanted to Learn Box -->
-            <div id="wantedToLearnWrap" class="reveal rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-md">
-              <div class="flex items-center justify-between">
-                <span id="wantedToLearnBadge" class="font-syne text-[10px] uppercase tracking-[3px] text-[#00f59b] font-semibold">02 / Goals</span>
-                <span id="wantedToLearnPill" class="rounded px-2.5 py-0.5 font-mono text-[10px] bg-emerald-500/20 text-[#00f59b] border border-emerald-500/30">LEARNING OBJECTIVE</span>
-              </div>
-              <h3 id="wantedToLearnHeading" class="mt-4 font-clash text-2xl uppercase tracking-tight text-white">What I Wanted to Learn</h3>
-              <p id="wantedToLearnDesc" class="mt-3 text-base sm:text-lg leading-[1.8] text-white/75">
-                I wanted to learn how jump and gravity physics work, how to spawn obstacles automatically, and how to make a simple 2D-style arcade game feel fun to play.
-              </p>
-            </div>
+            </a>
           </div>
         </div>
       </div>
